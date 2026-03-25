@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Technique - ELEC TECH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: { colors: { customOrange: '#FF8C00' } }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <!-- Header -->
+    <header class="p-6 border-b border-gray-800 backdrop-blur-sm bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo & Slogan Block -->
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="../index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                    <div class="mt-1.5 py-0.5 px-2 bg-customOrange/10 border border-customOrange/20 rounded-md">
+                        <p class="text-[7px] font-black uppercase tracking-[0.3em] text-customOrange whitespace-nowrap">
+                            La Tech pour tout le monde
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <!-- HLEGA -->
+                    <li class="relative group z-50">
+                        <a href="../Hlega/Hlega.html" class="text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-customOrange pb-1">
+                            🎮 Hlega <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Hlega/Hlega.html#qcm" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-question-circle w-5 text-gray-500"></i> QCMs Éclair</a></li>
+                                <li><a href="../Hlega/Hlega.html#jeux" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-gamepad w-5 text-gray-500"></i> Jeux Interactifs</a></li>
+                                <li><a href="../Hlega/Hlega.html#defis" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-trophy w-5 text-gray-500"></i> Défis & Amis</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- TECHNIQUE -->
+                    <li class="relative group z-40">
+                        <a href="../Technique/Technique.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            ⚙️ Technique <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-64 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li class="px-5 py-2 pt-3 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1">Notions de base</li>
+                                <li><a href="../Tech 1/electrotechnique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-bolt w-5 text-gray-500"></i> Électrotechnique</a></li>
+                                <li><a href="../Tech 1/electronique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microchip w-5 text-gray-500"></i> Électronique</a></li>
+                                <li><a href="../Tech 1/energies.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-leaf w-5 text-gray-500"></i> Énergies</a></li>
+                                <li><a href="../Tech 1/schemas.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-project-diagram w-5 text-gray-500"></i> Schémas</a></li>
+                                
+                                <li class="px-5 py-2 pt-4 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1 mt-2">Spécialisations</li>
+                                <li><a href="../Technique/Technique.html#electricite" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-network-wired w-5 text-gray-500"></i> Électricité</a></li>
+                                <li><a href="../Technique/Technique.html#software" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-code w-5 text-gray-500"></i> Software</a></li>
+                                <li><a href="../Technique/Technique.html#aeronautique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-plane w-5 text-gray-500"></i> Aéronautique</a></li>
+                                <li><a href="../Technique/Technique.html#mecanique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-cogs w-5 text-gray-500"></i> Génie Mécanique</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- DIPLOMES -->
+                    <li class="relative group z-35">
+                        <a href="../Diplomes/diplomes.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            🎓 Diplômes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Diplomes/diplomes.html#bts" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> BTS</a></li>
+                                <li><a href="../Diplomes/diplomes.html#dut" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> DUT</a></li>
+                                <li><a href="../Diplomes/diplomes.html#licence" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-award w-5 text-gray-500"></i> Licence</a></li>
+                                <li><a href="../Diplomes/diplomes.html#master" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-graduate w-5 text-gray-500"></i> Master</a></li>
+                                <li><a href="../Diplomes/diplomes.html#doctorat" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microscope w-5 text-gray-500"></i> Doctorat</a></li>
+                                <li><a href="../Diplomes/diplomes.html#mba" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-certificate w-5 text-gray-500"></i> MBA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <!-- COMMUNITY -->
+                    <li class="relative group z-30">
+                        <a href="../assets/community/clic.electech.html" class="hover:text-yellow-400 text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-yellow-400 pb-1">
+                            👥 Community <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../assets/community/clic.electech.html" class="block px-5 py-2.5 hover:bg-black hover:text-yellow-400 transition-colors"><i class="fas fa-bolt w-5 text-yellow-400"></i> Clic Electech</a></li>
+                                <li><a href="../utilisateur/forum.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-comments w-5 text-gray-500"></i> Forum</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <li><a href="../Tech 1/bibliotheque.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">📚 Livres</a></li>
+                    
+                    <!-- EMPLOI -->
+                    <li class="relative group z-30">
+                        <a href="../emploi/emploi.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            💼 Emploi <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../emploi/offres.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-briefcase w-5 text-gray-500"></i> Offres d'Emploi</a></li>
+                                <li><a href="../emploi/demandes.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-tie w-5 text-gray-500"></i> Demandes d'Emploi</a></li>
+                                <li><a href="../emploi/postale.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-envelope-open-text w-5 text-gray-500"></i> Boîte Postale</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+ 
+                <!-- Dynamic Auth Zone -->
+                <div id="auth-navbar" class="flex items-center gap-3 border-l border-gray-800 pl-8">
+                    <!-- Guest -->
+                    <div id="guest-zone" class="hidden items-center gap-5">
+                        <a href="../utilisateur/login.html?tab=signup" class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors">S'inscrire</a>
+                        <a href="../utilisateur/login.html?tab=login" class="bg-customOrange text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.1em] hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">Connexion</a>
+                    </div>
+                    <!-- Member -->
+                    <div id="member-zone" class="hidden items-center gap-4 bg-gray-950 border border-gray-900 px-4 py-2 rounded-2xl">
+                        <div class="flex items-center gap-3 group cursor-pointer">
+                            <div class="w-8 h-8 bg-customOrange/10 rounded-lg flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-user-circle text-base"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span id="nav-user-name" class="text-[11px] font-black text-white leading-none"></span>
+                                <a href="../utilisateur/profil.html" class="text-[9px] text-gray-600 font-bold uppercase tracking-tighter hover:text-customOrange transition-colors mt-1">Mon Profil</a>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" class="text-gray-700 hover:text-red-500 transition-colors ml-2 pt-1" title="Déconnexion">
+                            <i class="fas fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-start p-8 py-20">
+        <div id="article-content" class="container mx-auto max-w-4xl">
+            <!-- Loading State -->
+            <div id="loading" class="text-center py-20">
+                <i class="fas fa-circle-notch fa-spin text-4xl text-customOrange mb-4"></i>
+                <p class="text-gray-500">Chargement de l'article...</p>
+            </div>
+
+            <!-- Article Body (Injected) -->
+            <div id="article-body" class="hidden">
+                <div class="mb-12">
+                    <span id="art-tag" class="bg-customOrange/10 border border-customOrange/30 text-customOrange px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-6 inline-block">Matière</span>
+                    <h1 id="art-title" class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">Titre de l'article</h1>
+                    <div class="flex items-center gap-6 text-gray-500 text-sm">
+                        <span><i class="far fa-calendar-alt mr-2 text-customOrange"></i> <span id="art-date">---</span></span>
+                        <span><i class="far fa-user mr-2 text-customOrange"></i> <span id="art-author">Admin</span></span>
+                    </div>
+                </div>
+                
+                <div id="art-image-container" class="mb-12 rounded-3xl overflow-hidden border border-gray-800 hidden">
+                    <img id="art-image" src="" alt="" class="w-full h-auto object-cover max-h-[500px]">
+                </div>
+
+                <div id="art-text" class="prose prose-invert max-w-none text-gray-300 leading-relaxed text-lg space-y-6">
+                    <!-- Content here -->
+                </div>
+
+                <div class="mt-20 pt-10 border-t border-gray-800 flex justify-between items-center">
+                    <a href="index.html" onclick="history.back(); return false;" class="text-gray-500 hover:text-white transition-colors font-bold flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i> Retour
+                    </a>
+                    <div class="flex gap-4">
+                        <button onclick="window.print()" class="text-gray-500 hover:text-customOrange transition-colors"><i class="fas fa-print"></i></button>
+                        <button onclick="shareArticle()" class="text-gray-500 hover:text-customOrange transition-colors"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-box" class="hidden text-center py-20">
+                <i class="fas fa-exclamation-triangle text-6xl text-red-500 mb-6"></i>
+                <h2 class="text-2xl font-bold text-white mb-4">Article introuvable</h2>
+                <p class="text-gray-500 mb-8">Désolé, l'article que vous recherchez n'existe pas ou a été déplacé.</p>
+                <a href="../index.html" class="bg-customOrange text-black px-8 py-3 rounded-xl font-bold hover:bg-white transition-all">Retour à l'accueil</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full mt-auto py-10 bg-black border-t border-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-[10px] text-gray-600 font-medium tracking-widest uppercase">
+                Designed by <span class="text-gray-500 font-bold">ELECTECH Team 2026</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="../javascript/data_elec.js"></script>
+    <script>
+        function loadArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            const loading = document.getElementById('loading');
+            const errorBox = document.getElementById('error-box');
+            const articleBody = document.getElementById('article-body');
+
+            if (!articleId) {
+                loading.classList.add('hidden');
+                errorBox.classList.remove('hidden');
+                return;
+            }
+
+            // Check in local storage (user published articles)
+            const localArticles = JSON.parse(localStorage.getItem('electech_articles') || '[]');
+            const article = localArticles.find(a => String(a.id) === String(articleId));
+
+            if (article) {
+                renderArticle(article);
+            } else {
+                // Check in hardcoded matieresElec (if any)
+                const matiere = matieresElec.find(m => m.id === articleId);
+                if (matiere) {
+                    renderArticle({
+                        title: matiere.titre,
+                        subject: matiere.sujet,
+                        content: matiere.description,
+                        date: 'Cours Permanent',
+                        author: 'ELECTECH Team',
+                        category: matiere.titre
+                    });
+                } else {
+                    loading.classList.add('hidden');
+                    errorBox.classList.remove('hidden');
+                }
+            }
+        }
+
+        function renderArticle(art) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('article-body').classList.remove('hidden');
+            
+            document.getElementById('art-title').textContent = art.title || art.titre || 'Sans titre';
+            document.getElementById('art-tag').textContent = art.category || art.subject || 'Technique';
+            document.getElementById('art-date').textContent = art.date || '---';
+            document.getElementById('art-author').textContent = art.author || 'Admin';
+            
+            const contentDiv = document.getElementById('art-text');
+            contentDiv.innerHTML = art.content || art.description || '';
+
+            if (art.image) {
+                const imgCont = document.getElementById('art-image-container');
+                const img = document.getElementById('art-image');
+                img.src = art.image;
+                imgCont.classList.remove('hidden');
+            }
+            
+            document.title = `${art.title || art.titre} - ELEC TECH`;
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('electech_session');
+            window.location.reload();
+        }
+
+        function updateHeaderUI() {
+            const session = JSON.parse(localStorage.getItem('electech_session'));
+            const guestZone = document.getElementById('guest-zone');
+            const memberZone = document.getElementById('member-zone');
+            const navUserName = document.getElementById('nav-user-name');
+
+            if (session) {
+                guestZone.classList.add('hidden');
+                memberZone.classList.remove('hidden');
+                memberZone.classList.add('flex');
+                navUserName.textContent = session.name;
+            } else {
+                guestZone.classList.remove('hidden');
+                guestZone.classList.add('flex');
+                memberZone.classList.add('hidden');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateHeaderUI();
+            loadArticle();
+        });
+    </script>
+
+    <script src="../js/search_index.js"></script>
+    <script src="../js/search_logic.js"></script>
+    <script src="../js/scroll_to_search.js"></script>
+</body>
+</html>

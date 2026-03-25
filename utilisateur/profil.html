@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil Expert - ELECTECH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customOrange: '#FF6B00',
+                        deepBlack: '#050505',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .bento-card {
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 107, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            border-color: rgba(255, 107, 0, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -20px rgba(255, 107, 0, 0.1);
+        }
+        .orange-glow {
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.1);
+        }
+        input, select, textarea {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus {
+            border-color: #FF6B00 !important;
+            outline: none !important;
+            background: rgba(255, 107, 0, 0.05) !important;
+        }
+        .file-upload-zone {
+            border: 2px dashed rgba(255, 107, 0, 0.2);
+        }
+        .file-upload-zone:hover {
+            border-color: #FF6B00;
+            background: rgba(255, 107, 0, 0.05);
+        }
+        .nav-item.active {
+            background: rgba(255, 107, 0, 0.1);
+            color: #FF6B00;
+            border-right: 3px solid #FF6B00;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .truncate-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-deepBlack text-gray-300 min-h-screen font-sans selection:bg-customOrange selection:text-black">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-900">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../index.html" class="text-2xl font-black text-white tracking-widest uppercase">
+                <i class="fas fa-bolt text-customOrange mr-2"></i>ELEC<span class="text-customOrange">TECH</span>
+            </a>
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <!-- HLEGA -->
+                    <li class="relative group z-50">
+                        <a href="../Hlega/Hlega.html" class="text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-customOrange pb-1">
+                            🎮 Hlega <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Hlega/Hlega.html#qcm" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-question-circle w-5 text-gray-500"></i> QCMs Éclair</a></li>
+                                <li><a href="../Hlega/Hlega.html#jeux" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-gamepad w-5 text-gray-500"></i> Jeux Interactifs</a></li>
+                                <li><a href="../Hlega/Hlega.html#defis" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-trophy w-5 text-gray-500"></i> Défis & Amis</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- TECHNIQUE -->
+                    <li class="relative group z-40">
+                        <a href="../Technique/Technique.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            ⚙️ Technique <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-64 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li class="px-5 py-2 pt-3 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1">Notions de base</li>
+                                <li><a href="../Tech 1/electrotechnique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-bolt w-5 text-gray-500"></i> Électrotechnique</a></li>
+                                <li><a href="../Tech 1/electronique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microchip w-5 text-gray-500"></i> Électronique</a></li>
+                                <li><a href="../Tech 1/energies.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-leaf w-5 text-gray-500"></i> Énergies</a></li>
+                                <li><a href="../Tech 1/schemas.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-project-diagram w-5 text-gray-500"></i> Schémas</a></li>
+                                
+                                <li class="px-5 py-2 pt-4 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1 mt-2">Spécialisations</li>
+                                <li><a href="../Technique/Technique.html#electricite" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-network-wired w-5 text-gray-500"></i> Électricité</a></li>
+                                <li><a href="../Technique/Technique.html#software" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-code w-5 text-gray-500"></i> Software</a></li>
+                                <li><a href="../Technique/Technique.html#aeronautique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-plane w-5 text-gray-500"></i> Aéronautique</a></li>
+                                <li><a href="../Technique/Technique.html#mecanique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-cogs w-5 text-gray-500"></i> Génie Mécanique</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- DIPLOMES -->
+                    <li class="relative group z-35">
+                        <a href="../Diplomes/diplomes.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            🎓 Diplômes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Diplomes/diplomes.html#bts" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> BTS</a></li>
+                                <li><a href="../Diplomes/diplomes.html#dut" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> DUT</a></li>
+                                <li><a href="../Diplomes/diplomes.html#licence" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-award w-5 text-gray-500"></i> Licence</a></li>
+                                <li><a href="../Diplomes/diplomes.html#master" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-graduate w-5 text-gray-500"></i> Master</a></li>
+                                <li><a href="../Diplomes/diplomes.html#doctorat" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microscope w-5 text-gray-500"></i> Doctorat</a></li>
+                                <li><a href="../Diplomes/diplomes.html#mba" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-certificate w-5 text-gray-500"></i> MBA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- COMMUNITY -->
+                    <li class="relative group z-30">
+                        <a href="../assets/community/clic.electech.html" class="hover:text-yellow-400 text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-yellow-400 pb-1">
+                            👥 Community <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../assets/community/clic.electech.html" class="block px-5 py-2.5 hover:bg-black hover:text-yellow-400 transition-colors"><i class="fas fa-bolt w-5 text-yellow-400"></i> Clic Electech</a></li>
+                                <li><a href="../utilisateur/forum.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-comments w-5 text-gray-500"></i> Forum</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li><a href="../Tech 1/bibliotheque.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">📚 Livres</a></li>
+                    
+                    <!-- EMPLOI -->
+                    <li class="relative group z-30">
+                        <a href="../emploi/emploi.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            💼 Emploi <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../emploi/offres.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-briefcase w-5 text-gray-500"></i> Offres d'Emploi</a></li>
+                                <li><a href="../emploi/demandes.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-tie w-5 text-gray-500"></i> Demandes d'Emploi</a></li>
+                                <li><a href="../emploi/postale.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-envelope-open-text w-5 text-gray-500"></i> Boîte Postale</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Dynamic Auth Zone -->
+                <div id="auth-navbar" class="flex items-center gap-3 border-l border-gray-800 pl-8">
+                    <!-- Guest -->
+                    <div id="guest-zone" class="hidden items-center gap-5">
+                        <a href="../utilisateur/login.html?tab=signup" class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors">S'inscrire</a>
+                        <a href="../utilisateur/login.html?tab=login" class="bg-customOrange text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.1em] hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">Connexion</a>
+                    </div>
+                    <!-- Member -->
+                    <div id="member-zone" class="hidden items-center gap-4 bg-gray-950 border border-gray-900 px-4 py-2 rounded-2xl">
+                        <div class="flex items-center gap-3 group cursor-pointer">
+                            <div class="w-8 h-8 bg-customOrange/10 rounded-lg flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-user-circle text-base"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span id="nav-user-name" class="text-[11px] font-black text-white leading-none"></span>
+                                <a href="../utilisateur/profil.html" class="text-[9px] text-gray-600 font-bold uppercase tracking-tighter hover:text-customOrange transition-colors mt-1">Mon Profil</a>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" class="text-gray-700 hover:text-red-500 transition-colors ml-2 pt-1" title="Déconnexion">
+                            <i class="fas fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 px-6">
+        <div class="max-w-5xl mx-auto">
+            <!-- Forced Redirect Alert -->
+            <div id="redirect-alert" class="hidden mb-8 bg-customOrange/10 border border-customOrange/20 p-6 rounded-3xl animate-pulse">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-customOrange/20 flex items-center justify-center text-customOrange text-xl">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-black text-lg">Profil Incomplet</h3>
+                        <p class="text-sm text-gray-400">Veuillez compléter vos informations techniques pour débloquer toutes les fonctionnalités du Hub (Publier des annonces, etc.).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Left Column: Identity & Side Menu -->
+                <div class="md:col-span-1 space-y-6">
+                    <!-- Profile Card -->
+                    <div class="bento-card p-8 rounded-3xl text-center relative overflow-hidden">
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-customOrange/10 blur-3xl rounded-full"></div>
+                        <div class="w-24 h-24 bg-gradient-to-br from-customOrange to-orange-600 rounded-2xl mx-auto flex items-center justify-center text-black text-4xl font-black mb-4 shadow-xl shadow-customOrange/20">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h1 id="view-name" class="text-2xl font-black text-white mb-1">Expert</h1>
+                        <p id="view-role" class="text-customOrange font-bold text-xs uppercase tracking-widest mb-6 opacity-80"></p>
+                        
+                        <div class="flex justify-center gap-4 border-t border-gray-800 pt-6">
+                            <div class="text-center">
+                                <div id="view-exp-val" class="text-white font-black text-xl">0</div>
+                                <div class="text-[10px] text-gray-600 font-bold uppercase">Ans Exp.</div>
+                            </div>
+                            <div class="w-[1px] h-10 bg-gray-800"></div>
+                            <div class="text-center">
+                                <div id="view-spec-val" class="text-white font-black text-xl">—</div>
+                                <div class="text-[10px] text-gray-600 font-bold uppercase">Spécialité</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SIDE MENU -->
+                    <div class="bento-card rounded-3xl overflow-hidden p-2">
+                        <nav class="flex flex-col gap-1">
+                            <button onclick="switchTab('tab-compte')" id="btn-tab-compte" class="nav-item active flex items-center gap-4 px-6 py-4 rounded-2xl text-sm font-bold transition-all text-left">
+                                <i class="fas fa-id-card w-5 text-center"></i> 
+                                <span>Mon Compte</span>
+                            </button>
+                            <button onclick="switchTab('tab-docs')" id="btn-tab-docs" class="nav-item flex items-center gap-4 px-6 py-4 rounded-2xl text-sm font-bold transition-all text-left text-gray-500 hover:bg-white/5 hover:text-white">
+                                <i class="fas fa-file-pdf w-5 text-center"></i> 
+                                <span>Documents & CV</span>
+                            </button>
+                            <button onclick="switchTab('tab-history')" id="btn-tab-history" class="nav-item flex items-center gap-4 px-6 py-4 rounded-2xl text-sm font-bold transition-all text-left text-gray-500 hover:bg-white/5 hover:text-white">
+                                <i class="fas fa-history w-5 text-center"></i> 
+                                <span>Historique & Activité</span>
+                            </button>
+                        </nav>
+                    </div>
+
+                    <!-- Confidentiality Info -->
+                    <div class="bento-card p-6 rounded-3xl border-l-4 border-l-customOrange">
+                        <h3 class="text-white font-bold text-sm mb-2"><i class="fas fa-shield-halved text-customOrange mr-2"></i>Sécurité</h3>
+                        <p class="text-[11px] text-gray-500 leading-relaxed italic">
+                            Vos données sont protégées localement. Vos annonces et questions forum sont liées à votre compte expert.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Tab Contents -->
+                <div class="md:col-span-2">
+                    
+                    <!-- TAB 1: MON COMPTE -->
+                    <div id="tab-compte" class="tab-content active space-y-6">
+                        <form id="profileForm" class="space-y-6" onsubmit="saveProfile(event)">
+                            <div class="bento-card p-8 rounded-3xl">
+                                <h2 class="text-xl font-black text-white mb-6 flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-lg bg-customOrange/10 flex items-center justify-center text-customOrange text-xs"><i class="fas fa-user-circle"></i></span>
+                                    Informations Générales
+                                </h2>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div class="space-y-2">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Nom Complet</label>
+                                        <input type="text" id="name" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="Votre nom" required>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Ville</label>
+                                        <input type="text" id="city" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="Ex: Casablanca">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Spécialité</label>
+                                        <select id="specialty" onchange="toggleOtherSpecialty()" class="w-full px-4 py-3 rounded-xl text-sm appearance-none bg-gray-900 text-white border-gray-800">
+                                            <option value="" class="bg-gray-900 text-gray-400">Sélectionner...</option>
+                                            <option value="Électrotechnique" class="bg-gray-900 text-white">Électrotechnique</option>
+                                            <option value="Électronique" class="bg-gray-900 text-white">Électronique</option>
+                                            <option value="Automatisme" class="bg-gray-900 text-white">Automatisme</option>
+                                            <option value="Énergies Renouvelables" class="bg-gray-900 text-white">Énergies Renouvelables</option>
+                                            <option value="Maintenance Industrielle" class="bg-gray-900 text-white">Maintenance Industrielle</option>
+                                            <option value="Autre" class="bg-gray-900 text-customOrange font-bold italic">Autre (préciser...)</option>
+                                        </select>
+                                        <div id="other-specialty-container" style="display: none;" class="mt-3 space-y-2 animate-in fade-in slide-in-from-top-1 duration-300">
+                                            <label class="text-[9px] text-customOrange font-black uppercase tracking-widest ml-1">Précisez votre spécialité</label>
+                                            <input type="text" id="specialty-other" class="w-full px-4 py-3 rounded-xl text-sm border-customOrange/50 focus:border-customOrange bg-white/5 text-white" placeholder="Ex: Domotique, Froid Industriel...">
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Expérience (Années)</label>
+                                        <input type="number" id="experience" min="0" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between gap-4 pt-4">
+                                <p id="save-msg" class="text-xs font-bold text-green-500 opacity-0 transition-opacity">Profil mis à jour !</p>
+                                <button type="submit" class="bg-customOrange text-black px-10 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl shadow-customOrange/10">
+                                    Sauvegarder
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- TAB 2: DOCUMENTS -->
+                    <div id="tab-docs" class="tab-content space-y-6">
+                        <div class="bento-card p-8 rounded-3xl">
+                            <h2 class="text-xl font-black text-white mb-6 flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-customOrange/10 flex items-center justify-center text-customOrange text-xs"><i class="fas fa-file-pdf"></i></span>
+                                Curriculum Vitae & Motivation
+                            </h2>
+                            <div class="space-y-8">
+                                <!-- CV -->
+                                <div>
+                                    <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 mb-2 block">Dernier CV à jour (PDF)</label>
+                                    <div id="cv-dropzone" class="file-upload-zone rounded-2xl p-8 text-center cursor-pointer transition-all group">
+                                        <input type="file" id="cv-file" class="hidden" accept=".pdf">
+                                        <div id="cv-status" class="space-y-3">
+                                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-700 group-hover:text-customOrange transition-colors"></i>
+                                            <p class="text-sm font-bold text-gray-500 group-hover:text-gray-300">Déposez votre CV ici ou <span class="text-customOrange font-black">parcourez</span></p>
+                                        </div>
+                                        <div id="cv-loaded" class="hidden space-y-3">
+                                            <i class="fas fa-file-circle-check text-3xl text-green-500"></i>
+                                            <p id="cv-name" class="text-sm font-bold text-white"></p>
+                                            <button type="button" onclick="resetFile(event)" class="text-[10px] text-red-500 font-black uppercase tracking-widest hover:underline">Supprimer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Motivation Letter -->
+                                <div class="space-y-2">
+                                    <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1 block">Lettre de Motivation / CV Express</label>
+                                    <textarea id="motivation-letter" rows="8" class="w-full bg-black/40 border border-gray-800 rounded-2xl p-5 text-sm text-gray-300 focus:border-customOrange outline-none resize-none transition-all placeholder:text-gray-700" placeholder="Décrivez votre parcours et vos ambitions..."></textarea>
+                                </div>
+                            </div>
+                            <div class="mt-8 flex justify-end">
+                                <button onclick="saveProfile(event)" class="bg-customOrange text-black px-8 py-3.5 rounded-2xl font-black uppercase tracking-widest hover:bg-white transition-all text-xs">
+                                    Enregistrer les documents
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: HISTORY -->
+                    <div id="tab-history" class="tab-content space-y-8">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bento-card p-6 rounded-3xl text-center border-b-4 border-b-blue-600/50">
+                                <div id="count-annonces" class="text-white text-3xl font-black">0</div>
+                                <div class="text-[9px] text-gray-600 font-black uppercase tracking-widest mt-1">Annonces Hub</div>
+                            </div>
+                            <div class="bento-card p-6 rounded-3xl text-center border-b-4 border-b-orange-600/50">
+                                <div id="count-forum" class="text-white text-3xl font-black">0</div>
+                                <div class="text-[9px] text-gray-600 font-black uppercase tracking-widest mt-1">Questions Forum</div>
+                            </div>
+                        </div>
+
+                        <!-- User Ads -->
+                        <div class="space-y-4">
+                            <h3 class="text-white font-black text-lg flex items-center gap-3">
+                                <span class="w-2 h-6 bg-blue-600 rounded-full"></span>
+                                Mes Annonces Emploi
+                            </h3>
+                            <div id="list-annonces" class="grid grid-cols-1 gap-4">
+                                <!-- Dynamic -->
+                            </div>
+                        </div>
+
+                        <!-- User Questions -->
+                        <div class="space-y-4">
+                            <h3 class="text-white font-black text-lg flex items-center gap-3">
+                                <span class="w-2 h-6 bg-orange-600 rounded-full"></span>
+                                Mes Questions Forum
+                            </h3>
+                            <div id="list-forum" class="grid grid-cols-1 gap-4">
+                                <!-- Dynamic -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // SESSION_KEY is already defined in api.js
+        const PROFILE_KEY = 'electech_user_profile';
+
+        // Security check
+        function checkAuth() {
+            const session = JSON.parse(localStorage.getItem(SESSION_KEY));
+            if (!session) {
+                window.location.href = 'login.html?msg=unauthorized';
+                return null;
+            }
+            return session;
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', async () => {
+            const session = checkAuth();
+            if (!session) return;
+
+            // Check for redirect reason
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('reason') === 'first_login') {
+                document.getElementById('redirect-alert').classList.remove('hidden');
+            }
+
+            // Load session name
+            document.getElementById('name').value = session.name;
+            document.getElementById('view-name').textContent = session.name;
+            document.getElementById('view-role').textContent = session.role || 'Expert';
+
+            // Load tabs logic
+            window.switchTab = (tabId) => {
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.nav-item').forEach(b => {
+                    b.classList.remove('active');
+                    b.classList.add('text-gray-500');
+                });
+                
+                document.getElementById(tabId).classList.add('active');
+                document.getElementById('btn-' + tabId).classList.add('active');
+                document.getElementById('btn-' + tabId).classList.remove('text-gray-500');
+
+                if (tabId === 'tab-history') loadHistory(session.name);
+            };
+
+            async function loadHistory(userName) {
+                // Load Ads
+                const annonces = JSON.parse(localStorage.getItem('electech_annonces') || '[]');
+                const myAnnonces = annonces.filter(a => a.author === userName);
+                document.getElementById('count-annonces').textContent = myAnnonces.length;
+                
+                const adsList = document.getElementById('list-annonces');
+                if (myAnnonces.length === 0) {
+                    adsList.innerHTML = '<p class="text-gray-600 text-xs italic">Aucune annonce publiée.</p>';
+                } else {
+                    adsList.innerHTML = myAnnonces.map(a => `
+                        <div class="bg-gray-900 border border-gray-800 p-5 rounded-2xl flex justify-between items-center group hover:border-blue-500/50 transition-all">
+                            <div>
+                                <p class="text-white font-bold text-sm">${a.type === 'candidat' ? 'Demande de poste' : a.poste}</p>
+                                <p class="text-[10px] text-gray-500 font-mono mt-1">${a.date} — ${a.contrat || 'Candidat'}</p>
+                            </div>
+                            ${a.status === 'pending'
+                                ? '<span class="text-[10px] bg-customOrange/10 text-customOrange border border-customOrange/20 px-3 py-1 rounded-full font-black uppercase">En attente</span>'
+                                : '<span class="text-[10px] bg-blue-600/10 text-blue-500 border border-blue-500/20 px-3 py-1 rounded-full font-black uppercase">Publié</span>'}
+                        </div>
+                    `).join('');
+                }
+
+                // Load Forum
+                const forumData = JSON.parse(localStorage.getItem('electech_forum_questions') || '[]');
+                const myQuestions = forumData.filter(q => q.author === userName);
+                document.getElementById('count-forum').textContent = myQuestions.length;
+
+                const forumList = document.getElementById('list-forum');
+                if (myQuestions.length === 0) {
+                    forumList.innerHTML = '<p class="text-gray-600 text-xs italic">Aucune question posée.</p>';
+                } else {
+                    forumList.innerHTML = myQuestions.map(q => `
+                        <div class="bg-gray-900 border border-gray-800 p-5 rounded-2xl flex justify-between items-center group hover:border-orange-500/50 transition-all">
+                            <div class="flex-grow pr-4">
+                                <p class="text-white font-bold text-sm truncate-2">${q.title}</p>
+                                <p class="text-[10px] text-gray-500 font-mono mt-1">${q.date} — ${q.responses.length} réponses</p>
+                            </div>
+                            <a href="forum.html?id=${q.id}" class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-external-link-alt text-[10px]"></i>
+                            </a>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Load saved profile data from API
+            try {
+                const profile = await API.call(`/profile?email=${session.email}`);
+                if (profile) {
+                    document.getElementById('experience').value = profile.experience || '';
+                    document.getElementById('motivation-letter').value = profile.motivationLetter || '';
+                    
+                    // Handle specialty loading
+                    const select = document.getElementById('specialty');
+                    const options = Array.from(select.options).map(o => o.value);
+                    if (profile.specialty && !options.includes(profile.specialty) && profile.specialty !== '') {
+                        select.value = 'Autre';
+                        const otherContainer = document.getElementById('other-specialty-container');
+                        otherContainer.style.display = 'block';
+                        document.getElementById('specialty-other').value = profile.specialty;
+                    } else {
+                        select.value = profile.specialty || '';
+                    }
+                    
+                    updateVisuals(profile);
+
+                    if (profile.cvName) {
+                        showFileStatus(profile.cvName);
+                    }
+                }
+            } catch (err) {
+                console.error('API Error:', err);
+            }
+
+            // File Dropzone logic
+            const dropzone = document.getElementById('cv-dropzone');
+            const fileInput = document.getElementById('cv-file');
+
+            dropzone.onclick = () => fileInput.click();
+            fileInput.onchange = (e) => {
+                if (e.target.files.length) showFileStatus(e.target.files[0].name);
+            };
+        });
+
+        function toggleOtherSpecialty() {
+            const select = document.getElementById('specialty');
+            const otherContainer = document.getElementById('other-specialty-container');
+            const otherInput = document.getElementById('specialty-other');
+            if (select.value === 'Autre') {
+                otherContainer.style.display = 'block';
+                otherInput.focus();
+            } else {
+                otherContainer.style.display = 'none';
+                otherInput.value = '';
+            }
+        }
+
+        function updateVisuals(data) {
+            document.getElementById('view-exp-val').textContent = data.experience || '0';
+            const specVal = data.specialty ? (data.specialty.length > 5 ? data.specialty.substring(0, 4) + '.' : data.specialty) : '—';
+            document.getElementById('view-spec-val').textContent = specVal;
+            document.getElementById('view-spec-val').title = data.specialty || '';
+        }
+
+        function showFileStatus(name) {
+            document.getElementById('cv-status').classList.add('hidden');
+            document.getElementById('cv-loaded').classList.remove('hidden');
+            document.getElementById('cv-name').textContent = name;
+        }
+
+        function resetFile(e) {
+            e.stopPropagation();
+            document.getElementById('cv-file').value = '';
+            document.getElementById('cv-status').classList.remove('hidden');
+            document.getElementById('cv-loaded').classList.add('hidden');
+        }
+
+        async function saveProfile(e) {
+            e.preventDefault();
+            const session = checkAuth();
+            
+            let specialtyValue = document.getElementById('specialty').value;
+            if (specialtyValue === 'Autre') {
+                specialtyValue = document.getElementById('specialty-other').value;
+            }
+
+            const profileData = {
+                city: document.getElementById('city').value,
+                specialty: specialtyValue,
+                experience: document.getElementById('experience').value,
+                cvName: document.getElementById('cv-name').textContent,
+                motivationLetter: document.getElementById('motivation-letter').value
+            };
+
+            const newName = document.getElementById('name').value;
+
+            try {
+                const response = await API.call('/profile', 'POST', {
+                    email: session.email,
+                    profile: profileData
+                });
+
+                // Update session
+                session.name = newName;
+                session.profileComplete = response.profileComplete;
+                localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+
+                // Success feedback
+                updateVisuals(profileData);
+                document.getElementById('view-name').textContent = newName;
+                
+                const msg = document.getElementById('save-msg');
+                msg.style.opacity = '1';
+                setTimeout(() => {
+                    msg.style.opacity = '0';
+                    // If it was the first login and now complete, redirect back to index or hub
+                    if (response.profileComplete && document.getElementById('redirect-alert').classList.contains('hidden') === false) {
+                        window.location.href = '../index.html';
+                    }
+                }, 3000);
+            } catch (err) {
+                alert('Erreur: ' + err.message);
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem(SESSION_KEY);
+            window.location.href = '../index.html';
+        }
+    </script>
+    <footer class="p-8 text-center border-t border-gray-900 mt-10">
+        <p class="text-[10px] text-gray-700 font-bold uppercase tracking-[0.4em]">Designed by ELECTECH Team 2026 - © Tous les droits sont reservés</p>
+    </footer>
+</body>
+</html>

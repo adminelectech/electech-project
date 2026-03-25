@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELECTECH - Hub Technique & Emploi</title>
+    <script>
+        (function() {
+            const isMaintenance = localStorage.getItem('electech_maintenance') === 'true';
+            const bypass = localStorage.getItem('electech_bypass_maintenance') === 'true';
+            if (isMaintenance && !bypass) {
+                window.location.href = 'admin/site_en_maintenance.html';
+            }
+        })();
+    </script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customOrange: '#FF8C00',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body
+    class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <!-- Header -->
+    <header class="p-6 border-b border-gray-800 backdrop-blur-sm bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo & Slogan Block -->
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                    <div class="mt-1.5 py-0.5 px-2 bg-customOrange/10 border border-customOrange/20 rounded-md">
+                        <p class="text-[7px] font-black uppercase tracking-[0.3em] text-customOrange whitespace-nowrap">
+                            La Tech pour tout le monde
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <!-- HLEGA -->
+                    <li class="relative group z-50">
+                        <a href="Hlega/Hlega.html" class="text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-customOrange pb-1">
+                            🎮 Hlega <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="Hlega/Hlega.html#qcm" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-question-circle w-5 text-gray-500"></i> QCMs Éclair</a></li>
+                                <li><a href="Hlega/Hlega.html#jeux" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-gamepad w-5 text-gray-500"></i> Jeux Interactifs</a></li>
+                                <li><a href="Hlega/Hlega.html#defis" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-trophy w-5 text-gray-500"></i> Défis & Amis</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- TECHNIQUE -->
+                    <li class="relative group z-40">
+                        <a href="Technique/Technique.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            ⚙️ Technique <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-64 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li class="px-5 py-2 pt-3 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1">Notions de base</li>
+                                <li><a href="Tech 1/electrotechnique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-bolt w-5 text-gray-500"></i> Électrotechnique</a></li>
+                                <li><a href="Tech 1/electronique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microchip w-5 text-gray-500"></i> Électronique</a></li>
+                                <li><a href="Tech 1/energies.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-leaf w-5 text-gray-500"></i> Énergies</a></li>
+                                <li><a href="Tech 1/schemas.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-project-diagram w-5 text-gray-500"></i> Schémas</a></li>
+                                
+                                <li class="px-5 py-2 pt-4 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1 mt-2">Spécialisations</li>
+                                <li><a href="Technique/Technique.html#electricite" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-network-wired w-5 text-gray-500"></i> Électricité</a></li>
+                                <li><a href="Technique/Technique.html#software" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-code w-5 text-gray-500"></i> Software</a></li>
+                                <li><a href="Technique/Technique.html#aeronautique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-plane w-5 text-gray-500"></i> Aéronautique</a></li>
+                                <li><a href="Technique/Technique.html#mecanique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-cogs w-5 text-gray-500"></i> Génie Mécanique</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- DIPLOMES -->
+                    <li class="relative group z-35">
+                        <a href="Diplomes/diplomes.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            🎓 Diplômes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="Diplomes/diplomes.html#bts" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> BTS</a></li>
+                                <li><a href="Diplomes/diplomes.html#dut" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> DUT</a></li>
+                                <li><a href="Diplomes/diplomes.html#licence" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-award w-5 text-gray-500"></i> Licence</a></li>
+                                <li><a href="Diplomes/diplomes.html#master" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-graduate w-5 text-gray-500"></i> Master</a></li>
+                                <li><a href="Diplomes/diplomes.html#doctorat" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microscope w-5 text-gray-500"></i> Doctorat</a></li>
+                                <li><a href="Diplomes/diplomes.html#mba" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-certificate w-5 text-gray-500"></i> MBA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <!-- COMMUNITY -->
+                    <li class="relative group z-30">
+                        <a href="assets/community/clic.electech.html" class="hover:text-yellow-400 text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-yellow-400 pb-1">
+                            👥 Community <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="assets/community/clic.electech.html" class="block px-5 py-2.5 hover:bg-black hover:text-yellow-400 transition-colors"><i class="fas fa-bolt w-5 text-yellow-400"></i> Clic Electech</a></li>
+                                <li><a href="utilisateur/forum.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-comments w-5 text-gray-500"></i> Forum</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <li><a href="Tech 1/bibliotheque.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">📚 Livres</a></li>
+                    
+                    <!-- EMPLOI -->
+                    <li class="relative group z-30">
+                        <a href="emploi/emploi.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            💼 Emploi <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="emploi/offres.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-briefcase w-5 text-gray-500"></i> Offres d'Emploi</a></li>
+                                <li><a href="emploi/demandes.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-tie w-5 text-gray-500"></i> Demandes d'Emploi</a></li>
+                                <li><a href="emploi/postale.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-envelope-open-text w-5 text-gray-500"></i> Boîte Postale</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+ 
+                <!-- Dynamic Auth Zone -->
+                <div id="auth-navbar" class="flex items-center gap-3 border-l border-gray-800 pl-8">
+                    <!-- Guest -->
+                    <div id="guest-zone" class="hidden items-center gap-5">
+                        <a href="utilisateur/login.html?tab=signup" class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors">S'inscrire</a>
+                        <a href="utilisateur/login.html?tab=login" class="bg-customOrange text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.1em] hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">Connexion</a>
+                    </div>
+                    <!-- Member -->
+                    <div id="member-zone" class="hidden items-center gap-4 bg-gray-950 border border-gray-900 px-4 py-2 rounded-2xl">
+                        <div class="flex items-center gap-3 group cursor-pointer">
+                            <div class="w-8 h-8 bg-customOrange/10 rounded-lg flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-user-circle text-base"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span id="nav-user-name" class="text-[11px] font-black text-white leading-none"></span>
+                                <a href="utilisateur/profil.html" class="text-[9px] text-gray-600 font-bold uppercase tracking-tighter hover:text-customOrange transition-colors mt-1">Mon Profil</a>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" class="text-gray-700 hover:text-red-500 transition-colors ml-2 pt-1" title="Déconnexion">
+                            <i class="fas fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="mt-8 mb-4 px-6">
+        <div class="container mx-auto max-w-[1600px] flex justify-start">
+            <div class="relative w-full max-w-sm group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-500 text-xs group-focus-within:text-customOrange transition-colors"></i>
+                </div>
+                <input type="text" 
+                    id="site-search-input"
+                    placeholder="Recherche rapide..." 
+                    class="w-full bg-gray-900/40 border border-gray-800 text-white text-xs rounded-xl py-3 pl-10 pr-20 focus:outline-none focus:border-customOrange/50 focus:ring-4 focus:ring-customOrange/5 backdrop-blur-xl transition-all placeholder:text-gray-600 shadow-lg">
+                <div class="absolute inset-y-1.5 right-1.5 flex items-center">
+                    <button id="search-btn" class="bg-customOrange/10 border border-customOrange/20 text-customOrange px-4 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-customOrange hover:text-black transition-all">
+                        Recherche
+                    </button>
+                </div>
+
+                <!-- Search Results Dropdown -->
+                <div id="search-results" class="absolute top-full left-0 w-full md:w-[450px] mt-2 bg-black/95 border border-gray-800 rounded-2xl backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-[100] hidden overflow-hidden">
+                    <div class="p-3 border-b border-gray-800 flex justify-between items-center bg-white/5">
+                        <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest">Résultats du site</span>
+                        <span id="results-count" class="text-[9px] text-customOrange font-bold">0 trouvés</span>
+                    </div>
+                    <div id="results-list" class="max-h-[400px] overflow-y-auto p-2 space-y-1">
+                        <div class="p-4 text-center text-gray-600 text-[10px] italic">Saisissez au moins 2 caractères...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <main class="flex-grow flex flex-col items-center justify-center p-8 py-20">
+
+        <!-- Section Rejoignez la clic Hytech -->
+        <!-- Section Contenu & Communauté Tri-Colones Élargie -->
+        <div class="container mx-auto max-w-[1600px] px-6 mb-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Articles Populaires (GAUCHE) -->
+                <div class="lg:col-span-2 bg-gray-900/40 border border-gray-800 rounded-3xl p-6 backdrop-blur-sm flex flex-col hover:border-customOrange/30 transition-all">
+                    <h3 class="text-xs font-black text-customOrange uppercase tracking-[0.3em] mb-8 flex items-center gap-2">
+                        <i class="fas fa-fire"></i> Populaires
+                    </h3>
+                    <div class="space-y-8 text-left">
+                        <a href="Tech 1/electrotechnique.html" class="group flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-customOrange/10 border border-customOrange/20 flex-shrink-0 flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all mt-1">
+                                <i class="fas fa-bolt text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase mb-1 tracking-tighter">Niveau Expert</p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-customOrange transition-colors leading-tight">Installation Industrielle & Normes 2024</h4>
+                            </div>
+                        </a>
+                        <a href="Tech 1/schemas.html" class="group flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-customOrange/10 border border-customOrange/20 flex-shrink-0 flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all mt-1">
+                                <i class="fas fa-project-diagram text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase mb-1 tracking-tighter">Didacticiel</p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-customOrange transition-colors leading-tight">Lecture et conception de schémas complexes</h4>
+                            </div>
+                        </a>
+                        <a href="Tech 1/energies.html" class="group flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-customOrange/10 border border-customOrange/20 flex-shrink-0 flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all mt-1">
+                                <i class="fas fa-solar-panel text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase mb-1 tracking-tighter">Futur Tech</p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-customOrange transition-colors leading-tight">Le stockage d'énergie haute densité</h4>
+                            </div>
+                        </a>
+                        <a href="Tech 1/electronique.html" class="group flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-customOrange/10 border border-customOrange/20 flex-shrink-0 flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all mt-1">
+                                <i class="fas fa-microchip text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase mb-1 tracking-tighter">Semiconducteurs</p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-customOrange transition-colors leading-tight">Architecture ARM vs RISC-V</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hub Communauté (CENTRE - Restauré à Largeur Max) -->
+                <div class="lg:col-span-8 bg-gray-900/60 border border-gray-800 rounded-[3rem] p-10 md:p-14 relative overflow-hidden flex flex-col items-center text-center shadow-2xl group/hub">
+                    <!-- Background Glow Dynamic -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-customOrange/5 rounded-full blur-[100px] -translate-y-48"></div>
+                    
+                    <h2 class="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-6 leading-tight">
+                        Rejoignez la clic <span class="text-yellow-400 font-black italic">Electech</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm md:text-base max-w-2xl mb-12">
+                         La plus grande communauté tech du Maroc. Échangez, apprenez et construisons ensemble le futur de l'ingénierie.
+                    </p>
+
+                    <!-- Avatar Slider -->
+                    <div class="relative w-full max-w-sm mb-12">
+                        <div id="community-slider" class="flex items-center justify-center gap-10 relative h-48">
+                            <div class="community-avatar opacity-40 scale-75 transition-all duration-700">
+                                <div class="w-32 h-32 rounded-3xl bg-purple-600/10 border border-purple-500/30 flex items-center justify-center overflow-hidden">
+                                    <i class="fas fa-user-ninja text-5xl text-purple-400/50"></i>
+                                </div>
+                            </div>
+                            <div class="community-avatar active opacity-100 scale-125 z-10 transition-all duration-700">
+                                 <div class="w-40 h-40 rounded-[2rem] bg-blue-600/20 border-4 border-blue-500/80 overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.2)]">
+                                    <img src="assets/community/boy.png" alt="Boy Tech" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="community-avatar opacity-40 scale-75 transition-all duration-700">
+                                <div class="w-32 h-32 rounded-3xl bg-green-600/10 border border-green-500/30 overflow-hidden">
+                                    <img src="assets/community/worker.png" alt="Industrial Employee" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community Call to Action -->
+                    <div class="flex flex-col items-center gap-6">
+                        <a href="assets/community/clic.electech.html" class="group relative px-12 py-5 bg-red-600 hover:bg-red-500 text-white rounded-[2rem] font-black uppercase tracking-[0.2em] text-xs transition-all shadow-[0_20px_50px_-15px_rgba(220,38,38,0.6)] hover:-translate-y-1.5 active:scale-95">
+                            S'abonner au groupe
+                            <div class="absolute inset-x-0 bottom-0 h-1.5 bg-white/20 rounded-b-[2rem] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center"></div>
+                        </a>
+                        <p class="text-[9px] font-bold text-gray-600 uppercase tracking-[0.5em] mt-2 animate-pulse">Rejoignez +5000 membres</p>
+                    </div>
+                </div>
+
+                <!-- Articles Récents (DROITE) -->
+                <div class="lg:col-span-2 bg-gray-900/40 border border-gray-800 rounded-3xl p-6 backdrop-blur-sm flex flex-col hover:border-blue-400/30 transition-all">
+                    <h3 class="text-xs font-black text-blue-400 uppercase tracking-[0.3em] mb-8 flex items-center gap-2">
+                        <i class="fas fa-bolt"></i> Flux Actu
+                    </h3>
+                    <div class="space-y-8 text-left">
+                        <a href="utilisateur/forum.html" class="group flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex-shrink-0 flex items-center justify-center text-blue-400 group-hover:bg-blue-400 group-hover:text-black transition-all mt-1">
+                                <i class="fas fa-comments text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase mb-1 tracking-tighter">Communauté</p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition-colors leading-tight">Nouveau débat : IA et Maintenance prédictive</h4>
+                            </div>
+                        </a>
+                        <a href="emploi/offres.html" class="group flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex-shrink-0 flex items-center justify-center text-blue-400 group-hover:bg-blue-400 group-hover:text-black transition-all mt-1">
+                                <i class="fas fa-briefcase text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase mb-1 tracking-tighter">Emploi Maroc</p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition-colors leading-tight">5 opportunités en automatisme à Casablanca</h4>
+                            </div>
+                        </a>
+                        <a href="Tech 1/electronique.html" class="group flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex-shrink-0 flex items-center justify-center text-blue-400 group-hover:bg-blue-400 group-hover:text-black transition-all mt-1">
+                                <i class="fas fa-file-alt text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase mb-1 tracking-tighter">Publication</p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition-colors leading-tight">Dossier : Évolutions de la fibre optique</h4>
+                            </div>
+                        </a>
+                        <a href="emploi/demandes.html" class="group flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex-shrink-0 flex items-center justify-center text-blue-400 group-hover:bg-blue-400 group-hover:text-black transition-all mt-1">
+                                <i class="fas fa-user-tie text-xs"></i>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase mb-1 tracking-tighter">Candidature</p>
+                                <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition-colors leading-tight">CV : Ingénieur en Systèmes Embarqués</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+            </div>
+        </div>
+
+        <style>
+            .community-avatar {
+                transform: perspective(1000px) rotateY(15deg);
+                filter: grayscale(80%);
+            }
+            .community-avatar.active {
+                transform: perspective(1000px) rotateY(0deg);
+                filter: grayscale(0%);
+            }
+        </style>
+
+
+        <script>
+            (function initCommunitySlider() {
+                const avatars = document.querySelectorAll('.community-avatar');
+                if (avatars.length === 0) return;
+                let current = 1; // Start with the boy (middle one)
+
+                setInterval(() => {
+                    avatars.forEach(av => {
+                        av.classList.remove('active', 'opacity-100', 'scale-110', 'z-10');
+                        av.classList.add('opacity-40', 'scale-75');
+                        av.style.zIndex = "0";
+                    });
+
+                    current = (current + 1) % avatars.length;
+                    const active = avatars[current];
+                    if (active) {
+                        active.classList.add('active', 'opacity-100', 'scale-110', 'z-10');
+                        active.classList.remove('opacity-40', 'scale-75');
+                        active.style.zIndex = "20";
+                    }
+                }, 3000);
+            })();
+        </script>
+
+        <style>
+            .animate-scroll {
+                animation: slideScroll linear infinite;
+            }
+
+            .pause-scroll {
+                animation-play-state: paused;
+            }
+        </style>
+
+
+        <!-- Section Titre : Exploration Technique -->
+        <div class="container mx-auto max-w-6xl px-4 mb-10">
+            <div class="flex flex-col items-center text-center">
+                <div class="w-16 h-1 bg-customOrange mb-6 rounded-full opacity-50"></div>
+                <h2 class="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4">
+                    Explorez nos <span class="text-customOrange">Pôles d'Expertise</span>
+                </h2>
+                <p class="text-gray-500 text-sm md:text-base max-w-2xl font-medium">
+                    Plongez dans les fondements de l'ingénierie électrique à travers nos modules interactifs et nos guides de référence.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sections Théoriques (Cards) -->
+        <div id="cards-container"
+            class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 max-w-6xl">
+            <!-- Les cartes générées en JS iront ici -->
+        </div>
+
+        <!-- Modal Calculateurs Techniques -->
+        <div id="tools-modal" class="fixed inset-0 bg-black/95 z-50 overflow-y-auto hidden">
+            <div class="container mx-auto px-4 max-w-7xl py-12 relative min-h-screen flex flex-col">
+                <!-- Header Modal -->
+                <div class="flex justify-between items-center mb-12 border-b border-gray-800 pb-6">
+                    <h2
+                        class="text-3xl md:text-4xl font-extrabold uppercase tracking-widest text-white flex items-center">
+                        <i class="fas fa-toolbox text-customOrange mr-4"></i>
+                        Outils de <span class="text-customOrange ml-2">l'Électricien</span>
+                    </h2>
+                    <button onclick="document.getElementById('tools-modal').classList.add('hidden')"
+                        class="text-gray-400 hover:text-customOrange transition-colors text-3xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 flex-grow">
+                    <!-- Calculateur Loi d'Ohm -->
+                    <div
+                        class="bg-black border-2 border-customOrange rounded-xl p-8 shadow-[0_0_20px_rgba(255,140,0,0.3)] relative font-mono mt-4">
+                        <div
+                            class="absolute -top-5 left-8 bg-black px-4 text-customOrange font-bold text-xl tracking-widest border-x-2 border-t-2 border-customOrange rounded-t-lg">
+                            LOI D'OHM
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm font-sans pt-2">Entrez deux valeurs pour calculer la
+                            troisième.</p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <label for="ohm_U" class="w-20 text-white font-bold text-lg">U (V)</label>
+                                <input type="number" id="ohm_U" step="any" placeholder="Tension (V)"
+                                    oninput="checkOhm()"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="ohm_R" class="w-20 text-white font-bold text-lg">R (Ω)</label>
+                                <input type="number" id="ohm_R" step="any" placeholder="Résistance (Ω)"
+                                    oninput="checkOhm()"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="ohm_I" class="w-20 text-white font-bold text-lg">I (A)</label>
+                                <input type="number" id="ohm_I" step="any" placeholder="Intensité (A)"
+                                    oninput="checkOhm()"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end font-sans">
+                            <button onclick="resetOhm()" class="text-gray-400 hover:text-white transition-colors"><i
+                                    class="fas fa-trash-alt mr-2"></i>Reset</button>
+                        </div>
+                        <div id="ohm_msg" class="mt-2 text-sm text-red-500 hidden font-sans"></div>
+                    </div>
+
+                    <!-- Calculateur Section de Câble -->
+                    <div
+                        class="bg-black border-2 border-customOrange rounded-xl p-8 shadow-[0_0_20px_rgba(255,140,0,0.3)] relative font-mono mt-4">
+                        <div
+                            class="absolute -top-5 left-8 bg-black px-4 text-customOrange font-bold text-xl tracking-widest border-x-2 border-t-2 border-customOrange rounded-t-lg">
+                            CÂBLAGE
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm font-sans pt-2">Estimation de la section cuivre (Chute 3%).
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <label for="cab_P" class="w-24 text-white font-bold text-lg">P (W)</label>
+                                <input type="number" id="cab_P" step="any" placeholder="Puissance"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="cab_L" class="w-24 text-white font-bold text-lg">L (m)</label>
+                                <input type="number" id="cab_L" step="any" placeholder="Distance"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="cab_V" class="w-24 text-white font-bold text-lg">U (V)</label>
+                                <select id="cab_V"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange cursor-pointer">
+                                    <option value="230">230V</option>
+                                    <option value="400">400V</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-gray-900 border border-gray-700 rounded p-3 text-center">
+                            <span class="text-gray-400 text-sm font-sans block">Section recommandée</span>
+                            <span id="cab_Res" class="text-2xl font-bold text-customOrange">-- mm²</span>
+                        </div>
+                        <div class="mt-4 flex justify-between font-sans">
+                            <button onclick="calculerCable()"
+                                class="bg-customOrange text-black font-bold py-2 px-6 rounded hover:bg-white hover:text-customOrange transition-colors"><i
+                                    class="fas fa-calculator mr-2"></i>Calculer</button>
+                            <button onclick="resetCable()" class="text-gray-400 hover:text-white transition-colors"><i
+                                    class="fas fa-trash-alt mr-2"></i>Reset</button>
+                        </div>
+                        <div id="cab_msg" class="mt-2 text-sm text-red-500 hidden font-sans"></div>
+                    </div>
+
+                    <!-- Puissance Triphasée -->
+                    <div
+                        class="bg-black border-2 border-customOrange rounded-xl p-8 shadow-[0_0_20px_rgba(255,140,0,0.3)] relative font-mono mt-4">
+                        <div
+                            class="absolute -top-5 left-8 bg-black px-4 text-customOrange font-bold text-xl tracking-widest border-x-2 border-t-2 border-customOrange rounded-t-lg">
+                            PUISSANCE
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm font-sans pt-2">Calcul de la puissance active (Triphasé /
+                            Monophasé).</p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <label for="pwr_U" class="w-28 text-white font-bold text-lg">U (V)</label>
+                                <input type="number" id="pwr_U" placeholder="Tension"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="pwr_I" class="w-28 text-white font-bold text-lg">I (A)</label>
+                                <input type="number" id="pwr_I" placeholder="Courant"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                            <div class="flex items-center">
+                                <label for="pwr_Cos" class="w-28 text-white font-bold text-lg">Cos(φ)</label>
+                                <input type="number" id="pwr_Cos" step="0.01" max="1" min="0" value="0.8"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                            <div class="flex items-center mt-2">
+                                <label class="w-28 text-white font-bold text-lg">Réseau</label>
+                                <div class="flex space-x-4">
+                                    <label class="flex items-center text-white cursor-pointer"><input type="radio"
+                                            name="pwr_type" value="mono" class="mr-2 accent-customOrange"> Mono</label>
+                                    <label class="flex items-center text-white cursor-pointer"><input type="radio"
+                                            name="pwr_type" value="tri" class="mr-2 accent-customOrange" checked>
+                                        Tri</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-gray-900 border border-gray-700 rounded p-3 text-center">
+                            <span class="text-gray-400 text-sm font-sans block">Puissance Active</span>
+                            <span id="pwr_Res" class="text-2xl font-bold text-customOrange">-- W</span>
+                        </div>
+                        <div class="mt-4 flex justify-between font-sans">
+                            <button onclick="calculerPuissance()"
+                                class="bg-customOrange text-black font-bold py-2 px-6 rounded hover:bg-white hover:text-customOrange transition-colors"><i
+                                    class="fas fa-bolt mr-2"></i>Calculer</button>
+                            <button onclick="resetPuissance()"
+                                class="text-gray-400 hover:text-white transition-colors"><i
+                                    class="fas fa-trash-alt mr-2"></i>Reset</button>
+                        </div>
+                        <div id="pwr_msg" class="mt-2 text-sm text-red-500 hidden font-sans"></div>
+                    </div>
+
+                    <!-- Convertisseur AWG -->
+                    <div
+                        class="bg-black border-2 border-customOrange rounded-xl p-8 shadow-[0_0_20px_rgba(255,140,0,0.3)] relative font-mono mt-4">
+                        <div
+                            class="absolute -top-5 left-8 bg-black px-4 text-customOrange font-bold text-xl tracking-widest border-x-2 border-t-2 border-customOrange rounded-t-lg">
+                            CONVERSION
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm font-sans pt-2">Conversion rapide AWG (American Wire Gauge)
+                            vers mm².</p>
+
+                        <div class="space-y-4 mt-8">
+                            <div class="flex items-center">
+                                <label for="awg_val" class="w-24 text-white font-bold text-lg">AWG</label>
+                                <input type="number" id="awg_val" placeholder="Ex: 12" oninput="convertirAWG()"
+                                    class="w-full bg-gray-900 border border-gray-700 text-customOrange text-xl rounded p-3 focus:outline-none focus:border-customOrange transition-all">
+                            </div>
+                        </div>
+                        <div
+                            class="mt-8 bg-gray-900 border border-gray-700 rounded p-5 text-center flex items-center justify-center space-x-4">
+                            <span class="text-gray-400 text-sm font-sans">Équivalent :</span>
+                            <span id="awg_Res" class="text-3xl font-bold text-customOrange">-- mm²</span>
+                        </div>
+                        <div class="mt-8 flex justify-end font-sans">
+                            <button onclick="resetAWG()" class="text-gray-400 hover:text-white transition-colors"><i
+                                    class="fas fa-trash-alt mr-2"></i>Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Calculatrice Scientifique -->
+                    <div
+                        class="bg-black border-2 border-customOrange rounded-xl p-6 shadow-[0_0_20px_rgba(255,140,0,0.3)] relative font-mono mt-4 xl:col-span-2">
+                        <div
+                            class="absolute -top-5 left-8 bg-black px-4 text-customOrange font-bold text-xl tracking-widest border-x-2 border-t-2 border-customOrange rounded-t-lg uppercase">
+                            Calculatrice Scientifique
+                        </div>
+
+                        <div class="mt-4 bg-gray-950 border-2 border-gray-800 rounded-xl p-4 mb-4">
+                            <div id="calc-history" class="text-right text-gray-600 text-xs h-4 overflow-hidden mb-1">
+                            </div>
+                            <div id="calc-display"
+                                class="text-right text-white text-3xl font-black tracking-wider overflow-hidden whitespace-nowrap">
+                                0</div>
+                        </div>
+
+                        <div class="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                            <!-- Fonctions Scientifiques -->
+                            <button onclick="calcIn('sin(')"
+                                class="bg-gray-900 text-customOrange p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">SIN</button>
+                            <button onclick="calcIn('cos(')"
+                                class="bg-gray-900 text-customOrange p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">COS</button>
+                            <button onclick="calcIn('tan(')"
+                                class="bg-gray-900 text-customOrange p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">TAN</button>
+                            <button onclick="calcIn('log(')"
+                                class="bg-gray-900 text-customOrange p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">LOG</button>
+                            <button onclick="calcIn('ln(')"
+                                class="bg-gray-900 text-customOrange p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">LN</button>
+                            <button onclick="calcIn('sqrt(')"
+                                class="bg-gray-900 text-customOrange p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">√</button>
+
+                            <button onclick="calcIn('^')"
+                                class="bg-gray-900 text-gray-400 p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">xʸ</button>
+                            <button onclick="calcIn('(')"
+                                class="bg-gray-900 text-gray-400 p-3 rounded-lg text-sm font-bold hover:bg-gray-700 transition-all">(</button>
+                            <button onclick="calcIn(')')"
+                                class="bg-gray-900 text-gray-400 p-3 rounded-lg text-sm font-bold hover:bg-gray-700 transition-all">)</button>
+                            <button onclick="calcIn('PI')"
+                                class="bg-gray-900 text-gray-400 p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">π</button>
+                            <button onclick="calcIn('E')"
+                                class="bg-gray-900 text-gray-400 p-3 rounded-lg text-xs font-bold hover:bg-customOrange hover:text-black transition-all">e</button>
+                            <button onclick="calcClear()"
+                                class="bg-red-950 text-red-500 p-3 rounded-lg text-xs font-black hover:bg-red-500 hover:text-white transition-all">AC</button>
+
+                            <!-- Pavé Numérique -->
+                            <button onclick="calcIn('7')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">7</button>
+                            <button onclick="calcIn('8')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">8</button>
+                            <button onclick="calcIn('9')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">9</button>
+                            <button onclick="calcDel()"
+                                class="bg-gray-900 text-gray-500 p-4 rounded-lg text-xs font-bold hover:bg-gray-700 transition-all">DEL</button>
+                            <button onclick="calcIn('/')"
+                                class="bg-gray-900 text-customOrange p-4 rounded-lg font-bold hover:bg-customOrange hover:text-black transition-all">÷</button>
+                            <button onclick="calcIn('*')"
+                                class="bg-gray-900 text-customOrange p-4 rounded-lg font-bold hover:bg-customOrange hover:text-black transition-all">×</button>
+
+                            <button onclick="calcIn('4')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">4</button>
+                            <button onclick="calcIn('5')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">5</button>
+                            <button onclick="calcIn('6')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">6</button>
+                            <button onclick="calcIn('-')"
+                                class="bg-gray-900 text-customOrange p-4 rounded-lg font-bold hover:bg-customOrange hover:text-black transition-all">−</button>
+                            <button onclick="calcIn('+')"
+                                class="bg-gray-900 text-customOrange p-4 rounded-lg font-bold h-full row-span-2 hover:bg-customOrange hover:text-black transition-all">+</button>
+                            <button onclick="calcEqual()"
+                                class="bg-customOrange text-black p-4 rounded-lg font-black h-full row-span-2 hover:bg-white transition-all text-xl">=</button>
+
+                            <button onclick="calcIn('1')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">1</button>
+                            <button onclick="calcIn('2')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">2</button>
+                            <button onclick="calcIn('3')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">3</button>
+                            <button onclick="calcIn('.')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">.</button>
+
+                            <button onclick="calcIn('0')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold col-span-2 hover:bg-gray-700 transition-all">0</button>
+                            <button onclick="calcIn('00')"
+                                class="bg-gray-800 text-white p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">00</button>
+                            <button onclick="calcIn('%')"
+                                class="bg-gray-900 text-gray-400 p-4 rounded-lg font-bold hover:bg-gray-700 transition-all">%</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Volet Emploi dynamique -->
+    <section class="w-full bg-black border-t border-gray-800 py-12 px-6">
+        <div class="container mx-auto max-w-6xl">
+
+            <!-- En-tête volet -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 bg-gray-900 border-2 border-customOrange rounded-full flex items-center justify-center text-2xl shadow-[0_0_12px_rgba(255,140,0,0.3)]">
+                        💼</div>
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-white">Hub Emploi <span class="text-customOrange">Maroc
+                                 🇲🇦</span></h2>
+                        <p class="text-gray-600 text-xs font-mono mt-0.5"><i
+                                class="fas fa-fire text-customOrange mr-1"></i> Annonces les plus consultées</p>
+                    </div>
+                </div>
+                <a href="emploi/emploi.html"
+                    class="inline-flex items-center gap-2 border border-customOrange text-customOrange hover:bg-customOrange hover:text-black font-bold py-2.5 px-6 rounded-full transition-all text-sm shadow-[0_0_10px_rgba(255,140,0,0.2)] hover:shadow-[0_0_20px_rgba(255,140,0,0.5)] whitespace-nowrap">
+                    <i class="fas fa-briefcase"></i> Accéder au Hub
+                </a>
+            </div>
+
+            <!-- Annonces dynamiques -->
+            <div id="topAnnonces" class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                <!-- Rendu par JS -->
+            </div>
+
+            <!-- Vide state -->
+            <div id="emptyAnnonces" class="hidden text-center py-10 border border-dashed border-gray-800 rounded-2xl">
+                <i class="fas fa-briefcase text-3xl text-gray-800 mb-3 block"></i>
+                <p class="text-gray-600 text-sm">Aucune annonce publiée pour l'instant.</p>
+                <a href="emploi/emploi.html"
+                    class="inline-flex items-center gap-2 mt-4 text-customOrange text-sm hover:underline"><i
+                        class="fas fa-plus-circle"></i> Publier la première annonce</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Logithèque : Documents Populaires -->
+    <section class="w-full bg-gray-950 border-t border-b border-gray-800 py-14 px-6">
+        <div class="container mx-auto max-w-6xl">
+
+            <!-- Titre de section -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white flex items-center">
+                    <i class="fas fa-download text-customOrange mr-3 text-2xl"></i>
+                    Logithèque : <span class="text-customOrange ml-2">Documents Populaires</span>
+                </h2>
+                <span class="text-sm text-gray-600 font-mono border border-gray-800 px-4 py-2 rounded-full">
+                    <i class="fas fa-fire text-customOrange mr-1"></i> Les plus téléchargés
+                </span>
+            </div>
+
+            <!-- Grille de fichiers -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+                <!-- Fichier 1 : PDF -->
+                <div
+                    class="flex items-center gap-5 bg-black border border-gray-800 hover:border-red-500 rounded-xl p-5 transition-all group cursor-pointer">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-file-pdf text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <p class="text-white font-bold text-sm leading-tight truncate">Guide NF C 15-100</p>
+                        <p class="text-gray-600 text-xs mt-1 font-mono">PDF &bull; 4.2 MB</p>
+                    </div>
+                    <a href="Tech 1/ressources.html" target="_blank"
+                        class="flex-shrink-0 bg-transparent border border-customOrange text-customOrange hover:bg-customOrange hover:text-black text-xs font-bold py-2 px-4 rounded-full transition-all whitespace-nowrap">
+                        <i class="fas fa-download mr-1"></i> Télécharger
+                    </a>
+                </div>
+
+                <!-- Fichier 2 : Excel -->
+                <div
+                    class="flex items-center gap-5 bg-black border border-gray-800 hover:border-green-500 rounded-xl p-5 transition-all group cursor-pointer">
+                    <div class="flex-shrink-0">
+                        <i
+                            class="fas fa-file-excel text-5xl text-green-500 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <p class="text-white font-bold text-sm leading-tight truncate">Tableau Dimensionnement Câbles
+                        </p>
+                        <p class="text-gray-600 text-xs mt-1 font-mono">Excel &bull; 1.8 MB</p>
+                    </div>
+                    <a href="Tech 1/ressources.html" target="_blank"
+                        class="flex-shrink-0 bg-transparent border border-customOrange text-customOrange hover:bg-customOrange hover:text-black text-xs font-bold py-2 px-4 rounded-full transition-all whitespace-nowrap">
+                        <i class="fas fa-download mr-1"></i> Télécharger
+                    </a>
+                </div>
+
+                <!-- Fichier 3 : Word -->
+                <div
+                    class="flex items-center gap-5 bg-black border border-gray-800 hover:border-blue-500 rounded-xl p-5 transition-all group cursor-pointer">
+                    <div class="flex-shrink-0">
+                        <i
+                            class="fas fa-file-word text-5xl text-blue-500 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <p class="text-white font-bold text-sm leading-tight truncate">Modèle Rapport de Maintenance</p>
+                        <p class="text-gray-600 text-xs mt-1 font-mono">Word &bull; 0.8 MB</p>
+                    </div>
+                    <a href="Tech 1/ressources.html" target="_blank"
+                        class="flex-shrink-0 bg-transparent border border-customOrange text-customOrange hover:bg-customOrange hover:text-black text-xs font-bold py-2 px-4 rounded-full transition-all whitespace-nowrap">
+                        <i class="fas fa-download mr-1"></i> Télécharger
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Lien vers la logithèque complète -->
+            <div class="flex justify-end">
+                <a href="Tech 1/ressources.html"
+                    class="inline-flex items-center gap-2 text-customOrange border border-customOrange hover:bg-customOrange hover:text-black font-bold py-3 px-8 rounded-full transition-all text-sm shadow-[0_0_12px_rgba(255,140,0,0.2)] hover:shadow-[0_0_25px_rgba(255,140,0,0.5)]">
+                    Accéder à la logithèque complète <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // ── Render Top Annonces on Homepage ───────────────────────
+        (function renderTopAnnonces() {
+            const ANNONCES_KEY = 'electech_annonces';
+            const raw = JSON.parse(localStorage.getItem(ANNONCES_KEY) || '[]');
+            const container = document.getElementById('topAnnonces');
+            const empty = document.getElementById('emptyAnnonces');
+
+            // Sort by views desc, take top 3
+            const top = [...raw].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 3);
+
+            if (top.length === 0) {
+                container.classList.add('hidden');
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            container.innerHTML = top.map((a) => {
+                const isRec = a.type === 'recruteur';
+                const border = isRec ? 'hover:border-blue-600' : 'hover:border-green-600';
+                const badge = isRec ? '<span class="text-xs bg-blue-900/40 text-blue-400 border border-blue-800 px-2 py-0.5 rounded-full font-bold">🏢 Offre</span>'
+                    : '<span class="text-xs bg-green-900/40 text-green-400 border border-green-800 px-2 py-0.5 rounded-full font-bold">👤 Candidat</span>';
+                const title = isRec ? `${a.poste} <span class="text-gray-500 font-normal text-sm">— ${a.entreprise}</span>` : a.poste;
+                const sub = isRec ? `<i class="fas fa-handshake mr-1"></i>${a.contrat}` : `<i class="fas fa-tools mr-1"></i>${a.skills || ''}`;
+                const views = a.views || 0;
+                const link = isRec
+                    ? `emploi/voir_annonce.html?id=${a.id}`
+                    : `emploi/voir_profil.html?id=${a.id}`;
+                const cta = isRec ? '<i class="fas fa-paper-plane mr-1"></i> Postuler' : '<i class="fas fa-eye mr-1"></i> Voir Profil';
+                const ctaCol = isRec ? 'border-blue-700 text-blue-400 hover:bg-blue-900/30'
+                    : 'border-green-700 text-green-400 hover:bg-green-900/30';
+
+                return `
+            <div class="bg-gray-900 border border-gray-800 ${border} rounded-xl p-5 flex flex-col gap-3 transition-all">
+                <div class="flex items-center justify-between">
+                    ${badge}
+                    <span class="text-xs text-gray-700 font-mono flex items-center gap-1"><i class="fas fa-eye text-customOrange/60"></i>${views}</span>
+                </div>
+                <h3 class="text-white font-extrabold text-base leading-snug">${title}</h3>
+                <p class="text-customOrange text-xs font-mono"><i class="fas fa-map-marker-alt mr-1"></i>${a.ville || ''}</p>
+                <p class="text-gray-600 text-xs">${sub}</p>
+                <a href="${link}" class="mt-auto inline-flex items-center gap-1 text-xs border ${ctaCol} py-1.5 px-4 rounded-full transition-all font-bold">${cta}</a>
+            </div>`;
+            }).join('');
+        })();
+    </script>
+
+    <!-- Library Preview Hub -->
+    <section class="py-24 relative overflow-hidden bg-black/50">
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-customOrange/5 blur-[160px] rounded-full pointer-events-none">
+        </div>
+        <div class="container mx-auto max-w-6xl px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-center md:text-left">
+                <div class="max-w-2xl">
+                    <span class="text-customOrange font-black text-[10px] uppercase tracking-[0.4em] mb-4 block">Centre
+                        de Connaissances</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-white leading-tight">Bibliothèque des <br> <span
+                            class="text-customOrange uppercase tracking-widest text-2xl">Experts & Bouquins</span>.</h2>
+                </div>
+                <a href="Tech 1/bibliotheque.html"
+                    class="group flex items-center gap-4 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-white transition-all mx-auto md:mx-0">
+                    Explorer la bibliothèque <span
+                        class="w-12 h-12 rounded-full border border-gray-800 flex items-center justify-center group-hover:border-customOrange group-hover:text-customOrange transition-all"><i
+                            class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div onclick="window.location.href='Tech 1/bibliotheque.html'"
+                    class="bg-gray-950/50 border border-gray-900 rounded-[2.5rem] p-8 hover:border-customOrange/30 transition-all group cursor-pointer">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-customOrange/10 flex items-center justify-center text-customOrange mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white mb-4 uppercase">Guides Pratiques</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-8">Des centaines de manuels constructeurs et de
+                        guides d'installation en libre téléchargement.</p>
+                    <span
+                        class="text-[10px] font-black uppercase tracking-widest text-customOrange group-hover:translate-x-2 transition-transform inline-block">Consulter
+                        <i class="fas fa-arrow-right ml-2 text-[8px]"></i></span>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-customOrange to-orange-600 rounded-[2.5rem] p-8 shadow-2xl shadow-customOrange/20 transform hover:-translate-y-2 transition-all cursor-pointer overflow-hidden relative group">
+                    <div
+                        class="absolute -right-4 -bottom-4 opacity-10 scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-700">
+                        <i class="fas fa-graduation-cap text-9xl"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-black mb-4 uppercase text-black">Cours de Base</h3>
+                    <p class="text-black/80 text-sm font-bold leading-relaxed mb-8">Idéal pour les étudiants et
+                        techniciens débutants souhaitant consolider leurs bases.</p>
+                    <a href="Tech 1/bibliotheque.html"
+                        class="bg-black text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest inline-block">Accéder
+                        aux cours</a>
+                </div>
+                <div onclick="window.location.href='Tech 1/bibliotheque.html'"
+                    class="bg-gray-950/50 border border-gray-900 rounded-[2.5rem] p-8 hover:border-customOrange/30 transition-all group cursor-pointer">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-customOrange/10 flex items-center justify-center text-customOrange mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white mb-4 uppercase">Normes & Sécurité</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-8">Restez à jour avec les dernières normes NF C
+                        15-100 et régulations de sécurité électrique.</p>
+                    <span
+                        class="text-[10px] font-black uppercase tracking-widest text-customOrange group-hover:translate-x-2 transition-transform inline-block">Consulter
+                        <i class="fas fa-arrow-right ml-2 text-[8px]"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Officiel Full-Width (4 Colonnes) -->
+    <footer class="w-full mt-auto py-20 bg-black border-t border-gray-900">
+        <div class="w-full px-[5%] lg:px-[10%]">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+
+                <!-- Colonne 1 : Newsletter -->
+                <div class="bg-gray-950/50 border border-gray-800 p-8 rounded-3xl shadow-xl flex flex-col">
+                    <h3 class="text-white font-extrabold text-lg mb-2">Newsletter 📩</h3>
+                    <p class="text-gray-500 text-xs mb-8">Restez informé des derniers cours et schémas techniques.</p>
+                    <form onsubmit="handleNewsletter(event)" class="flex flex-col gap-4">
+                        <input type="email" placeholder="Votre email pro..." required
+                            class="bg-black border border-gray-800 text-white px-5 py-3 rounded-xl focus:outline-none focus:border-customOrange transition-all text-xs">
+                        <button type="submit"
+                            class="bg-customOrange text-black font-extrabold py-3 rounded-xl hover:bg-white hover:text-customOrange transition-all text-xs shadow-lg shadow-customOrange/10">
+                            S'abonner
+                        </button>
+                    </form>
+                    <div id="newsletter-success"
+                        class="hidden mt-4 text-customOrange text-[10px] font-bold animate-bounce text-center">
+                        ✅ Inscription validée !
+                    </div>
+                </div>
+
+                <!-- Colonne 2 : Navigation -->
+                <div class="lg:pl-10">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">
+                        Navigation</h4>
+                    <ul class="space-y-5 text-sm">
+                        <li><a href="Tech 1/electrotechnique.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-bolt w-4 opacity-50 text-xs text-customOrange"></i>
+                                Électrotechnique</a></li>
+                        <li><a href="Tech 1/electronique.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-microchip w-4 opacity-50 text-xs text-customOrange"></i>
+                                Électronique</a></li>
+                        <li><a href="Tech 1/schemas.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-project-diagram w-4 opacity-50 text-xs text-customOrange"></i> Schémas
+                                & Plans</a></li>
+                        <li><a href="Tech 1/energies.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-solar-panel w-4 opacity-50 text-xs text-customOrange"></i> Énergies
+                                Renouv.</a></li>
+                        <li><a href="Tech 1/bibliotheque.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-book w-4 opacity-50 text-xs text-customOrange"></i> Bibliothèque
+                                Hub</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 3 : Communauté -->
+                <div class="lg:pl-10">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">
+                        Communauté</h4>
+                    <ul class="space-y-5 text-sm">
+                        <li><a href="utilisateur/forum.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-comments w-4 opacity-50 text-xs text-customOrange"></i> Forum
+                                Public</a></li>
+                        <li><a href="emploi/emploi.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-briefcase w-4 opacity-50 text-xs text-customOrange"></i> Hub
+                                Emploi</a></li>
+                        <li><a href="emploi/offres.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3 ml-4 text-xs font-bold text-blue-400">└
+                                Offres d'Emploi</a></li>
+                        <li><a href="emploi/demandes.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3 ml-4 text-xs font-bold text-green-400">└
+                                Demandes d'Emploi</a></li>
+                        <li><a href="utilisateur/contact.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-envelope w-4 opacity-50 text-xs text-customOrange"></i> Contact
+                                Expert</a></li>
+                        <li><a href="Tech 1/ressources.html"
+                                class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i
+                                    class="fas fa-folder-open w-4 opacity-50 text-xs text-customOrange"></i>
+                                Logithèque</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 4 : Réseaux Sociaux -->
+                <div class="lg:pl-10 text-left">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">
+                        Suivez-nous</h4>
+                    <p class="text-gray-500 text-xs mb-6">Rejoignez notre laboratoire technologique sur les réseaux.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i
+                                class="fab fa-linkedin-in text-sm"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i
+                                class="fab fa-facebook-f text-sm"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i
+                                class="fab fa-instagram text-sm"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i
+                                class="fab fa-twitter text-sm"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright Line -->
+            <div
+                class="h-[1px] w-full bg-gradient-to-r from-transparent via-customOrange to-transparent opacity-20 mb-8">
+            </div>
+            <p class="text-center text-[10px] text-gray-600 font-medium tracking-widest uppercase">
+                Designed by <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;"
+                    class="text-gray-500 hover:text-customOrange transition-all font-bold">ELECTECH Team 2026</a> - ©
+                Tous les droits sont reservés
+            </p>
+        </div>
+    </footer>
+    <script>
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value.trim();
+            const success = document.getElementById('newsletter-success');
+            if (email) {
+                const subs = JSON.parse(localStorage.getItem('electech_newsletter') || '[]');
+                if (!subs.find(s => s.email === email)) {
+                    subs.unshift({ email, date: new Date().toLocaleDateString('fr-FR'), page: document.title || 'index.html' });
+                    localStorage.setItem('electech_newsletter', JSON.stringify(subs));
+                }
+            }
+            success.classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => success.classList.add('hidden'), 5000);
+        }
+    </script>
+    <script src="javascript/data_elec.js"></script>
+    <!-- Scripts -->
+    <script>
+        function genererCartes(donnees) {
+            const container = document.getElementById('cards-container');
+            const counter = document.getElementById('searchCounter');
+            container.innerHTML = '';
+
+            donnees.forEach(matiere => {
+                const isCalc = matiere.id === 'calculateurs';
+                let clickAction = '';
+                if (isCalc) {
+                    clickAction = 'onclick="document.getElementById(\'tools-modal\').classList.remove(\'hidden\');"';
+                } else {
+                    clickAction = `onclick="window.location.href='Tech 1/${matiere.id}.html';"`;
+                }
+
+                const baseClasses = isCalc ? 'bg-gray-900 border border-customOrange rounded-2xl p-8 transition-all duration-300 transform hover:-translate-y-2 group shadow-[0_0_15px_rgba(255,140,0,0.3)] hover:shadow-[0_0_25px_rgba(255,140,0,0.8)] flex flex-col h-full cursor-pointer'
+                    : 'bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-customOrange transition-all duration-300 transform hover:-translate-y-2 group shadow-lg hover:shadow-customOrange/20 flex flex-col h-full cursor-pointer';
+                const titleColor = isCalc ? 'text-customOrange font-extrabold' : 'text-white font-bold';
+
+                const cardHTML = `
+                    <div ${clickAction} class="${baseClasses}">
+                        <div class="text-customOrange text-5xl mb-6 flex justify-center group-hover:scale-125 group-hover:drop-shadow-[0_0_15px_rgba(255,140,0,0.8)] transition-all duration-300 select-none">
+                            ${matiere.icone}
+                        </div>
+                        <h3 class="text-xl ${titleColor} text-center mb-1">${matiere.titre}</h3>
+                        <h4 class="text-sm font-semibold ${isCalc ? 'text-white' : 'text-customOrange'} text-center mb-4">${matiere.sujet}</h4>
+                        <p class="text-gray-400 text-center text-sm leading-relaxed flex-grow">
+                            ${matiere.description}
+                        </p>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+
+            // Met à jour le compteur
+            const count = donnees.length;
+            if (count === 0) {
+                counter.textContent = "Aucun sujet trouvé.";
+            } else if (count === 1) {
+                counter.textContent = "1 sujet trouvé.";
+            } else {
+                counter.textContent = `${count} sujets trouvés.`;
+            }
+        }
+
+        function filtrerCartes() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const resultats = matieresElec.filter(matiere => {
+                return matiere.titre.toLowerCase().includes(query) ||
+                    matiere.sujet.toLowerCase().includes(query) ||
+                    matiere.description.toLowerCase().includes(query);
+            });
+            genererCartes(resultats);
+        }
+
+        // Initialisation : afficher tout + écouter la recherche
+        document.addEventListener('DOMContentLoaded', () => {
+            genererCartes(matieresElec);
+            document.getElementById('searchInput').addEventListener('input', filtrerCartes);
+        });
+
+        // --- Calculateurs Techniques ---
+
+        // Loi d'Ohm interactif
+        function checkOhm() {
+            const elU = document.getElementById('ohm_U');
+            const elR = document.getElementById('ohm_R');
+            const elI = document.getElementById('ohm_I');
+            const msg = document.getElementById('ohm_msg');
+
+            let strU = elU.value;
+            let strR = elR.value;
+            let strI = elI.value;
+
+            let count = 0;
+            if (strU !== '') count++;
+            if (strR !== '') count++;
+            if (strI !== '') count++;
+
+            msg.classList.add('hidden');
+
+            if (count === 2) {
+                let u = parseFloat(strU);
+                let r = parseFloat(strR);
+                let i = parseFloat(strI);
+
+                if (strU === '') {
+                    elU.value = (r * i).toFixed(2);
+                    elU.classList.add('animate-pulse', 'bg-customOrange/20');
+                    setTimeout(() => elU.classList.remove('animate-pulse', 'bg-customOrange/20'), 1000);
+                } else if (strR === '') {
+                    if (i === 0) {
+                        msg.textContent = "L'intensité ne peut pas être nulle.";
+                        msg.classList.remove('hidden');
+                        return;
+                    }
+                    elR.value = (u / i).toFixed(2);
+                    elR.classList.add('animate-pulse', 'bg-customOrange/20');
+                    setTimeout(() => elR.classList.remove('animate-pulse', 'bg-customOrange/20'), 1000);
+                } else if (strI === '') {
+                    if (r === 0) {
+                        msg.textContent = "La résistance ne peut pas être nulle.";
+                        msg.classList.remove('hidden');
+                        return;
+                    }
+                    elI.value = (u / r).toFixed(2);
+                    elI.classList.add('animate-pulse', 'bg-customOrange/20');
+                    setTimeout(() => elI.classList.remove('animate-pulse', 'bg-customOrange/20'), 1000);
+                }
+            }
+        }
+
+        function resetOhm() {
+            document.getElementById('ohm_U').value = '';
+            document.getElementById('ohm_R').value = '';
+            document.getElementById('ohm_I').value = '';
+            document.getElementById('ohm_msg').classList.add('hidden');
+        }
+
+        // Section de Câble
+        function calculerCable() {
+            const elP = document.getElementById('cab_P');
+            const elL = document.getElementById('cab_L');
+            const elV = document.getElementById('cab_V');
+            const elRes = document.getElementById('cab_Res');
+            const msg = document.getElementById('cab_msg');
+
+            let p = parseFloat(elP.value);
+            let l = parseFloat(elL.value);
+            let v = parseFloat(elV.value);
+
+            msg.classList.add('hidden');
+            elRes.textContent = "-- mm²";
+
+            if (isNaN(p) || isNaN(l)) {
+                msg.textContent = "Veuillez entrer une puissance et une distance.";
+                msg.classList.remove('hidden');
+                return;
+            }
+            if (p <= 0 || l <= 0) {
+                msg.textContent = "Les valeurs doivent être positives.";
+                msg.classList.remove('hidden');
+                return;
+            }
+
+            const rho = 0.0225; // résistivité du cuivre en ohm.mm2/m
+            const deltaU = v * 0.03; // chute de tension max 3%
+
+            let section = 0;
+            if (v === 230) {
+                // I = P / 230
+                let i = p / v;
+                // S = (2 * rho * L * I) / deltaU
+                section = (2 * rho * l * i) / deltaU;
+            } else {
+                // 400V Triphasé (supposé équilibré)
+                // I = P / (U * sqrt(3))
+                let i = p / (v * Math.sqrt(3));
+                // S = (sqrt(3) * rho * L * I) / deltaU
+                section = (Math.sqrt(3) * rho * l * i) / deltaU;
+            }
+
+            // Normalisation des sections standard
+            const normes = [1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300];
+            let sectSuggeree = normes.find(s => s >= section);
+
+            if (!sectSuggeree) {
+                elRes.textContent = section.toFixed(1) + " (Hors norme)";
+            } else {
+                elRes.textContent = `${sectSuggeree} mm²`;
+            }
+
+            elRes.classList.add('animate-pulse');
+            setTimeout(() => elRes.classList.remove('animate-pulse'), 1000);
+        }
+
+        function resetCable() {
+            document.getElementById('cab_P').value = '';
+            document.getElementById('cab_L').value = '';
+            document.getElementById('cab_V').value = '230';
+            document.getElementById('cab_Res').textContent = '-- mm²';
+            document.getElementById('cab_msg').classList.add('hidden');
+        }
+
+        // Puissance
+        function calculerPuissance() {
+            const u = parseFloat(document.getElementById('pwr_U').value);
+            const i = parseFloat(document.getElementById('pwr_I').value);
+            const cos = parseFloat(document.getElementById('pwr_Cos').value);
+            const type = document.querySelector('input[name="pwr_type"]:checked').value;
+            const res = document.getElementById('pwr_Res');
+            const msg = document.getElementById('pwr_msg');
+
+            msg.classList.add('hidden');
+            res.textContent = "-- W";
+
+            if (isNaN(u) || isNaN(i) || isNaN(cos)) {
+                msg.textContent = "Veuillez remplir U, I et Cos(φ).";
+                msg.classList.remove('hidden');
+                return;
+            }
+
+            let p = 0;
+            if (type === 'mono') {
+                p = u * i * cos;
+            } else {
+                p = u * i * cos * Math.sqrt(3);
+            }
+
+            if (p >= 1000) {
+                res.textContent = (p / 1000).toFixed(2) + " kW";
+            } else {
+                res.textContent = p.toFixed(0) + " W";
+            }
+            res.classList.add('animate-pulse');
+            setTimeout(() => res.classList.remove('animate-pulse'), 1000);
+        }
+
+        function resetPuissance() {
+            document.getElementById('pwr_U').value = '';
+            document.getElementById('pwr_I').value = '';
+            document.getElementById('pwr_Cos').value = '0.8';
+            document.getElementById('pwr_Res').textContent = '-- W';
+            document.getElementById('pwr_msg').classList.add('hidden');
+        }
+
+        // AWG Converter
+        function convertirAWG() {
+            const awgStr = document.getElementById('awg_val').value;
+            const res = document.getElementById('awg_Res');
+
+            if (awgStr === '') {
+                res.textContent = "-- mm²";
+                return;
+            }
+
+            let awg = parseFloat(awgStr);
+            if (isNaN(awg)) return;
+
+            // Formule AWG -> mm2 : Section = 0.012668 * 92^((36-AWG)/39.5)
+            let section = 0.012668 * Math.pow(92, (36 - awg) / 39.5);
+
+            res.textContent = section.toFixed(2) + " mm²";
+            res.classList.add('animate-pulse', 'text-white');
+            setTimeout(() => res.classList.remove('animate-pulse', 'text-white'), 500);
+        }
+
+        function resetAWG() {
+            document.getElementById('awg_val').value = '';
+            document.getElementById('awg_Res').textContent = '-- mm²';
+        }
+
+        // --- Scientific Calculator Logic ---
+        let currentExpr = '';
+        const calcDisplay = document.getElementById('calc-display');
+        const calcHistory = document.getElementById('calc-history');
+
+        function calcIn(val) {
+            currentExpr += val;
+            updateCalcDisplay();
+        }
+
+        function calcClear() {
+            currentExpr = '';
+            calcHistory.textContent = '';
+            updateCalcDisplay();
+        }
+
+        function calcDel() {
+            currentExpr = currentExpr.slice(0, -1);
+            updateCalcDisplay();
+        }
+
+        function updateCalcDisplay() {
+            calcDisplay.textContent = currentExpr || '0';
+        }
+
+        function calcEqual() {
+            if (!currentExpr) return;
+            try {
+                // Pre-process expression for eval
+                let expr = currentExpr
+                    .replace(/sin\(/g, 'Math.sin(')
+                    .replace(/cos\(/g, 'Math.cos(')
+                    .replace(/tan\(/g, 'Math.tan(')
+                    .replace(/log\(/g, 'Math.log10(')
+                    .replace(/ln\(/g, 'Math.log(')
+                    .replace(/sqrt\(/g, 'Math.sqrt(')
+                    .replace(/PI/g, 'Math.PI')
+                    .replace(/E/g, 'Math.E')
+                    .replace(/\^/g, '**');
+
+                // Handle degrees for trig if needed (default to radians for simplicity like standard calculators)
+                // But let's assume experts use radians, or I can add a toggle. For now, standard Math.sin (radians).
+
+                let result = eval(expr);
+
+                if (result === Infinity || isNaN(result)) {
+                    calcDisplay.textContent = "Erreur";
+                } else {
+                    calcHistory.textContent = currentExpr + " =";
+                    currentExpr = Number.isInteger(result) ? result.toString() : result.toFixed(6).replace(/\.?0+$/, "");
+                    updateCalcDisplay();
+                }
+            } catch (e) {
+                calcDisplay.textContent = "Syntax Error";
+                console.error(e);
+            }
+        }
+    </script>
+    <script>
+        function updateHeaderUI() {
+            const SESSION_KEY = 'electech_session';
+            const session = JSON.parse(localStorage.getItem(SESSION_KEY));
+
+            const guestZone = document.getElementById('guest-zone');
+            const memberZone = document.getElementById('member-zone');
+            const navUserName = document.getElementById('nav-user-name');
+
+            if (session) {
+                guestZone.classList.add('hidden');
+                guestZone.classList.remove('flex');
+                memberZone.classList.remove('hidden');
+                memberZone.classList.add('flex');
+                navUserName.textContent = session.name;
+            } else {
+                guestZone.classList.remove('hidden');
+                guestZone.classList.add('flex');
+                memberZone.classList.add('hidden');
+                memberZone.classList.remove('flex');
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('electech_session');
+            window.location.reload();
+        }
+
+        window.addEventListener('DOMContentLoaded', updateHeaderUI);
+    </script>
+    <script src="javascript/data_elec.js"></script>
+    <script src="js/search_index.js"></script>
+    <script src="js/search_logic.js"></script>
+    <script src="js/scroll_to_search.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour de Contrôle - Console Admin - ELEC TECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { customOrange: '#FF8C00' }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <style>
+        .filter-input {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid #1f2937;
+            color: #9ca3af;
+            border-radius: 0.4rem;
+            padding: 0.35rem 0.6rem;
+            font-size: 0.7rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .filter-input:focus { border-color: #FF8C00; color: #fff; }
+        .filter-input option { background: #111; }
+    </style>
+    <script>
+        // Simple Auth Check
+        if (sessionStorage.getItem('admin_unlocked') !== 'true') {
+            window.location.href = 'admin_publish.html';
+        }
+    </script>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <header class="p-6 border-b border-gray-800 backdrop-blur-sm bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <a href="admin_publish.html" class="text-gray-400 hover:text-customOrange transition-colors text-sm font-bold flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Tableau de bord
+                </a>
+                <a href="../index.html" class="text-2xl font-bold text-white tracking-widest hover:scale-105 transition-transform inline-block">
+                    <i class="fas fa-bolt text-customOrange mr-2"></i>ELEC<span class="text-customOrange">TECH</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-customOrange font-black tracking-widest uppercase border border-customOrange/30 bg-customOrange/10 px-4 py-1.5 rounded-full text-xs">
+                    <i class="fas fa-shield-alt mr-1"></i> Mode Admin
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-start p-6 py-12">
+        <div class="w-full max-w-6xl bg-gray-900 border border-gray-800 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden mb-12">
+            <h2 class="text-2xl font-black text-white mb-6 border-b border-gray-800 pb-4 flex flex-col md:flex-row md:items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-satellite-dish text-customOrange mr-4 animate-pulse"></i> Tour de Contrôle Globale
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4 md:mt-0 text-[10px] md:text-xs">
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full"><span id="metric-art" class="font-bold text-white">0</span> Arts</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full"><span id="metric-cmt" class="font-bold text-white">0</span> Coms</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full"><span id="metric-pdf" class="font-bold text-white">0</span> PDFs</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full"><span id="metric-forum" class="font-bold text-white">0</span> Forum</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full"><span id="metric-jobs" class="font-bold text-white">0</span> Jobs</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full"><span id="metric-cand" class="font-bold text-white">0</span> Cand</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full"><span id="metric-msg" class="font-bold text-white">0</span> Msgs</span>
+                    <span class="bg-customOrange/10 border border-customOrange/30 text-customOrange px-3 py-1 rounded-full"><span id="metric-newsletter" class="font-bold">0</span> Newsletter</span>
+                    <span class="bg-blue-500/10 border border-blue-500/30 text-blue-400 px-3 py-1 rounded-full"><span id="metric-users" class="font-bold">0</span> Membres</span>
+                </div>
+            </h2>
+            <!-- Filter bar -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6 p-4 bg-black/40 border border-gray-800 rounded-2xl">
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-600 uppercase tracking-widest mb-1"><i class="fas fa-calendar-alt mr-1 text-customOrange"></i>Date</label>
+                    <input type="date" id="filter-date" class="filter-input" oninput="filterTable()">
+                </div>
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-600 uppercase tracking-widest mb-1"><i class="fas fa-tag mr-1 text-customOrange"></i>Type</label>
+                    <select id="filter-type" class="filter-input" onchange="filterTable()">
+                        <option value="">Tous</option>
+                        <option value="article">Article</option>
+                        <option value="comment">Commentaire</option>
+                        <option value="book">Fichier PDF</option>
+                        <option value="forum">Forum</option>
+                        <option value="job">Emploi</option>
+                        <option value="candidature">Candidature</option>
+                        <option value="message">Contact</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-600 uppercase tracking-widest mb-1"><i class="fas fa-search mr-1 text-customOrange"></i>Titre / Aperçu</label>
+                    <input type="text" id="filter-title" placeholder="Rechercher..." class="filter-input" oninput="filterTable()">
+                </div>
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-600 uppercase tracking-widest mb-1"><i class="fas fa-user mr-1 text-customOrange"></i>Auteur</label>
+                    <input type="text" id="filter-author" placeholder="Nom..." class="filter-input" oninput="filterTable()">
+                </div>
+                <div>
+                    <label class="block text-[9px] font-bold text-gray-600 uppercase tracking-widest mb-1"><i class="fas fa-circle mr-1 text-customOrange"></i>Statut</label>
+                    <select id="filter-status" class="filter-input" onchange="filterTable()">
+                        <option value="">Tous</option>
+                        <option value="pending">En attente</option>
+                        <option value="approved">Approuvé / Publié</option>
+                        <option value="envoyé">Envoyé</option>
+                    </select>
+                </div>
+            </div>
+            <div class="text-right mb-3">
+                <button onclick="clearFilters()" class="text-[9px] font-bold text-gray-600 hover:text-customOrange border border-gray-800 hover:border-customOrange/50 transition-all px-3 py-1 rounded-full uppercase tracking-widest">
+                    <i class="fas fa-times mr-1"></i>Réinitialiser les filtres
+                </button>
+                <span id="filter-count" class="ml-3 text-[9px] text-gray-600 font-mono"></span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm" id="mainTable">
+                    <thead>
+                        <tr class="bg-black/50 text-gray-400 border-b border-gray-800">
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs">Date</th>
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs">Type</th>
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs">Titre / Aperçu</th>
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs">Auteur</th>
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs">Statut</th>
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="globalTableBody" class="text-gray-300">
+                        <!-- Rows injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Store all rows for filtering
+        let allJournalRows = [];
+        let allJournalData = [];
+
+        function filterTable() {
+            const dateVal  = document.getElementById('filter-date').value;  // YYYY-MM-DD
+            const typeVal  = document.getElementById('filter-type').value.toLowerCase();
+            const titleVal = document.getElementById('filter-title').value.toLowerCase();
+            const authorVal= document.getElementById('filter-author').value.toLowerCase();
+            const statusVal= document.getElementById('filter-status').value.toLowerCase();
+
+            const rows = document.querySelectorAll('#globalTableBody tr[data-type]');
+            let visible = 0;
+            rows.forEach(row => {
+                const rType    = (row.dataset.type   || '').toLowerCase();
+                const rTitle   = (row.dataset.title  || '').toLowerCase();
+                const rAuthor  = (row.dataset.author || '').toLowerCase();
+                const rStatus  = (row.dataset.status || '').toLowerCase();
+                const rDate    = (row.dataset.date   || '');
+
+                const matchType   = !typeVal   || rType.includes(typeVal);
+                const matchTitle  = !titleVal  || rTitle.includes(titleVal);
+                const matchAuthor = !authorVal || rAuthor.includes(authorVal);
+                const matchStatus = !statusVal || rStatus.includes(statusVal);
+                const matchDate   = !dateVal   || rDate === dateVal;
+
+                const show = matchType && matchTitle && matchAuthor && matchStatus && matchDate;
+                row.style.display = show ? '' : 'none';
+                if(show) visible++;
+            });
+            const count = document.getElementById('filter-count');
+            if(count) count.textContent = visible + ' résultat(s)';
+        }
+
+        function clearFilters() {
+            ['filter-date','filter-type','filter-title','filter-author','filter-status'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) { el.tagName === 'SELECT' ? el.selectedIndex = 0 : el.value = ''; }
+            });
+            filterTable();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGlobalJournal();
+        });
+
+        function renderGlobalJournal() {
+            const tbody = document.getElementById('globalTableBody');
+            let journal = [];
+            
+            const articles = JSON.parse(localStorage.getItem('electech_articles') || '[]');
+            document.getElementById('metric-art').textContent = articles.length;
+            articles.forEach(a => {
+                journal.push({
+                    _rawDate: new Date(a.date),
+                    id: a.id,
+                    dbType: 'article',
+                    displayType: '<span class="text-blue-400 flex items-center gap-2"><div class="w-6 h-6 flex items-center justify-center bg-blue-500/10 rounded"><i class="fas fa-newspaper"></i></div> Article</span>',
+                    titleExcerpt: a.title,
+                    author: a.author || 'Administratif',
+                    status: '<span class="text-green-500 text-[10px] font-bold border border-green-500/30 bg-green-500/10 px-2 py-0.5 rounded uppercase tracking-wider">Publié</span>'
+                });
+            });
+
+            const comments = JSON.parse(localStorage.getItem('electech_comments') || '[]');
+            document.getElementById('metric-cmt').textContent = comments.length;
+            comments.forEach(c => {
+                let statusBadge = c.status === 'pending' 
+                    ? '<span class="text-customOrange text-[10px] font-bold border border-customOrange/30 bg-customOrange/10 px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">En attente</span>'
+                    : '<span class="text-green-500 text-[10px] font-bold border border-green-500/30 bg-green-500/10 px-2 py-0.5 rounded uppercase tracking-wider">Approuvé</span>';
+                journal.push({
+                    _rawDate: new Date(c.date),
+                    id: c.id,
+                    artId: c.articleId,
+                    dbType: 'comment',
+                    displayType: '<span class="text-purple-400 flex items-center gap-2"><div class="w-6 h-6 flex items-center justify-center bg-purple-500/10 rounded"><i class="fas fa-comment"></i></div> Comment.</span>',
+                    titleExcerpt: `<span class="opacity-50">[${c.articleTitle}]</span> ${c.text.substring(0,30)}...`,
+                    author: c.userName,
+                    status: statusBadge,
+                    _rawStatus: c.status
+                });
+            });
+
+            const books = JSON.parse(localStorage.getItem('electech_books') || '[]');
+            document.getElementById('metric-pdf').textContent = books.length;
+            books.forEach(b => {
+                let statusBadge = b.status === 'pending' 
+                    ? '<span class="text-customOrange text-[10px] font-bold border border-customOrange/30 bg-customOrange/10 px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">En attente</span>'
+                    : '<span class="text-green-500 text-[10px] font-bold border border-green-500/30 bg-green-500/10 px-2 py-0.5 rounded uppercase tracking-wider">Approuvé</span>';
+                journal.push({
+                    _rawDate: b.date ? new Date(b.date) : new Date(0),
+                    id: b.id,
+                    dbType: 'book',
+                    displayType: '<span class="text-yellow-400 flex items-center gap-2"><div class="w-6 h-6 flex items-center justify-center bg-yellow-500/10 rounded"><i class="fas fa-file-pdf"></i></div> Fichier</span>',
+                    titleExcerpt: b.title,
+                    author: b.author || 'Utilisateur',
+                    status: statusBadge,
+                    _rawStatus: b.status
+                });
+            });
+
+            const forumQuestions = JSON.parse(localStorage.getItem('electech_forum_questions') || '[]');
+            document.getElementById('metric-forum').textContent = forumQuestions.length;
+            forumQuestions.forEach(q => {
+                journal.push({
+                    _rawDate: q.date === "À l'instant" ? new Date() : (isNaN(new Date(q.date)) ? new Date() : new Date(q.date)),
+                    id: q.id,
+                    dbType: 'forum',
+                    displayType: '<span class="text-customOrange flex items-center gap-2"><div class="w-6 h-6 flex items-center justify-center bg-customOrange/10 rounded"><i class="fas fa-comments"></i></div> Forum</span>',
+                    titleExcerpt: q.title,
+                    author: q.author,
+                    status: '<span class="text-customOrange text-[10px] font-bold border border-customOrange/30 bg-customOrange/10 px-2 py-0.5 rounded uppercase tracking-wider">Public</span>'
+                });
+            });
+
+            const jobs = JSON.parse(localStorage.getItem('electech_annonces') || '[]');
+            document.getElementById('metric-jobs').textContent = jobs.length;
+            jobs.forEach((j, idx) => {
+                let statusBadge = j.status === 'pending' 
+                    ? '<span class="text-customOrange text-[10px] font-bold border border-customOrange/30 bg-customOrange/10 px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">En attente</span>'
+                    : '<span class="text-green-500 text-[10px] font-bold border border-green-500/30 bg-green-500/10 px-2 py-0.5 rounded uppercase tracking-wider">Public</span>';
+                journal.push({
+                    _rawDate: new Date(j.date || Date.now()),
+                    id: j.id || (idx + '_' + j.poste),
+                    dbType: 'job',
+                    displayType: '<span class="text-green-400 flex items-center gap-2"><div class="w-6 h-6 flex items-center justify-center bg-green-500/10 rounded"><i class="fas fa-briefcase"></i></div> Emploi</span>',
+                    titleExcerpt: `[${j.type === 'recrutement' || j.type === 'recruteur' ? 'OFFRE' : 'CV'}] ${j.poste || j.author}`,
+                    author: j.author || 'Inconnu',
+                    status: statusBadge,
+                    _rawStatus: j.status || 'approved',
+                    cv: j.cv,
+                    lm: j.lm
+                });
+            });
+
+            const candidatures = JSON.parse(localStorage.getItem('electech_candidatures') || '[]');
+            document.getElementById('metric-cand').textContent = candidatures.length;
+            candidatures.forEach((c, idx) => {
+                journal.push({
+                    _rawDate: new Date(c.date || Date.now()),
+                    id: idx,
+                    dbType: 'candidature',
+                    displayType: '<span class="text-blue-300 flex items-center gap-2"><div class="w-6 h-6 flex items-center justify-center bg-blue-500/10 rounded"><i class="fas fa-user-tie"></i></div> Cand.</span>',
+                    titleExcerpt: `Candidature de \${c.candidat.nom} pour \${c.poste}`,
+                    author: c.candidat.nom,
+                    status: `<span class="text-blue-400 text-[10px] font-bold border border-blue-500/30 bg-blue-500/10 px-2 py-0.5 rounded uppercase tracking-wider">\${c.status || 'En cours'}</span>`
+                });
+            });
+
+            const messages = JSON.parse(localStorage.getItem('electech_messages') || '[]');
+            const msgMetric = document.getElementById('metric-msg');
+            if (msgMetric) msgMetric.textContent = messages.length;
+            messages.forEach((m, idx) => {
+                // Parse french date to usable Date object for sorting
+                let parsedDate = new Date();
+                if(m.date && m.date.includes('/')) {
+                    const parts = m.date.split('/');
+                    if(parts.length === 3) parsedDate = new Date(`\${parts[2]}-\${parts[1]}-\${parts[0]}T\${m.time || '00:00'}:00`);
+                }
+                
+                journal.push({
+                    _rawDate: parsedDate,
+                    id: idx,
+                    dbType: 'message',
+                    displayType: '<span class="text-pink-400 flex items-center gap-2"><div class="w-6 h-6 flex items-center justify-center bg-pink-500/10 rounded"><i class="fas fa-envelope"></i></div> Contact</span>',
+                    titleExcerpt: m.type === 'Contact Recruteur -> Candidat' ? `Recruteur (\${m.from}) a contacté \${m.to}` : `Message vers \${m.to}`,
+                    author: m.from,
+                    status: `<span class="text-pink-400 text-[10px] font-bold border border-pink-500/30 bg-pink-500/10 px-2 py-0.5 rounded uppercase tracking-wider">Envoyé</span>`
+                });
+            });
+
+            document.getElementById('metric-newsletter').textContent = JSON.parse(localStorage.getItem('electech_newsletter') || '[]').length;
+            document.getElementById('metric-users').textContent = JSON.parse(localStorage.getItem('electech_users') || '[]').length;
+
+            journal.sort((current, next) => next._rawDate - current._rawDate);
+
+            if(journal.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-12 text-center text-gray-600 font-bold italic text-base uppercase tracking-widest"><i class="fas fa-ghost text-4xl mb-4 block opacity-50 text-gray-800"></i> Aucun historique enregistré</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = journal.map(item => {
+                const dateStr = item._rawDate.getTime() === 0 ? 'N/A' : item._rawDate.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour:'2-digit', minute:'2-digit' });
+                let actionBtns = '';
+                let viewUrl = '';
+
+                if(item.dbType === 'article') viewUrl = `../Tech 1/Article.html?id=${item.id}`;
+                else if(item.dbType === 'comment') viewUrl = `../Tech 1/Article.html?id=${item.artId}`;
+                else if(item.dbType === 'book') viewUrl = `../Tech 1/bibliotheque.html`;
+                else if(item.dbType === 'forum') viewUrl = `../utilisateur/forum.html?id=${item.id}`;
+                else if(item.dbType === 'job') viewUrl = `../emploi/emploi.html`;
+                else if(item.dbType === 'candidature') viewUrl = `../emploi/emploi.html`;
+
+                if(viewUrl) actionBtns += `<a href="${viewUrl}" target="_blank" class="text-gray-400 hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-gray-800/40 hover:bg-gray-700 transition-all font-bold" title="Voir l'élément"><i class="fas fa-external-link-alt"></i></a>`;
+                
+                if(item.dbType === 'article') {
+                    actionBtns += `<a href="admin_publish_article.html?edit=${item.id}" class="text-blue-400 hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-blue-900/20 hover:bg-blue-600 transition-all font-bold" title="Modifier"><i class="fas fa-pen"></i></a>`;
+                    actionBtns += `<button onclick="deleteGlobalItem('article', '${item.id}')" class="text-red-500 hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-red-900/20 hover:bg-red-600 transition-all font-bold" title="Supprimer (Annuler)"><i class="fas fa-trash"></i></button>`;
+                } else if(item.dbType === 'forum' || item.dbType === 'candidature') {
+                    actionBtns += `<button onclick="deleteGlobalItem('${item.dbType}', '${item.id}')" class="text-red-500 hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-red-900/20 hover:bg-red-600 transition-all font-bold" title="Supprimer définitivement"><i class="fas fa-trash"></i></button>`;
+                } else if(item.dbType === 'comment' || item.dbType === 'book' || item.dbType === 'job') {
+                    if(item._rawStatus === 'pending') actionBtns += `<button onclick="approveGlobalItem('${item.dbType}', '${item.id}')" class="text-customOrange hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-customOrange/20 hover:bg-green-500 transition-all font-bold" title="Approuver"><i class="fas fa-check"></i></button>`;
+                    if(item.dbType === 'job') {
+                        if(item.cv) actionBtns += `<button onclick="downloadFile('${item.cv.data}', '${item.cv.name}')" class="text-green-400 hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-green-900/20 hover:bg-green-600 transition-all font-bold" title="Télécharger CV"><i class="fas fa-file-pdf"></i></button>`;
+                        if(item.lm) actionBtns += `<button onclick="downloadFile('${item.lm.data}', '${item.lm.name}')" class="text-blue-400 hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-blue-900/20 hover:bg-blue-600 transition-all font-bold" title="Télécharger Lettre"><i class="fas fa-file-alt"></i></button>`;
+                    }
+                    actionBtns += `<button onclick="deleteGlobalItem('${item.dbType}', '${item.id}')" class="text-red-500 hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-red-900/20 hover:bg-red-600 transition-all font-bold" title="Rejeter / Supprimer"><i class="fas fa-times"></i></button>`;
+                }
+
+                return `
+                    <tr class="border-b border-gray-800/30 hover:bg-gray-800/40 transition-colors group"
+                        data-type="${item.dbType}"
+                        data-title="${(item.titleExcerpt || '').replace(/"/g, '&quot;').replace(/<[^>]+>/g, '')}"
+                        data-author="${(item.author || '').replace(/"/g, '&quot;')}"
+                        data-status="${item._rawStatus || item.dbType}"
+                        data-date="${item._rawDate instanceof Date && !isNaN(item._rawDate) ? item._rawDate.toISOString().split('T')[0] : ''}"
+                    >
+                        <td class="p-4 font-mono text-[10px] text-gray-500 whitespace-nowrap"><i class="far fa-clock mr-1"></i> ${dateStr}</td>
+                        <td class="p-4 text-xs font-black uppercase tracking-wider">${item.displayType}</td>
+                        <td class="p-4 text-xs text-gray-300 font-medium max-w-[200px] truncate" title="${item.titleExcerpt.replace(/"/g, '&quot;')}">${item.titleExcerpt}</td>
+                        <td class="p-4 text-[10px] text-gray-500 font-black uppercase tracking-widest truncate">${item.author}</td>
+                        <td class="p-4 whitespace-nowrap">${item.status}</td>
+                        <td class="p-4 text-right whitespace-nowrap flex justify-end gap-1 opacity-60 group-hover:opacity-100 transition-opacity">${actionBtns}</td>
+                    </tr>`;
+            }).join('');
+        }
+
+        function deleteGlobalItem(dbType, id) {
+            if(!confirm("⚠️ Êtes-vous sûr de vouloir supprimer DÉFINITIVEMENT cet élément ?")) return;
+            let key = { 'article': 'electech_articles', 'comment': 'electech_comments', 'book': 'electech_books', 'forum': 'electech_forum_questions', 'job': 'electech_annonces', 'candidature': 'electech_candidatures' }[dbType];
+            let items = JSON.parse(localStorage.getItem(key) || '[]');
+            if(dbType === 'candidature') items.splice(Number(id), 1);
+            else items = items.filter((x, idx) => String(x.id || idx) !== String(id));
+            localStorage.setItem(key, JSON.stringify(items));
+            renderGlobalJournal();
+        }
+
+        function approveGlobalItem(dbType, id) {
+            let key = { 'comment': 'electech_comments', 'book': 'electech_books', 'job': 'electech_annonces' }[dbType];
+            let items = JSON.parse(localStorage.getItem(key) || '[]');
+            const idx = items.findIndex(x => String(x.id || (items.indexOf(x) + '_' + x.poste)) === String(id));
+            if(idx > -1) {
+                items[idx].status = 'approved';
+                localStorage.setItem(key, JSON.stringify(items));
+                renderGlobalJournal();
+            }
+        }
+
+        function downloadFile(base64Data, fileName) {
+            const link = document.createElement('a');
+            link.href = base64Data;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance en cours - ELEC TECH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { customOrange: '#FF8C00' }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #000; overflow: hidden; }
+        .bg-glow {
+            background: radial-gradient(circle at 50% 50%, #FF8C0015 0%, transparent 70%);
+            position: absolute; inset: 0; pointer-events: none;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        .animate-pulse-slow { animation: pulse 4s infinite linear; }
+    </style>
+</head>
+<body class="text-gray-300 flex flex-col items-center justify-center min-h-screen relative px-4">
+    <div class="bg-glow"></div>
+
+    <!-- Main Content -->
+    <div class="text-center relative z-10 max-w-2xl px-8 py-16 rounded-[3rem] border border-gray-900 bg-black/40 backdrop-blur-xl shadow-2xl">
+        <!-- Logo -->
+        <div class="mb-10 inline-flex flex-col items-center">
+            <div class="text-4xl font-black text-white tracking-widest leading-none flex items-center mb-2">
+                <i class="fas fa-bolt text-customOrange mr-4 text-5xl"></i>
+                ELEC<span class="text-customOrange">TECH</span>
+            </div>
+            <div class="h-1 w-20 bg-customOrange rounded-full"></div>
+        </div>
+
+        <!-- Maintenance Message -->
+        <h1 class="text-2xl md:text-3xl font-black text-white mb-6 uppercase tracking-widest leading-tight">
+            Site en maintenance technique
+        </h1>
+        <p class="text-gray-500 text-sm md:text-base mb-10 font-medium leading-relaxed italic">
+            "Veuillez revenir après, merci pour votre compréhension"
+        </p>
+
+        <!-- Dynamic Icon -->
+        <div class="flex justify-center gap-6 text-gray-800 text-3xl mb-4">
+            <i class="fas fa-wrench animate-bounce delay-75"></i>
+            <i class="fas fa-cog fa-spin text-customOrange/20"></i>
+            <i class="fas fa-tools animate-bounce"></i>
+        </div>
+    </div>
+
+    <!-- Discreet Admin Access -->
+    <div class="absolute bottom-8 w-full max-w-xs text-center opacity-20 hover:opacity-100 transition-opacity duration-700">
+        <div class="p-4 rounded-2xl bg-gray-950/50 border border-gray-900">
+            <label for="adminPass" class="block text-[8px] font-black uppercase tracking-[0.3em] text-gray-700 mb-2">Accès Administrateur</label>
+            <div class="flex gap-2">
+                <input type="password" id="adminPass" placeholder="••••••••" 
+                    class="flex-grow bg-black border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-center outline-none focus:border-customOrange transition-all text-white">
+                <button onclick="checkAccess()" class="bg-gray-900 px-3 rounded-lg text-gray-500 hover:text-customOrange border border-gray-800">
+                    <i class="fas fa-arrow-right text-[10px]"></i>
+                </button>
+            </div>
+            <p id="errorMsg" class="hidden text-red-500 text-[9px] mt-2 font-black uppercase italic"></p>
+        </div>
+    </div>
+
+    <script>
+        function checkAccess() {
+            const pass = document.getElementById('adminPass').value;
+            const error = document.getElementById('errorMsg');
+            
+            // Password set to "electech2026" as an example, user can change
+            if (pass === "electech2026") {
+                localStorage.setItem('electech_bypass_maintenance', 'true');
+                window.location.href = "../index.html";
+            } else {
+                error.textContent = "Accès refusé";
+                error.classList.remove('hidden');
+                setTimeout(() => error.classList.add('hidden'), 2000);
+            }
+        }
+
+        // Support "Enter" key
+        document.getElementById('adminPass').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkAccess();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vos Formations et Diplômes - ELEC TECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customOrange: '#FF8C00',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <style>
+        .bento-card {
+            background: linear-gradient(145deg, #111111, #0a0a0a);
+            border: 1px solid #1f2937;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-5px);
+            border-color: #FF8C00;
+            box-shadow: 0 15px 40px -10px rgba(255, 140, 0, 0.2);
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .tab-btn.active {
+            background-color: #FF8C00;
+            color: black;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <!-- Header -->
+    <header class="p-6 border-b border-gray-800 bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo & Slogan Block -->
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="../index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                    <div class="mt-1.5 py-0.5 px-2 bg-customOrange/10 border border-customOrange/20 rounded-md">
+                        <p class="text-[7px] font-black uppercase tracking-[0.3em] text-customOrange whitespace-nowrap">
+                            La Tech pour tout le monde
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <!-- HLEGA -->
+                    <li class="relative group z-50">
+                        <a href="../Hlega/Hlega.html" class="text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-customOrange pb-1">
+                            🎮 Hlega <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Hlega/Hlega.html#qcm" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-question-circle w-5 text-gray-500"></i> QCMs Éclair</a></li>
+                                <li><a href="../Hlega/Hlega.html#jeux" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-gamepad w-5 text-gray-500"></i> Jeux Interactifs</a></li>
+                                <li><a href="../Hlega/Hlega.html#defis" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-trophy w-5 text-gray-500"></i> Défis & Amis</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- TECHNIQUE -->
+                    <li class="relative group z-40">
+                        <a href="../Technique/Technique.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            ⚙️ Technique <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-64 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li class="px-5 py-2 pt-3 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1">Notions de base</li>
+                                <li><a href="../Tech 1/electrotechnique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-bolt w-5 text-gray-500"></i> Électrotechnique</a></li>
+                                <li><a href="../Tech 1/electronique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microchip w-5 text-gray-500"></i> Électronique</a></li>
+                                <li><a href="../Tech 1/energies.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-leaf w-5 text-gray-500"></i> Énergies</a></li>
+                                <li><a href="../Tech 1/schemas.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-project-diagram w-5 text-gray-500"></i> Schémas</a></li>
+                                
+                                <li class="px-5 py-2 pt-4 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1 mt-2">Spécialisations</li>
+                                <li><a href="../Technique/Technique.html#electricite" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-network-wired w-5 text-gray-500"></i> Électricité</a></li>
+                                <li><a href="../Technique/Technique.html#software" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-code w-5 text-gray-500"></i> Software</a></li>
+                                <li><a href="../Technique/Technique.html#aeronautique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-plane w-5 text-gray-500"></i> Aéronautique</a></li>
+                                <li><a href="../Technique/Technique.html#mecanique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-cogs w-5 text-gray-500"></i> Génie Mécanique</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- DIPLOMES -->
+                    <li class="relative group z-35">
+                        <a href="../Diplomes/diplomes.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            🎓 Diplômes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Diplomes/diplomes.html#bts" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> BTS</a></li>
+                                <li><a href="../Diplomes/diplomes.html#dut" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> DUT</a></li>
+                                <li><a href="../Diplomes/diplomes.html#licence" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-award w-5 text-gray-500"></i> Licence</a></li>
+                                <li><a href="../Diplomes/diplomes.html#master" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-graduate w-5 text-gray-500"></i> Master</a></li>
+                                <li><a href="../Diplomes/diplomes.html#doctorat" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microscope w-5 text-gray-500"></i> Doctorat</a></li>
+                                <li><a href="../Diplomes/diplomes.html#mba" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-certificate w-5 text-gray-500"></i> MBA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <!-- COMMUNITY -->
+                    <li class="relative group z-30">
+                        <a href="../assets/community/clic.electech.html" class="hover:text-yellow-400 text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-yellow-400 pb-1">
+                            👥 Community <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../assets/community/clic.electech.html" class="block px-5 py-2.5 hover:bg-black hover:text-yellow-400 transition-colors"><i class="fas fa-bolt w-5 text-yellow-400"></i> Clic Electech</a></li>
+                                <li><a href="../utilisateur/forum.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-comments w-5 text-gray-500"></i> Forum</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <li><a href="../Tech 1/bibliotheque.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">📚 Livres</a></li>
+                    
+                    <!-- EMPLOI -->
+                    <li class="relative group z-30">
+                        <a href="../emploi/emploi.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            💼 Emploi <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../emploi/offres.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-briefcase w-5 text-gray-500"></i> Offres d'Emploi</a></li>
+                                <li><a href="../emploi/demandes.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-tie w-5 text-gray-500"></i> Demandes d'Emploi</a></li>
+                                <li><a href="../emploi/postale.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-envelope-open-text w-5 text-gray-500"></i> Boîte Postale</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+ 
+                <!-- Dynamic Auth Zone -->
+                <div id="auth-navbar" class="flex items-center gap-3 border-l border-gray-800 pl-8">
+                    <!-- Guest -->
+                    <div id="guest-zone" class="hidden items-center gap-5">
+                        <a href="../utilisateur/login.html?tab=signup" class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors">S'inscrire</a>
+                        <a href="../utilisateur/login.html?tab=login" class="bg-customOrange text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.1em] hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">Connexion</a>
+                    </div>
+                    <!-- Member -->
+                    <div id="member-zone" class="hidden items-center gap-4 bg-gray-950 border border-gray-900 px-4 py-2 rounded-2xl">
+                        <div class="flex items-center gap-3 group cursor-pointer">
+                            <div class="w-8 h-8 bg-customOrange/10 rounded-lg flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-user-circle text-base"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span id="nav-user-name" class="text-[11px] font-black text-white leading-none"></span>
+                                <a href="../utilisateur/profil.html" class="text-[9px] text-gray-600 font-bold uppercase tracking-tighter hover:text-customOrange transition-colors mt-1">Mon Profil</a>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" class="text-gray-700 hover:text-red-500 transition-colors ml-2 pt-1" title="Déconnexion">
+                            <i class="fas fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-12 max-w-6xl">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-16 relative">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-customOrange/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
+            
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-900 border border-gray-800 mb-6 shadow-2xl animate-float">
+                <i class="fas fa-gamepad text-4xl text-customOrange drop-shadow-[0_0_10px_rgba(255,140,0,0.8)]"></i>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-4">Espace <span class="text-customOrange">Diplômes</span></h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-8">Découvrez toutes les formations académiques et professionnelles adaptées à vos objectifs, du BTS jusqu\'au Master et MBA.</p>
+            
+            <!-- Global Internal Menu -->
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <button onclick="switchTab('bts')" id="btn-bts" class="tab-btn active px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-black bg-customOrange transition-all flex items-center gap-2">
+                    <i class="fas fa-graduation-cap"></i> BTS
+                </button>
+                <button onclick="switchTab('dut')" id="btn-dut" class="tab-btn px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-white transition-all flex items-center gap-2">
+                    <i class="fas fa-graduation-cap"></i> DUT
+                </button>
+                <button onclick="switchTab('licence')" id="btn-licence" class="tab-btn px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-white transition-all flex items-center gap-2">
+                    <i class="fas fa-award"></i> Licence
+                </button>
+                <button onclick="switchTab('master')" id="btn-master" class="tab-btn px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-white transition-all flex items-center gap-2">
+                    <i class="fas fa-user-graduate"></i> Master
+                </button>
+                <button onclick="switchTab('doctorat')" id="btn-doctorat" class="tab-btn px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-white transition-all flex items-center gap-2">
+                    <i class="fas fa-microscope"></i> Doctorat
+                </button>
+                <button onclick="switchTab('mba')" id="btn-mba" class="tab-btn px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-white transition-all flex items-center gap-2">
+                    <i class="fas fa-certificate text-yellow-500"></i> MBA
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: BTS -->
+        <div id="tab-bts" class="tab-content active space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-blue-600/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-blue-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">BTS Électrotechnique</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Formation technicien supérieur spécialisé dans l'étude, la mise en oeuvre, et la maintenance des équipements électriques.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: DUT -->
+        <div id="tab-dut" class="tab-content hidden space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-green-600/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-green-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">DUT GEII</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Génie Électrique et Informatique Industrielle : automatismes, de l'informatique industrielle et des réseaux.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: LICENCE -->
+        <div id="tab-licence" class="tab-content hidden space-y-12">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-purple-600/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-purple-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">Licence Énergies Renouvelables</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Formation diplômante Bac+3 pour maîtriser les technologies solaires, éoliennes et la gestion de réseau intelligent (Smart Grids).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: MASTER -->
+        <div id="tab-master" class="tab-content hidden space-y-12">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-orange-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-orange-600/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-orange-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">Master Systèmes Embarqués</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Ingénierie des systèmes mécatroniques et développement de logiciels critiques embarqués (Aéronautique, Automobile).</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB CONTENT: DOCTORAT -->
+        <div id="tab-doctorat" class="tab-content hidden space-y-12">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-red-600/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-red-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">Cycle Doctorat (Recherche)</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Explorez la R&D approfondie dans les semi-conducteurs quantiques ou les nouveaux matériaux supraconducteurs.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB CONTENT: MBA -->
+        <div id="tab-mba" class="tab-content hidden space-y-12">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-400/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-yellow-400/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-yellow-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">MBA Management de l'Industrie</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Alliez expertise technologique et leadership stratégique pour diriger des usines d'énergie et de grandes firmes industrielles.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full mt-auto py-10 bg-black border-t border-gray-900 mt-20">
+        <div class="text-center">
+            <p class="text-[10px] text-gray-600 font-medium tracking-widest uppercase mb-4">
+                Designed by <span class="text-customOrange font-bold">ELECTECH Team 2026</span> - © Tous les droits sont reservés
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Auth UI from api.js 
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('electech_session') || 'null');
+            const guestZone = document.getElementById('guest-zone');
+            const memberZone = document.getElementById('member-zone');
+            const navUserName = document.getElementById('nav-user-name');
+
+            if (user) {
+                if(guestZone) { guestZone.classList.add('hidden'); guestZone.classList.remove('flex'); }
+                if(memberZone) { memberZone.classList.remove('hidden'); memberZone.classList.add('flex'); }
+                if(navUserName) navUserName.textContent = user.name;
+                
+                // Placer l'utilisateur en Top 1 du Hall of Fame
+                const hofTop1 = document.getElementById('hof-top1-name');
+                if (hofTop1) {
+                    hofTop1.innerHTML = `${user.name} <span class="text-customOrange font-normal ml-1">#VOUS</span>`;
+                    hofTop1.classList.remove('text-white');
+                    hofTop1.classList.add('text-customOrange', 'drop-shadow-[0_0_8px_rgba(255,140,0,0.5)]');
+                }
+            } else {
+                if(guestZone) { guestZone.classList.remove('hidden'); guestZone.classList.add('flex'); }
+                if(memberZone) { memberZone.classList.add('hidden'); memberZone.classList.remove('flex'); }
+            }
+
+            // check hash on load
+            if (window.location.hash) {
+                const tab = window.location.hash.replace('#', '');
+                if (['qcm', 'jeux', 'defis'].includes(tab)) {
+                    switchTab(tab);
+                }
+            }
+        });
+
+        function handleLogout() {
+            localStorage.removeItem('electech_session');
+            window.location.reload();
+        }
+
+        // Tab Switching Logic
+        const tabs = ['bts', 'dut', 'licence', 'master', 'doctorat', 'mba'];
+        function switchTab(targetTab) {
+            tabs.forEach(tab => {
+                const btn = document.getElementById(`btn-${tab}`);
+                const content = document.getElementById(`tab-${tab}`);
+                
+                if (tab === targetTab) {
+                    if (btn) {
+                        btn.classList.add('bg-customOrange', 'text-black');
+                        btn.classList.remove('text-white');
+                    }
+                    if (content) content.classList.add('active', 'block');
+                    if (content) content.classList.remove('hidden');
+                } else {
+                    if (btn) {
+                        btn.classList.remove('bg-customOrange', 'text-black');
+                        btn.classList.add('text-white');
+                    }
+                    if (content) content.classList.remove('active', 'block');
+                    if (content) content.classList.add('hidden');
+                }
+            });
+            window.location.hash = targetTab;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <script src="../js/search_index.js"></script>
+    <script src="../js/search_logic.js"></script>
+    <script src="../js/scroll_to_search.js"></script>
+</body>
+</html>

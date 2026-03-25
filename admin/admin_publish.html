@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Admin - Publication - ELEC TECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { customOrange: '#FF8C00' }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <style>
+        .input-field {
+            width: 100%;
+            background: #111;
+            border: 1px solid #374151;
+            color: #fff;
+            border-radius: 0.5rem;
+            padding: 0.8rem 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 0.9rem;
+        }
+        .input-field:focus {
+            border-color: #FF8C00;
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <!-- Master Password Lock Screen -->
+    <div id="admin-lock-screen" class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="text-center mb-8">
+            <i class="fas fa-user-shield text-customOrange text-6xl mb-4 animate-pulse"></i>
+            <h1 class="text-3xl font-black tracking-widest text-white uppercase"><span class="text-customOrange">Admin</span> Control</h1>
+            <p class="text-gray-500 mt-2 text-sm tracking-widest">Zone à accès restreint</p>
+        </div>
+        <form id="master-password-form" class="bg-gray-900 border border-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-sm flex flex-col gap-6">
+            <div>
+                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2"><i class="fas fa-lock"></i> Master Key</label>
+                <div class="relative mt-2">
+                    <i class="fas fa-key absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <input type="password" id="master-key-input" class="w-full bg-black border border-gray-800 text-white rounded-xl py-3 pl-12 pr-4 focus:outline-none focus:border-customOrange transition-colors text-center tracking-[0.3em] font-mono" placeholder="••••••••" required>
+                </div>
+                <div id="master-key-error" class="text-red-500 text-[10px] font-bold mt-2 text-center hidden animate-bounce">Clé invalide. Accès refusé.</div>
+            </div>
+            <button type="submit" class="w-full bg-customOrange text-black font-black uppercase text-xs py-4 rounded-xl hover:bg-white hover:text-customOrange transition-all tracking-widest shadow-lg hover:shadow-customOrange/20">
+                Déverrouiller <i class="fas fa-unlock ml-2"></i>
+            </button>
+        </form>
+    </div>
+
+    <header class="p-6 border-b border-gray-800 backdrop-blur-sm bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-bold text-white tracking-widest hover:scale-105 transition-transform inline-block">
+                <i class="fas fa-bolt text-customOrange mr-2"></i>ELEC<span class="text-customOrange">TECH</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <div class="text-customOrange font-black tracking-widest uppercase border border-customOrange/30 bg-customOrange/10 px-4 py-1.5 rounded-full text-xs">
+                    <i class="fas fa-shield-alt mr-1"></i> Mode Admin
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-6 py-12">
+        <div class="w-full max-w-5xl">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-black text-white mb-4 tracking-tight">Console de Gestion <span class="text-customOrange">ELEC TECH</span></h1>
+                <p class="text-gray-500 max-w-2xl mx-auto">Bienvenue dans votre centre de commande. Sélectionnez un module ci-dessous pour gérer les différentes sections de votre plateforme.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Publier Article -->
+                <a href="admin_publish_article.html" class="group bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-xl hover:border-customOrange hover:shadow-customOrange/20 transition-all duration-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fas fa-newspaper text-8xl text-customOrange"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-customOrange/10 border border-customOrange/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-edit text-customOrange text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-black text-white mb-3">Publier un Article</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Rédigez et publiez de nouveaux contenus techniques, schémas ou actualités directement sur les pages du site.</p>
+                        <span class="inline-flex items-center text-customOrange font-bold text-xs uppercase tracking-widest gap-2">
+                            Ouvrir le module <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Tour de Contrôle -->
+                <a href="admin_control_tower.html" class="group bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-xl hover:border-customOrange hover:shadow-customOrange/20 transition-all duration-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fas fa-satellite-dish text-8xl text-customOrange"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-customOrange/10 border border-customOrange/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-broadcast-tower text-customOrange text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-black text-white mb-3">Tour de Contrôle</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Surveillez l'activité globale : commentaires, questions forum, dépôts de fichiers et annonces d'emploi.</p>
+                        <span class="inline-flex items-center text-customOrange font-bold text-xs uppercase tracking-widest gap-2">
+                            Voir le journal <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Abonnés Newsletter -->
+                <a href="admin_subscribers.html" class="group bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-xl hover:border-customOrange hover:shadow-customOrange/20 transition-all duration-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fas fa-envelope-open-text text-8xl text-customOrange"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-customOrange/10 border border-customOrange/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-users-cog text-customOrange text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-black text-white mb-3">Newsletter</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Gérez la base de données des abonnés à la newsletter et visualisez la croissance de votre communauté.</p>
+                        <span class="inline-flex items-center text-customOrange font-bold text-xs uppercase tracking-widest gap-2">
+                            Gérer les abonnés <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Comptes Utilisateurs -->
+                <a href="admin_users.html" class="group bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-xl hover:border-customOrange hover:shadow-customOrange/20 transition-all duration-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fas fa-user-shield text-8xl text-customOrange"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-customOrange/10 border border-customOrange/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-user-friends text-customOrange text-2xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-black text-white mb-3">Utilisateurs</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Modérez les comptes membres, suspendez les utilisateurs inappropriés ou changez les privilèges d'accès.</p>
+                        <span class="inline-flex items-center text-customOrange font-bold text-xs uppercase tracking-widest gap-2">
+                            Administrer les comptes <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Mode Maintenance -->
+                <div class="group bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-xl hover:border-customOrange hover:shadow-customOrange/20 transition-all duration-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fas fa-tools text-8xl text-customOrange"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-customOrange/10 border border-customOrange/30 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-power-off text-customOrange text-2xl" id="maintenance-icon"></i>
+                        </div>
+                        <h2 class="text-2xl font-black text-white mb-3">Mode Maintenance</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Activez cette option pour rediriger tous les visiteurs vers la page de garde pendant vos travaux.</p>
+                        
+                        <div class="flex items-center gap-4">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="maintenance-toggle" class="sr-only peer">
+                                <div class="w-14 h-7 bg-gray-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-customOrange"></div>
+                            </label>
+                            <span id="maintenance-status" class="text-xs font-black uppercase tracking-widest text-gray-500">Désactivé</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isUnlocked = sessionStorage.getItem('admin_unlocked') === 'true';
+            const lockScreen = document.getElementById('admin-lock-screen');
+            
+            if(isUnlocked) {
+                lockScreen.classList.add('hidden');
+                
+                // Maintenance Toggle Logic
+                const mToggle = document.getElementById('maintenance-toggle');
+                const mStatus = document.getElementById('maintenance-status');
+                const mIcon = document.getElementById('maintenance-icon');
+
+                const isMaint = localStorage.getItem('electech_maintenance') === 'true';
+                mToggle.checked = isMaint;
+                updateMUI(isMaint);
+
+                mToggle.addEventListener('change', (e) => {
+                    const active = e.target.checked;
+                    localStorage.setItem('electech_maintenance', active);
+                    if (active) {
+                        // Clear the bypass flag so the admin can test the redirection
+                        localStorage.removeItem('electech_bypass_maintenance');
+                    }
+                    updateMUI(active);
+                });
+
+                function updateMUI(active) {
+                    if(active) {
+                        mStatus.textContent = "Activé";
+                        mStatus.classList.remove('text-gray-500');
+                        mStatus.classList.add('text-customOrange');
+                        mIcon.classList.add('animate-pulse');
+                    } else {
+                        mStatus.textContent = "Désactivé";
+                        mStatus.classList.add('text-gray-500');
+                        mStatus.classList.remove('text-customOrange');
+                        mIcon.classList.remove('animate-pulse');
+                    }
+                }
+            } else {
+                document.getElementById('master-password-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const key = document.getElementById('master-key-input').value;
+                    if(key === 'ELEC2026') {
+                        sessionStorage.setItem('admin_unlocked', 'true');
+                        lockScreen.classList.add('opacity-0');
+                        setTimeout(() => lockScreen.classList.add('hidden'), 700);
+                    } else {
+                        const err = document.getElementById('master-key-error');
+                        err.classList.remove('hidden');
+                        setTimeout(() => err.classList.add('hidden'), 3000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

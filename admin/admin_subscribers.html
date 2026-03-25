@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abonnés Newsletter - Console Admin - ELEC TECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { customOrange: '#FF8C00' }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <script>
+        // Simple Auth Check
+        if (sessionStorage.getItem('admin_unlocked') !== 'true') {
+            window.location.href = 'admin_publish.html';
+        }
+    </script>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <header class="p-6 border-b border-gray-800 backdrop-blur-sm bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <a href="admin_publish.html" class="text-gray-400 hover:text-customOrange transition-colors text-sm font-bold flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Tableau de bord
+                </a>
+                <a href="../index.html" class="text-2xl font-bold text-white tracking-widest hover:scale-105 transition-transform inline-block">
+                    <i class="fas fa-bolt text-customOrange mr-2"></i>ELEC<span class="text-customOrange">TECH</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-customOrange font-black tracking-widest uppercase border border-customOrange/30 bg-customOrange/10 px-4 py-1.5 rounded-full text-xs">
+                    <i class="fas fa-shield-alt mr-1"></i> Mode Admin
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-start p-6 py-12">
+        <!-- Newsletter Subscribers Panel -->
+        <div class="w-full max-w-4xl bg-gray-900 border border-gray-800 rounded-3xl p-8 md:p-10 shadow-2xl mt-8 mb-12">
+            <h2 class="text-2xl font-black text-white mb-2 flex items-center">
+                <i class="fas fa-envelope text-customOrange mr-4 animate-pulse"></i> Abonnés Newsletter
+                <span id="newsletter-count-badge" class="ml-4 text-xs bg-customOrange/10 border border-customOrange/30 text-customOrange px-3 py-1 rounded-full font-bold">0 abonnés</span>
+            </h2>
+            <p class="text-gray-600 text-xs mb-6">Emails collectés via le formulaire Newsletter du footer du site.</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-black/50 text-gray-400 border-b border-gray-800">
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs">Date</th>
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs">Email</th>
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs">Page Source</th>
+                            <th class="p-4 font-bold uppercase tracking-widest text-xs text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="newsletterTableBody" class="text-gray-300">
+                        <!-- Rows injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNewsletter();
+        });
+
+        function renderNewsletter() {
+            const subs = JSON.parse(localStorage.getItem('electech_newsletter') || '[]');
+            const tbody = document.getElementById('newsletterTableBody');
+            const badge = document.getElementById('newsletter-count-badge');
+            
+            if(badge) badge.textContent = `${subs.length} abonné${subs.length > 1 ? 's' : ''}`;
+            if(!tbody) return;
+            if(subs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-gray-700 italic text-xs uppercase tracking-widest">Aucun abonné pour le moment.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = subs.map((s, i) => `
+                <tr class="border-b border-gray-800/30 hover:bg-gray-800/40 transition-colors group">
+                    <td class="p-4 font-mono text-[10px] text-gray-500"><i class="far fa-calendar mr-1"></i>${s.date || 'N/A'}</td>
+                    <td class="p-4 text-xs text-white font-bold"><i class="far fa-envelope text-customOrange mr-2"></i>${s.email}</td>
+                    <td class="p-4 text-[10px] text-gray-600">${s.page || '---'}</td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteNewsletter(${i})" class="text-red-500 hover:text-white text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-red-900/20 hover:bg-red-600 transition-all ml-auto" title="Supprimer">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteNewsletter(index) {
+            if(!confirm('Supprimer cet abonné ?')) return;
+            const subs = JSON.parse(localStorage.getItem('electech_newsletter') || '[]');
+            subs.splice(index, 1);
+            localStorage.setItem('electech_newsletter', JSON.stringify(subs));
+            renderNewsletter();
+        }
+    </script>
+</body>
+</html>

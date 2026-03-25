@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hlega - Jeux & QCMs Électriques - ELEC TECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customOrange: '#FF8C00',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <style>
+        .bento-card {
+            background: linear-gradient(145deg, #111111, #0a0a0a);
+            border: 1px solid #1f2937;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-5px);
+            border-color: #FF8C00;
+            box-shadow: 0 15px 40px -10px rgba(255, 140, 0, 0.2);
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .tab-btn.active {
+            background-color: #FF8C00;
+            color: black;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <!-- Header -->
+    <header class="p-6 border-b border-gray-800 bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo & Slogan Block -->
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="../index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                    <div class="mt-1.5 py-0.5 px-2 bg-customOrange/10 border border-customOrange/20 rounded-md">
+                        <p class="text-[7px] font-black uppercase tracking-[0.3em] text-customOrange whitespace-nowrap">
+                            La Tech pour tout le monde
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <!-- HLEGA -->
+                    <li class="relative group z-50">
+                        <a href="../Hlega/Hlega.html" class="text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-customOrange pb-1">
+                            🎮 Hlega <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Hlega/Hlega.html#qcm" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-question-circle w-5 text-gray-500"></i> QCMs Éclair</a></li>
+                                <li><a href="../Hlega/Hlega.html#jeux" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-gamepad w-5 text-gray-500"></i> Jeux Interactifs</a></li>
+                                <li><a href="../Hlega/Hlega.html#defis" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-trophy w-5 text-gray-500"></i> Défis & Amis</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- TECHNIQUE -->
+                    <li class="relative group z-40">
+                        <a href="../Technique/Technique.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            ⚙️ Technique <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-64 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li class="px-5 py-2 pt-3 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1">Notions de base</li>
+                                <li><a href="../Tech 1/electrotechnique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-bolt w-5 text-gray-500"></i> Électrotechnique</a></li>
+                                <li><a href="../Tech 1/electronique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microchip w-5 text-gray-500"></i> Électronique</a></li>
+                                <li><a href="../Tech 1/energies.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-leaf w-5 text-gray-500"></i> Énergies</a></li>
+                                <li><a href="../Tech 1/schemas.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-project-diagram w-5 text-gray-500"></i> Schémas</a></li>
+                                
+                                <li class="px-5 py-2 pt-4 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1 mt-2">Spécialisations</li>
+                                <li><a href="../Technique/Technique.html#electricite" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-network-wired w-5 text-gray-500"></i> Électricité</a></li>
+                                <li><a href="../Technique/Technique.html#software" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-code w-5 text-gray-500"></i> Software</a></li>
+                                <li><a href="../Technique/Technique.html#aeronautique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-plane w-5 text-gray-500"></i> Aéronautique</a></li>
+                                <li><a href="../Technique/Technique.html#mecanique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-cogs w-5 text-gray-500"></i> Génie Mécanique</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- DIPLOMES -->
+                    <li class="relative group z-35">
+                        <a href="../Diplomes/diplomes.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            🎓 Diplômes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Diplomes/diplomes.html#bts" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> BTS</a></li>
+                                <li><a href="../Diplomes/diplomes.html#dut" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> DUT</a></li>
+                                <li><a href="../Diplomes/diplomes.html#licence" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-award w-5 text-gray-500"></i> Licence</a></li>
+                                <li><a href="../Diplomes/diplomes.html#master" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-graduate w-5 text-gray-500"></i> Master</a></li>
+                                <li><a href="../Diplomes/diplomes.html#doctorat" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microscope w-5 text-gray-500"></i> Doctorat</a></li>
+                                <li><a href="../Diplomes/diplomes.html#mba" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-certificate w-5 text-gray-500"></i> MBA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <!-- COMMUNITY -->
+                    <li class="relative group z-30">
+                        <a href="../assets/community/clic.electech.html" class="hover:text-yellow-400 text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-yellow-400 pb-1">
+                            👥 Community <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../assets/community/clic.electech.html" class="block px-5 py-2.5 hover:bg-black hover:text-yellow-400 transition-colors"><i class="fas fa-bolt w-5 text-yellow-400"></i> Clic Electech</a></li>
+                                <li><a href="../utilisateur/forum.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-comments w-5 text-gray-500"></i> Forum</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <li><a href="../Tech 1/bibliotheque.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">📚 Livres</a></li>
+                    
+                    <!-- EMPLOI -->
+                    <li class="relative group z-30">
+                        <a href="../emploi/emploi.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            💼 Emploi <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../emploi/offres.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-briefcase w-5 text-gray-500"></i> Offres d'Emploi</a></li>
+                                <li><a href="../emploi/demandes.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-tie w-5 text-gray-500"></i> Demandes d'Emploi</a></li>
+                                <li><a href="../emploi/postale.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-envelope-open-text w-5 text-gray-500"></i> Boîte Postale</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+ 
+                <!-- Dynamic Auth Zone -->
+                <div id="auth-navbar" class="flex items-center gap-3 border-l border-gray-800 pl-8">
+                    <!-- Guest -->
+                    <div id="guest-zone" class="hidden items-center gap-5">
+                        <a href="../utilisateur/login.html?tab=signup" class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors">S'inscrire</a>
+                        <a href="../utilisateur/login.html?tab=login" class="bg-customOrange text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.1em] hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">Connexion</a>
+                    </div>
+                    <!-- Member -->
+                    <div id="member-zone" class="hidden items-center gap-4 bg-gray-950 border border-gray-900 px-4 py-2 rounded-2xl">
+                        <div class="flex items-center gap-3 group cursor-pointer">
+                            <div class="w-8 h-8 bg-customOrange/10 rounded-lg flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-user-circle text-base"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span id="nav-user-name" class="text-[11px] font-black text-white leading-none"></span>
+                                <a href="../utilisateur/profil.html" class="text-[9px] text-gray-600 font-bold uppercase tracking-tighter hover:text-customOrange transition-colors mt-1">Mon Profil</a>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" class="text-gray-700 hover:text-red-500 transition-colors ml-2 pt-1" title="Déconnexion">
+                            <i class="fas fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-12 max-w-6xl">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-16 relative">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-customOrange/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
+            
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-900 border border-gray-800 mb-6 shadow-2xl animate-float">
+                <i class="fas fa-gamepad text-4xl text-customOrange drop-shadow-[0_0_10px_rgba(255,140,0,0.8)]"></i>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-4">
+                Section <span class="text-customOrange">Hlega</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
+                Apprenez l'électricité en vous amusant ! Relevez des défis, testez vos connaissances avec nos QCMs et défiez vos amis sur des mini-jeux interactifs.
+            </p>
+            
+            <!-- Global Internal Menu -->
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <button onclick="switchTab('accueil')" id="btn-accueil" class="tab-btn active px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange transition-all flex items-center gap-2">
+                    <i class="fas fa-home"></i> Accueil
+                </button>
+                <button onclick="switchTab('qcm')" id="btn-qcm" class="tab-btn px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-white transition-all flex items-center gap-2">
+                    <i class="fas fa-question-circle"></i> QCMs
+                </button>
+                <button onclick="switchTab('jeux')" id="btn-jeux" class="tab-btn px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-white transition-all flex items-center gap-2">
+                    <i class="fas fa-puzzle-piece"></i> Jeux
+                </button>
+                <button onclick="switchTab('defis')" id="btn-defis" class="tab-btn px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs border border-gray-800 hover:border-customOrange text-white transition-all flex items-center gap-2">
+                    <i class="fas fa-trophy text-yellow-500"></i> Défis
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: ACCUEIL -->
+        <div id="tab-accueil" class="tab-content active space-y-12">
+            
+            <!-- Cards Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Card QCM -->
+                <div onclick="switchTab('qcm')" class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-blue-600/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-blue-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-list-ul"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">QCMs Rapides</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Testez vos connaissances théoriques et pratiques sur les schémas, les normes et la sécurité.</p>
+                    <div class="text-xs font-bold text-blue-500 flex items-center gap-2 uppercase tracking-widest">
+                        Commencer <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Card Jeux -->
+                <div onclick="switchTab('jeux')" class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-green-600/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-green-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">Jeux Interactifs</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Réparez des circuits, connectez des câbles et résolvez des pannes virtuelles.</p>
+                    <div class="text-xs font-bold text-green-500 flex items-center gap-2 uppercase tracking-widest">
+                        Jouer Maintenant <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Card Défis -->
+                <div onclick="switchTab('defis')" class="bento-card p-8 group cursor-pointer relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10 group-hover:bg-purple-600/20 transition-colors"></div>
+                    <div class="w-14 h-14 bg-gray-900 border border-gray-800 rounded-2xl flex items-center justify-center text-2xl text-purple-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-3">Défier un ami</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Créez un salon privé, envoyez le lien à vos amis et voyez qui sera le meilleur électricien !</p>
+                    <div class="text-xs font-bold text-purple-500 flex items-center gap-2 uppercase tracking-widest">
+                        Créer un défi <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Sharing Preview in Accueil -->
+            <div class="bg-gray-900/50 border border-gray-800 rounded-[2rem] p-10 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-black text-white mb-4">Partagez votre expertise</h2>
+                    <p class="text-gray-400 text-sm mb-8 max-w-xl mx-auto">Vous avez fait un score parfait ? Montrez à votre réseau que vous êtes un véritable pro de l'électricité marocaine.</p>
+                    
+                    <div class="flex justify-center gap-4">
+                        <button onclick="shareScore('facebook')" class="w-12 h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-full flex items-center justify-center text-xl transition-all shadow-lg hover:-translate-y-1 hover:shadow-blue-600/50">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button onclick="shareScore('twitter')" class="w-12 h-12 bg-sky-500 hover:bg-sky-400 text-white rounded-full flex items-center justify-center text-xl transition-all shadow-lg hover:-translate-y-1 hover:shadow-sky-500/50">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button onclick="shareScore('whatsapp')" class="w-12 h-12 bg-green-500 hover:bg-green-400 text-white rounded-full flex items-center justify-center text-xl transition-all shadow-lg hover:-translate-y-1 hover:shadow-green-500/50">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                        <button onclick="shareScore('linkedin')" class="w-12 h-12 bg-blue-800 hover:bg-blue-700 text-white rounded-full flex items-center justify-center text-xl transition-all shadow-lg hover:-translate-y-1 hover:shadow-blue-800/50">
+                            <i class="fab fa-linkedin-in"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: QCM -->
+        <div id="tab-qcm" class="tab-content">
+            <div class="border-b border-gray-800 pb-8 mb-8 flex justify-between items-end">
+                <div>
+                    <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                        <i class="fas fa-bolt text-blue-500"></i> Mode QCM Éclair
+                    </h2>
+                    <p class="text-gray-500 mt-2">Testez vos connaissances en électricité en 10 questions chrono.</p>
+                </div>
+                <div class="hidden md:block">
+                    <span id="qcm-score-badge" class="bg-blue-900/30 text-blue-400 border border-blue-800 px-4 py-2 rounded-full font-black tracking-widest text-xs hidden">
+                        SCORE : <span id="qcm-score">0</span> pts
+                    </span>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <!-- Start Screen -->
+                <div id="qcm-start-screen" class="text-center py-16 border border-gray-800 rounded-[2rem] bg-gray-900/50 shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl -translate-y-10 translate-x-10"></div>
+                    <i class="fas fa-stopwatch text-5xl text-blue-500 mb-6 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]"></i>
+                    <h3 class="text-2xl font-black text-white mb-3">Prêt à relever le défi ?</h3>
+                    <p class="text-gray-400 mb-10 max-w-sm mx-auto">10 questions aléatoires sur les fondamentaux électriques, schémas et normes. 15 secondes par question.</p>
+                    <button onclick="startQCM()" class="bg-blue-600 hover:bg-blue-500 text-white font-black py-4 px-10 rounded-xl transition-all uppercase tracking-widest shadow-xl hover:shadow-blue-600/30 hover:-translate-y-1">
+                        Démarrer le QCM
+                    </button>
+                </div>
+
+                <!-- Active Question Screen -->
+                <div id="qcm-active-screen" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Question <span id="qcm-current-num" class="text-white text-sm">1</span> / 10</span>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-clock text-blue-500"></i>
+                            <span id="qcm-timer" class="text-xl font-black text-white font-mono">15s</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-900 h-2 rounded-full mb-8 overflow-hidden">
+                        <div id="qcm-progress" class="bg-blue-500 h-full rounded-full transition-all duration-300 w-[10%] shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
+                    </div>
+
+                    <div class="bg-black border border-gray-800 rounded-2xl p-8 shadow-xl mb-6">
+                        <h3 id="qcm-question-text" class="text-xl md:text-2xl font-bold text-white mb-8 leading-relaxed">
+                            Chargement de la question...
+                        </h3>
+                        
+                        <div id="qcm-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- JS Injected Options -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End Screen -->
+                <div id="qcm-end-screen" class="hidden text-center py-16 border border-gray-800 rounded-[2rem] bg-gray-900/50 shadow-2xl relative overflow-hidden">
+                    <div id="qcm-result-icon" class="mb-6"></div>
+                    <h3 class="text-3xl font-black text-white mb-2">Résultat Final</h3>
+                    <p class="text-gray-400 mb-8">Vous avez obtenu <span id="qcm-final-score" class="text-customOrange font-black text-xl">0</span> points.</p>
+                    
+                    <div class="bg-black/50 border border-gray-800 rounded-xl p-6 mx-auto max-w-sm mb-10">
+                        <p id="qcm-feedback" class="text-sm font-bold text-white"></p>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="startQCM()" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-xl transition-all">
+                            <i class="fas fa-redo mr-2"></i> Rejouer
+                        </button>
+                        <button onclick="shareScore('whatsapp')" class="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-8 rounded-xl transition-all hover:shadow-lg hover:shadow-green-600/30">
+                            <i class="fab fa-whatsapp mr-2"></i> Défier un ami
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: JEUX -->
+        <div id="tab-jeux" class="tab-content">
+            <div class="border-b border-gray-800 pb-8 mb-8 flex justify-between items-end">
+                <div>
+                    <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                        <i class="fas fa-gamepad text-green-500"></i> Mini-Jeux : Associez les Paires
+                    </h2>
+                    <p class="text-gray-500 mt-2">Associez chaque grandeur physique à son unité ou symbole.</p>
+                </div>
+                <!-- Game Score/Actions -->
+                <div class="hidden md:flex gap-3">
+                    <button onclick="startPairsGame()" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all"><i class="fas fa-redo"></i> Relancer</button>
+                    <span class="bg-green-900/30 text-green-400 border border-green-800 px-4 py-2 rounded-full font-black tracking-widest text-xs flex items-center gap-2">
+                        <i class="fas fa-check-circle"></i> <span id="game-pairs-found">0</span> / 6
+                    </span>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="max-w-4xl mx-auto">
+                <div id="game-board" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 perspective-1000">
+                    <!-- Cards injected by JS -->
+                </div>
+
+                <div id="game-win-screen" class="hidden mt-12 text-center p-10 border border-green-800 bg-green-900/10 rounded-3xl shadow-[0_0_30px_rgba(34,197,94,0.15)] relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                    <i class="fas fa-trophy text-6xl text-yellow-500 mb-6 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]"></i>
+                    <h3 class="text-3xl font-black text-white mb-2">Félicitations !</h3>
+                    <p class="text-gray-400 mb-8">Vous avez associé toutes les paires correctement en <span id="game-time" class="text-green-500 font-bold">0</span> secondes.</p>
+                    <div class="flex flex-wrap justify-center gap-4 relative z-10">
+                        <button onclick="startPairsGame()" class="bg-green-600 hover:bg-green-500 text-white font-black py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-green-600/30 uppercase tracking-widest text-xs">
+                            <i class="fas fa-play mr-2"></i> Rejouer
+                        </button>
+                        <button onclick="shareScore('twitter')" class="bg-sky-500 hover:bg-sky-400 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-sky-500/30">
+                            <i class="fab fa-twitter mr-2"></i> Partager l'exploit
+                        </button>
+                    </div>
+                </div>
+                
+                <style>
+                    .game-card {
+                        height: 100px;
+                        cursor: pointer;
+                        position: relative;
+                        transform-style: preserve-3d;
+                        transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+                    }
+                    .game-card.flipped { transform: rotateY(180deg); }
+                    .game-card.matched {
+                        opacity: 0.8;
+                        cursor: default;
+                        transform: rotateY(180deg) scale(0.95);
+                    }
+                    .game-card-front, .game-card-back {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        backface-visibility: hidden;
+                        border-radius: 1rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 1rem;
+                        text-align: center;
+                    }
+                    .game-card-front {
+                        background: #111;
+                        border: 2px solid #333;
+                        font-size: 2rem;
+                        color: #FF8C00;
+                    }
+                    .game-card-front:hover { border-color: #FF8C00; box-shadow: 0 0 15px rgba(255,140,0,0.2); }
+                    .game-card-back {
+                        background: linear-gradient(135deg, #1f2937, #111827);
+                        border: 2px solid #22c55e;
+                        transform: rotateY(180deg);
+                        color: white;
+                        font-weight: 800;
+                        font-size: 0.9rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                    }
+                    .game-card.matched .game-card-back {
+                        border-color: #3b82f6;
+                        background: linear-gradient(135deg, #1e3a8a, #172554);
+                    }
+                    .perspective-1000 { perspective: 1000px; }
+                </style>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: DEFIS -->
+        <div id="tab-defis" class="tab-content">
+            <div class="border-b border-gray-800 pb-8 mb-8 flex justify-between items-end">
+                <div>
+                    <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                        <i class="fas fa-trophy text-purple-500"></i> Défis Multi-joueurs
+                    </h2>
+                    <p class="text-gray-500 mt-2">Prouvez à vos amis qui est le patron !</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="bento-card p-10">
+                    <div class="w-16 h-16 bg-purple-600/20 text-purple-400 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white mb-2">Créer un salon</h3>
+                    <p class="text-gray-500 text-sm mb-8">Générez un lien unique, envoyez-le à vos amis par WhatsApp et lancez le chrono. Le meilleur score gagne.</p>
+                    
+                    <button onclick="createChallengeRoom()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-black py-4 rounded-xl uppercase tracking-widest text-xs transition-all shadow-[0_0_15px_rgba(147,51,234,0.3)] hover:shadow-[0_0_25px_rgba(147,51,234,0.6)] flex items-center justify-center gap-3">
+                        <i class="fas fa-plus-circle"></i> Générer mon lien de défi
+                    </button>
+                    
+                    <div id="challenge-link-container" class="hidden mt-6 bg-black/50 border border-purple-500/50 rounded-xl p-4 text-center">
+                        <p class="text-xs text-gray-400 mb-2">Envoyez ce lien à vos amis :</p>
+                        <div class="flex items-center gap-2">
+                            <input type="text" id="challenge-link-input" readonly class="w-full bg-gray-900 border border-gray-700 rounded-lg py-2 px-3 text-sm text-purple-400 font-mono outline-none">
+                            <button onclick="copyChallengeLink()" class="bg-gray-800 hover:bg-gray-700 text-white p-2 rounded-lg transition-colors" title="Copier le lien">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 relative overflow-hidden">
+                    <h3 class="text-sm font-black text-white uppercase tracking-widest border-b border-gray-800 pb-4 mb-4 flex justify-between">
+                        <span><i class="fas fa-crown text-yellow-500 mr-2"></i> Hall of Fame</span>
+                        <span class="text-gray-600">Top 3</span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4 bg-black/50 p-3 rounded-xl border border-yellow-500/20">
+                            <div class="w-10 h-10 bg-yellow-500/10 text-yellow-500 rounded-xl flex items-center justify-center font-black">#1</div>
+                            <div class="flex-grow">
+                                <p id="hof-top1-name" class="text-white font-bold text-sm transition-colors">Amine Elec</p>
+                                <p class="text-[10px] text-gray-500 font-mono">Maître QCM</p>
+                            </div>
+                            <div class="text-yellow-500 font-black font-mono">9,850 pts</div>
+                        </li>
+                        <li class="flex items-center gap-4 bg-black/50 p-3 rounded-xl border border-gray-400/20">
+                            <div class="w-10 h-10 bg-gray-400/10 text-gray-400 rounded-xl flex items-center justify-center font-black">#2</div>
+                            <div class="flex-grow">
+                                <p class="text-white font-bold text-sm">Soufiane Tech</p>
+                                <p class="text-[10px] text-gray-500 font-mono">Expert Câblage</p>
+                            </div>
+                            <div class="text-gray-400 font-black font-mono">8,420 pts</div>
+                        </li>
+                        <li class="flex items-center gap-4 bg-black/50 p-3 rounded-xl border border-orange-700/20">
+                            <div class="w-10 h-10 bg-orange-700/10 text-orange-500 rounded-xl flex items-center justify-center font-black">#3</div>
+                            <div class="flex-grow">
+                                <p class="text-white font-bold text-sm">Youssef B.</p>
+                                <p class="text-[10px] text-gray-500 font-mono">Apprenti Rapide</p>
+                            </div>
+                            <div class="text-orange-500 font-black font-mono">7,100 pts</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full mt-auto py-10 bg-black border-t border-gray-900 mt-20">
+        <div class="text-center">
+            <p class="text-[10px] text-gray-600 font-medium tracking-widest uppercase mb-4">
+                Designed by <span class="text-customOrange font-bold">ELECTECH Team 2026</span> - © Tous les droits sont reservés
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Auth UI from api.js 
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('electech_session') || 'null');
+            const guestZone = document.getElementById('guest-zone');
+            const memberZone = document.getElementById('member-zone');
+            const navUserName = document.getElementById('nav-user-name');
+
+            if (user) {
+                if(guestZone) { guestZone.classList.add('hidden'); guestZone.classList.remove('flex'); }
+                if(memberZone) { memberZone.classList.remove('hidden'); memberZone.classList.add('flex'); }
+                if(navUserName) navUserName.textContent = user.name;
+                
+                // Placer l'utilisateur en Top 1 du Hall of Fame
+                const hofTop1 = document.getElementById('hof-top1-name');
+                if (hofTop1) {
+                    hofTop1.innerHTML = `${user.name} <span class="text-customOrange font-normal ml-1">#VOUS</span>`;
+                    hofTop1.classList.remove('text-white');
+                    hofTop1.classList.add('text-customOrange', 'drop-shadow-[0_0_8px_rgba(255,140,0,0.5)]');
+                }
+            } else {
+                if(guestZone) { guestZone.classList.remove('hidden'); guestZone.classList.add('flex'); }
+                if(memberZone) { memberZone.classList.add('hidden'); memberZone.classList.remove('flex'); }
+            }
+
+            // check hash on load
+            if (window.location.hash) {
+                const tab = window.location.hash.replace('#', '');
+                if (['qcm', 'jeux', 'defis'].includes(tab)) {
+                    switchTab(tab);
+                }
+            }
+        });
+
+        function handleLogout() {
+            localStorage.removeItem('electech_session');
+            window.location.reload();
+        }
+
+        // Tab Switching Logic
+        const tabs = ['accueil', 'qcm', 'jeux', 'defis'];
+        function switchTab(targetTab) {
+            tabs.forEach(tab => {
+                const btn = document.getElementById(`btn-${tab}`);
+                const content = document.getElementById(`tab-${tab}`);
+                
+                if (tab === targetTab) {
+                    btn.classList.add('active', 'text-black');
+                    btn.classList.remove('text-white');
+                    content.classList.add('active');
+                } else {
+                    btn.classList.remove('active', 'text-black');
+                    btn.classList.add('text-white');
+                    content.classList.remove('active');
+                }
+            });
+            window.location.hash = targetTab;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ------------------------------------------------------------------
+        // QCM LOGIC
+        // ------------------------------------------------------------------
+        const qcmQuestions = [
+            { q: "Quelle est l'unité de la tension électrique ?", options: ["Watt", "Ohm", "Ampère", "Volt"], correct: 3 },
+            { q: "Que stipule la loi d'Ohm ?", options: ["U = R / I", "U = R × I", "I = U × R", "R = U × P"], correct: 1 },
+            { q: "À quoi sert un disjoncteur différentiel ?", options: ["Protéger les matériels", "Protéger les personnes", "Augmenter la tension", "Mesurer le courant"], correct: 1 },
+            { q: "Dans un circuit série, si une lampe grille :", options: ["Les autres brillent plus", "Le courant augmente", "Tout s'éteint", "Rien ne change"], correct: 2 },
+            { q: "Quelle est la fréquence du réseau électrique au Maroc ?", options: ["50 Hz", "60 Hz", "100 Hz", "120 Hz"], correct: 0 },
+            { q: "Quelle couleur de fil est standard pour la phase ?", options: ["Bleu", "Jaune/Vert", "Rouge/Marron/Noir", "Blanc"], correct: 2 },
+            { q: "Que mesure un ampèremètre ?", options: ["La résistance", "L'intensité du courant", "La tension", "La puissance"], correct: 1 },
+            { q: "Un court-circuit se produit quand :", options: ["La résistance est très grande", "Le courant est nul", "La phase touche le neutre directement", "Un interrupteur est ouvert"], correct: 2 },
+            { q: "Le symbole 'Ω' représente :", options: ["L'intensité", "La puissance", "L'énergie", "La résistance"], correct: 3 },
+            { q: "Quel dispositif permet de changer le niveau de tension alternative ?", options: ["Un condensateur", "Un transformateur", "Une diode", "Un transistor"], correct: 1 }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timer;
+        let timeLeft = 15;
+        
+        function startQCM() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('qcm-score').innerText = '0';
+            document.getElementById('qcm-score-badge').classList.remove('hidden');
+            
+            document.getElementById('qcm-start-screen').classList.add('hidden');
+            document.getElementById('qcm-end-screen').classList.add('hidden');
+            document.getElementById('qcm-active-screen').classList.remove('hidden');
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion >= qcmQuestions.length) {
+                endQCM();
+                return;
+            }
+            
+            const q = qcmQuestions[currentQuestion];
+            document.getElementById('qcm-current-num').innerText = currentQuestion + 1;
+            document.getElementById('qcm-question-text').innerText = q.q;
+            
+            const optionsContainer = document.getElementById('qcm-options');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "text-left bg-gray-900 border border-gray-700 hover:border-blue-500 hover:bg-gray-800 text-white p-4 rounded-xl transition-all font-bold group flex justify-between items-center";
+                btn.innerHTML = `<span>${opt}</span> <i class="fas fa-circle text-gray-700 group-hover:text-blue-500 text-xs"></i>`;
+                btn.onclick = () => handleAnswer(idx);
+                optionsContainer.appendChild(btn);
+            });
+
+            // Reset Timer
+            timeLeft = 15;
+            document.getElementById('qcm-timer').innerText = timeLeft + 's';
+            updateProgressBar();
+            clearInterval(timer);
+            timer = setInterval(countdownTime, 1000);
+        }
+
+        function countdownTime() {
+            timeLeft--;
+            document.getElementById('qcm-timer').innerText = timeLeft + 's';
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                alert("Temps écoulé !");
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestion) / qcmQuestions.length) * 100;
+            document.getElementById('qcm-progress').style.width = Math.max(10, progress) + '%';
+        }
+
+        function handleAnswer(selectedIndex) {
+            clearInterval(timer);
+            const correctIndex = qcmQuestions[currentQuestion].correct;
+            
+            const options = document.getElementById('qcm-options').children;
+            options[correctIndex].classList.replace('border-gray-700', 'border-green-500');
+            options[correctIndex].classList.replace('bg-gray-900', 'bg-green-900/30');
+            options[correctIndex].querySelector('i').className = 'fas fa-check-circle text-green-500 text-lg';
+
+            if (selectedIndex === correctIndex) {
+                score += 10;
+                document.getElementById('qcm-score').innerText = score;
+            } else {
+                options[selectedIndex].classList.replace('border-gray-700', 'border-red-500');
+                options[selectedIndex].classList.replace('bg-gray-900', 'bg-red-900/30');
+                options[selectedIndex].querySelector('i').className = 'fas fa-times-circle text-red-500 text-lg';
+            }
+
+            // Disable all buttons
+            for(let btn of options) btn.disabled = true;
+
+            setTimeout(() => {
+                currentQuestion++;
+                loadQuestion();
+            }, 1000);
+        }
+
+        function endQCM() {
+            document.getElementById('qcm-active-screen').classList.add('hidden');
+            document.getElementById('qcm-end-screen').classList.remove('hidden');
+            document.getElementById('qcm-score-badge').classList.add('hidden');
+            
+            document.getElementById('qcm-final-score').innerText = score;
+            
+            const iconContainer = document.getElementById('qcm-result-icon');
+            const feedback = document.getElementById('qcm-feedback');
+            
+            if (score >= 80) {
+                iconContainer.innerHTML = '<i class="fas fa-crown text-6xl text-yellow-500 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]"></i>';
+                feedback.innerText = "Excellent ! Vous êtes un véritable expert en électricité.";
+                feedback.className = "text-sm font-bold text-yellow-500";
+            } else if (score >= 50) {
+                iconContainer.innerHTML = '<i class="fas fa-thumbs-up text-6xl text-blue-500 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]"></i>';
+                feedback.innerText = "Pas mal ! Encore quelques révisions et vous serez au top.";
+                feedback.className = "text-sm font-bold text-blue-400";
+            } else {
+                iconContainer.innerHTML = '<i class="fas fa-book text-6xl text-gray-500"></i>';
+                feedback.innerText = "Aïe... Vous devriez jeter un œil à la section bibliothèque !";
+                feedback.className = "text-sm font-bold text-gray-400";
+            }
+        }
+
+
+        // ------------------------------------------------------------------
+        // MINI-GAME LOGIC (Pairs Memory)
+        // ------------------------------------------------------------------
+        const pairsData = [
+            { id: 1, text: "Tension", match: 1 }, { id: 1, text: "Volt (V)", match: 1 },
+            { id: 2, text: "Courant", match: 2 }, { id: 2, text: "Ampère (A)", match: 2 },
+            { id: 3, text: "Résistance", match: 3 }, { id: 3, text: "Ohm (Ω)", match: 3 },
+            { id: 4, text: "Puissance", match: 4 }, { id: 4, text: "Watt (W)", match: 4 },
+            { id: 5, text: "Fréquence", match: 5 }, { id: 5, text: "Hertz (Hz)", match: 5 },
+            { id: 6, text: "Énergie", match: 6 }, { id: 6, text: "Joule (J)", match: 6 }
+        ];
+
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let gameTimer;
+        let gameSeconds = 0;
+        let isBoardLocked = false;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function startPairsGame() {
+            clearInterval(gameTimer);
+            gameSeconds = 0;
+            matchedPairs = 0;
+            flippedCards = [];
+            isBoardLocked = false;
+            document.getElementById('game-pairs-found').innerText = '0';
+            document.getElementById('game-win-screen').classList.add('hidden');
+
+            const board = document.getElementById('game-board');
+            board.innerHTML = '';
+            
+            const shuffledData = shuffle([...pairsData]);
+            
+            shuffledData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.dataset.id = item.id;
+                card.dataset.index = index;
+                
+                card.innerHTML = `
+                    <div class="game-card-front"><i class="fas fa-bolt"></i></div>
+                    <div class="game-card-back">${item.text}</div>
+                `;
+                
+                card.onclick = () => flipCard(card);
+                board.appendChild(card);
+            });
+
+            gameTimer = setInterval(() => gameSeconds++, 1000);
+        }
+
+        function flipCard(card) {
+            if (isBoardLocked || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            
+            card.classList.add('flipped');
+            flippedCards.push(card);
+            
+            if (flippedCards.length === 2) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            isBoardLocked = true;
+            const card1 = flippedCards[0];
+            const card2 = flippedCards[1];
+            
+            if (card1.dataset.id === card2.dataset.id) {
+                // Match!
+                setTimeout(() => {
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    matchedPairs++;
+                    document.getElementById('game-pairs-found').innerText = matchedPairs;
+                    resetTurn();
+                    if (matchedPairs === 6) winGame();
+                }, 500);
+            } else {
+                // No match
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    resetTurn();
+                }, 1000);
+            }
+        }
+
+        function resetTurn() {
+            flippedCards = [];
+            isBoardLocked = false;
+        }
+
+        function winGame() {
+            clearInterval(gameTimer);
+            document.getElementById('game-time').innerText = gameSeconds;
+            // Delay slightly for effect
+            setTimeout(() => {
+                document.getElementById('game-win-screen').classList.remove('hidden');
+            }, 600);
+        }
+
+        // Initialize the game when the tab is clicked, or immediately on load 
+        // if we are already in the games tab.
+        document.getElementById('btn-jeux').addEventListener('click', () => {
+            if (matchedPairs === 0 && gameSeconds === 0) startPairsGame();
+        });
+
+        // ------------------------------------------------------------------
+        // SOCIAL & CHALLENGES LOGIC
+        // ------------------------------------------------------------------
+        function shareScore(platform) {
+            let message = "J'ai testé mes connaissances électriques sur le hub Hlega de ELEC-TECH ! Viens relever le défi ! ⚡";
+            
+            // Les réseaux sociaux (surtout Facebook) bloquent le partage d'URL locales (file:// ou localhost).
+            // On utilise une URL publique factice si on est en local pour que la fenêtre s'ouvre correctement.
+            let isLocal = window.location.protocol === 'file:' || window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+            let url = isLocal ? "https://electech-maroc.com/hlega" : window.location.href;
+            
+            let shareUrl = "";
+            switch (platform) {
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message + " " + url)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(url)}`;
+                    break;
+                case 'facebook':
+                    // Facebook ne prend plus que l'URL en paramètre (pas de texte personnalisé via sharer.php)
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+                    break;
+            }
+            if (shareUrl) {
+                const width = 600, height = 400;
+                const left = (window.innerWidth / 2) - (width / 2);
+                const top = (window.innerHeight / 2) - (height / 2);
+                window.open(shareUrl, `share_${platform}`, `width=${width},height=${height},top=${top},left=${left}`);
+            }
+        }
+
+        function createChallengeRoom() {
+            // Generate a fake room ID to simulate challenge creation
+            const roomId = Math.random().toString(36).substring(2, 9).toUpperCase();
+            const challengeLink = window.location.origin + window.location.pathname + "?room=" + roomId;
+            
+            const container = document.getElementById('challenge-link-container');
+            const input = document.getElementById('challenge-link-input');
+            
+            input.value = challengeLink;
+            container.classList.remove('hidden');
+            
+            // Highlight effect for the input
+            input.classList.add('bg-purple-900/30', 'border-purple-500');
+            setTimeout(() => {
+                input.classList.remove('bg-purple-900/30', 'border-purple-500');
+            }, 500);
+        }
+
+        function copyChallengeLink() {
+            const input = document.getElementById('challenge-link-input');
+            input.select();
+            input.setSelectionRange(0, 99999); // For mobile devices
+            try {
+                navigator.clipboard.writeText(input.value);
+                // Visual feedback icon change
+                const btn = input.nextElementSibling;
+                const icon = btn.querySelector('i');
+                icon.className = 'fas fa-check text-green-500';
+                setTimeout(() => { icon.className = 'fas fa-copy text-white'; }, 2000);
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+        }
+
+    </script>
+
+    <script src="../js/search_index.js"></script>
+    <script src="../js/search_logic.js"></script>
+    <script src="../js/scroll_to_search.js"></script>
+</body>
+</html>

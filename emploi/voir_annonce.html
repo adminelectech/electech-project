@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de l'offre - ELEC TECH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { customOrange: '#FF8C00' }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        .bento-card { background: #0a0a0a; border: 1px solid #1f2937; position: relative; overflow: hidden; }
+        .bento-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, transparent 100%); pointer-events: none; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in { animation: fadeIn .4s ease-out forwards; }
+        .msg-body { white-space: pre-wrap; word-break: break-all; overflow-wrap: break-word; }
+    </style>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+<header class="p-6 border-b border-gray-800 bg-black/80 sticky top-0 z-50 backdrop-blur-md">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="../index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <li><a href="../index.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors">Accueil</a></li>
+                    <li><a href="offres.html" class="text-customOrange font-bold transition-colors">Offres d'Emploi</a></li>
+                    <li><a href="demandes.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors">Candidats</a></li>
+                </ul>
+            </nav>
+    </div>
+</header>
+
+<main class="flex-grow container mx-auto px-4 py-12 max-w-4xl opacity-0 fade-in">
+    <div class="mb-8">
+        <a href="offres.html" class="text-customOrange text-sm hover:underline font-bold tracking-wider uppercase"><i class="fas fa-arrow-left mr-2"></i>Retour aux Offres</a>
+    </div>
+
+    <div id="loading" class="text-center py-20">
+        <i class="fas fa-circle-notch fa-spin text-4xl text-customOrange"></i>
+    </div>
+
+    <div id="content" class="hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Sidebar Stats -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bento-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full"></div>
+                    <div class="w-16 h-16 bg-blue-600/10 border border-blue-500/30 rounded-2xl flex items-center justify-center text-blue-500 text-2xl mb-6">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h1 id="view-poste" class="text-2xl font-black text-white mb-2 leading-tight">Poste</h1>
+                    <p id="view-entreprise" class="text-customOrange font-bold text-xs uppercase tracking-widest mb-6"></p>
+                    
+                    <div class="space-y-4 border-t border-gray-800 pt-6">
+                        <div>
+                            <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Localisation</div>
+                            <div id="view-ville" class="text-white text-sm font-medium">---</div>
+                        </div>
+                        <div>
+                            <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Type de Contrat</div>
+                            <div id="view-contrat" class="text-white text-sm font-medium">---</div>
+                        </div>
+                        <div>
+                            <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Date de publication</div>
+                            <div id="view-date" class="text-white text-sm font-medium">---</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a id="apply-btn" href="#" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center font-black py-4 rounded-2xl transition-all uppercase tracking-widest text-xs shadow-xl shadow-blue-600/20">
+                    Postuler à cette offre <i class="fas fa-paper-plane ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Main Description -->
+            <div class="md:col-span-2 space-y-8">
+                <div class="bento-card p-8 md:p-10 rounded-3xl">
+                    <h2 class="text-xl font-black text-white mb-6 flex items-center">
+                        <i class="fas fa-align-left text-blue-500 mr-3"></i> Description du poste
+                    </h2>
+                    <div id="view-desc" class="text-gray-400 leading-relaxed msg-body text-sm">
+                        <!-- Content here -->
+                    </div>
+                </div>
+
+                <div class="bento-card p-8 rounded-3xl bg-blue-900/5">
+                    <h3 class="text-white font-bold text-sm mb-4">À propos de l'annonceur</h3>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center text-gray-500 text-xl border border-gray-800">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <p id="view-author" class="text-white font-bold text-sm">---</p>
+                            <p class="text-[10px] text-gray-600 uppercase tracking-widest">Utilisateur vérifié</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const offerId = params.get('id');
+        
+        const annonces = JSON.parse(localStorage.getItem('electech_annonces') || '[]');
+        const offer = annonces.find(a => a.id === offerId);
+
+        document.getElementById('loading').classList.add('hidden');
+        
+        if (offer) {
+            document.getElementById('content').classList.remove('hidden');
+            document.getElementById('view-poste').textContent = offer.poste;
+            document.getElementById('view-entreprise').textContent = offer.entreprise || 'Entreprise Confidentielle';
+            document.getElementById('view-ville').textContent = offer.ville || 'Non spécifiée';
+            document.getElementById('view-contrat').textContent = offer.contrat || 'Non spécifié';
+            document.getElementById('view-date').textContent = offer.date || 'Récemment';
+            document.getElementById('view-author').textContent = offer.author || 'Inconnu';
+            document.getElementById('view-desc').textContent = offer.desc || 'Aucune description fournie.';
+            
+            document.getElementById('apply-btn').href = `postuler.html?id=${offer.id}`;
+
+            // Increment views
+            offer.views = (offer.views || 0) + 1;
+            localStorage.setItem('electech_annonces', JSON.stringify(annonces));
+        } else {
+            alert("Annonce introuvable.");
+            window.location.href = "offres.html";
+        }
+    });
+</script>
+</body>
+</html>

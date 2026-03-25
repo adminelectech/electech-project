@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification - ELECTECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customOrange: '#FF8C00',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <script src="../javascript/antispam.js"></script>
+    <style>
+        .bento-glow {
+            background: radial-gradient(circle at center, rgba(255, 140, 0, 0.15) 0%, transparent 70%);
+        }
+        .tab-active {
+            color: #FF8C00;
+            border-bottom: 2px solid #FF8C00;
+        }
+        .bento-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black overflow-x-hidden">
+
+    <!-- Background Glows -->
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bento-glow opacity-50 blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bento-glow opacity-50 blur-[120px] pointer-events-none"></div>
+
+    <!-- Header -->
+    <header class="p-6 relative z-50">
+        <div class="container mx-auto flex justify-center">
+            <div class="text-2xl font-bold text-white tracking-[0.3em] uppercase">
+                <a href="../index.html" class="hover:scale-105 transition-transform inline-block">
+                    <i class="fas fa-bolt text-customOrange mr-2"></i>ELEC<span class="text-customOrange">TECH</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center p-6 relative z-10">
+        <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-6">
+            
+            <!-- Left Bento: Welcome & Message (4 cols) -->
+            <div class="md:col-span-5 flex flex-col gap-6">
+                <div class="bento-card p-8 rounded-[2.5rem] flex-grow flex flex-col justify-center">
+                    <div id="redirect-msg" class="hidden mb-6 bg-customOrange/10 border border-customOrange/20 p-4 rounded-2xl animate-pulse-slow">
+                        <p class="text-customOrange text-xs font-bold leading-relaxed">
+                            <i class="fas fa-shield-alt mr-2"></i> <span id="msg-text">Cette action nécessite d'être membre de la communauté.</span>
+                        </p>
+                    </div>
+                    <h1 class="text-4xl font-black text-white leading-tight mb-4 lowercase tracking-tighter">
+                        le lab <br> <span class="text-customOrange uppercase tracking-widest text-2xl">scientifique</span> <br> <a href="../Tech 1/electrotechnique.html" class="hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">⚡ Électrotechnique</a>.
+                    </h1>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Rejoignez la plus grande base de connaissances pour ingénieurs et techniciens au Maroc. Accédez aux ressources exclusives et collaborez avec des experts.
+                    </p>
+                </div>
+                <!-- Mini Bento: Stats -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bento-card p-6 rounded-3xl text-center">
+                        <p class="text-white font-black text-xl">15k+</p>
+                        <p class="text-gray-600 text-[10px] uppercase font-bold tracking-widest mt-1">Membres</p>
+                    </div>
+                    <div class="bento-card p-6 rounded-3xl text-center">
+                        <p class="text-customOrange font-black text-xl">500+</p>
+                        <p class="text-gray-600 text-[10px] uppercase font-bold tracking-widest mt-1">Ressources</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Bento: Form Card (7 cols) -->
+            <div class="md:col-span-7 bento-card p-2 rounded-[3rem] shadow-2xl relative">
+                <div class="bg-gray-950/40 rounded-[2.8rem] p-10 h-full">
+                    
+                    <!-- Tabs -->
+                    <div class="flex gap-8 mb-10 border-b border-gray-900">
+                        <button id="tab-login" onclick="switchForm('login')" class="pb-4 text-xs font-black uppercase tracking-[0.2em] transition-all tab-active cursor-pointer">Connexion</button>
+                        <button id="tab-signup" onclick="switchForm('signup')" class="pb-4 text-xs font-black uppercase tracking-[0.2em] transition-all text-gray-600 hover:text-gray-300 cursor-pointer">Inscription</button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="form-login" class="space-y-6" onsubmit="handleAuth(event, 'login')">
+                        <div class="space-y-4">
+                            <div class="relative group">
+                                <i class="fas fa-envelope absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-customOrange transition-colors"></i>
+                                <input type="email" id="login-email" placeholder="Email professionnel" required 
+                                    class="w-full bg-black border border-gray-900 text-white pl-12 pr-5 py-4 rounded-2xl focus:outline-none focus:border-customOrange transition-all text-sm">
+                            </div>
+                            <div class="relative group">
+                                <i class="fas fa-lock absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-customOrange transition-colors"></i>
+                                <input type="password" id="login-pass" placeholder="Mot de passe" required 
+                                    class="w-full bg-black border border-gray-900 text-white pl-12 pr-5 py-4 rounded-2xl focus:outline-none focus:border-customOrange transition-all text-sm">
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-gray-600">
+                            <label class="flex items-center gap-2 cursor-pointer hover:text-gray-300">
+                                <input type="checkbox" class="accent-customOrange bg-black border-gray-900 rounded"> Se souvenir
+                            </label>
+                            <a href="#" class="hover:text-customOrange">Oublié ?</a>
+                        </div>
+                        <button type="submit" class="w-full bg-customOrange text-black font-black py-4 rounded-2xl hover:bg-white hover:scale-[1.02] transition-all shadow-xl shadow-customOrange/10 uppercase tracking-widest text-xs">
+                            Se connecter <i class="fas fa-chevron-right ml-2 text-[10px]"></i>
+                        </button>
+                    </form>
+
+                    <!-- Signup Form -->
+                    <form id="form-signup" class="space-y-4 hidden" onsubmit="handleAuth(event, 'signup')">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="relative group">
+                                <i class="fas fa-user absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-customOrange transition-colors"></i>
+                                <input type="text" id="signup-name" placeholder="Nom/Pseudo" required 
+                                    class="w-full bg-black border border-gray-900 text-white pl-12 pr-5 py-3.5 rounded-2xl focus:outline-none focus:border-customOrange transition-all text-sm">
+                            </div>
+                            <div class="relative group">
+                                <i class="fas fa-briefcase absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-customOrange transition-colors"></i>
+                                <select id="signup-sector" required 
+                                    class="w-full bg-black border border-gray-900 text-gray-500 pl-12 pr-5 py-3.5 rounded-2xl focus:outline-none focus:border-customOrange transition-all text-sm appearance-none">
+                                    <option value="" disabled selected>Secteur</option>
+                                    <option value="Etudiant">Étudiant</option>
+                                    <option value="Technicien">Technicien</option>
+                                    <option value="Ingenieur">Ingénieur</option>
+                                    <option value="Recruteur">Recruteur</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="relative group">
+                            <i class="fas fa-envelope absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-customOrange transition-colors"></i>
+                            <input type="email" id="signup-email" placeholder="Email professionnel" required 
+                                class="w-full bg-black border border-gray-900 text-white pl-12 pr-5 py-3.5 rounded-2xl focus:outline-none focus:border-customOrange transition-all text-sm">
+                        </div>
+                        <div class="relative group">
+                            <i class="fas fa-lock absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within:text-customOrange transition-colors"></i>
+                            <input type="password" id="signup-pass" placeholder="Mot de passe" required 
+                                class="w-full bg-black border border-gray-900 text-white pl-12 pr-5 py-3.5 rounded-2xl focus:outline-none focus:border-customOrange transition-all text-sm">
+                        </div>
+                        <!-- Puzzle Anti-Spam -->
+                        <div id="signup-captcha-container" class="my-2"></div>
+
+                        <button type="submit" class="w-full bg-customOrange text-black font-black py-4 rounded-2xl hover:bg-white hover:scale-[1.02] transition-all shadow-xl shadow-customOrange/10 uppercase tracking-widest text-xs">
+                            Créer mon compte <i class="fas fa-plus ml-2 text-[10px]"></i>
+                        </button>
+                    </form>
+
+                    <!-- Google Login Divider -->
+                    <div class="relative my-8">
+                        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-900"></div></div>
+                        <div class="relative flex justify-center text-[10px] uppercase font-bold tracking-widest"><span class="bg-gray-950 px-4 text-gray-600">ou avec</span></div>
+                    </div>
+
+                    <button onclick="handleGoogleLogin()" type="button" class="w-full bg-black border border-gray-900 text-white font-bold py-4 rounded-2xl hover:bg-white hover:text-black transition-all flex items-center justify-center gap-3 text-xs group cursor-pointer">
+                        <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" class="w-4 h-4" alt="Google">
+                        Se connecter avec Google
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-8 text-center relative z-10">
+        <p class="text-[10px] text-gray-700 font-bold uppercase tracking-[0.4em]">Designed by ELECTECH Team 2026 - © Tous les droits sont reservés</p>
+    </footer>
+
+    <script>
+        // SESSION_KEY is already defined in api.js
+
+        function switchForm(type) {
+            console.log('Switching form to:', type);
+            const isLogin = type === 'login';
+            
+            const formLogin = document.getElementById('form-login');
+            const formSignup = document.getElementById('form-signup');
+            const tabLogin = document.getElementById('tab-login');
+            const tabSignup = document.getElementById('tab-signup');
+
+            if (formLogin && formSignup) {
+                formLogin.classList.toggle('hidden', !isLogin);
+                formSignup.classList.toggle('hidden', isLogin);
+            }
+            
+            if (tabLogin && tabSignup) {
+                tabLogin.classList.toggle('tab-active', isLogin);
+                tabLogin.classList.toggle('text-gray-600', !isLogin);
+                
+                tabSignup.classList.toggle('tab-active', !isLogin);
+                tabSignup.classList.toggle('text-gray-600', isLogin);
+            }
+        }
+
+        let signupCaptcha;
+
+        async function handleAuth(event, type) {
+            event.preventDefault();
+            const btn = event.submitter || event.target.querySelector('button[type="submit"]');
+            if (!btn) return;
+
+            // Vérification puzzle uniquement pour l'inscription
+            if (type === 'signup') {
+                if (!checkPuzzle(signupCaptcha, btn)) return;
+            }
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+            try {
+                const email = document.getElementById(type === 'login' ? 'login-email' : 'signup-email').value;
+                const password = document.getElementById(type === 'login' ? 'login-pass' : 'signup-pass').value;
+                
+                let data = { email, password };
+                if (type === 'signup') {
+                    data.name = document.getElementById('signup-name').value;
+                    data.role = document.getElementById('signup-sector').value;
+                }
+
+                console.log('Authenticating:', type, email);
+                const endpoint = type === 'login' ? '/login' : '/register';
+                const response = await API.call(endpoint, 'POST', data);
+
+                localStorage.setItem(SESSION_KEY, JSON.stringify(response.user));
+
+                if (response.user.profileComplete) {
+                    const params = new URLSearchParams(window.location.search);
+                    window.location.href = params.get('redirect') || '../index.html';
+                } else {
+                    window.location.href = 'profil.html?reason=first_login';
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+                alert('Erreur: ' + error.message);
+                btn.innerHTML = originalText;
+            }
+        }
+
+        function handleGoogleLogin() {
+            console.log('Google login clicked');
+            alert('Connexion Google stimulée pour la démo. Redirection vers votre profil...');
+            const mockUser = {
+                name: "Utilisateur Google",
+                email: "google.user@example.com",
+                role: "Technicien",
+                profileComplete: false
+            };
+            localStorage.setItem(SESSION_KEY, JSON.stringify(mockUser));
+            window.location.href = 'profil.html?reason=first_login';
+        }
+
+        // Init captcha + URL params
+        document.addEventListener('DOMContentLoaded', () => {
+            signupCaptcha = new PuzzleCaptcha('signup-captcha-container');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Page loaded, checking params');
+
+            // ─── Already Connected? Show Welcome ──────────────────────
+            const existingSession = JSON.parse(localStorage.getItem('electech_session') || 'null');
+            if (existingSession && existingSession.name) {
+                // Hide the form card
+                const formCard = document.querySelector('.md\\:col-span-7');
+                const leftCard = document.querySelector('.md\\:col-span-5');
+                if (formCard) {
+                    formCard.innerHTML = `
+                        <div class="bento-card rounded-[3rem] p-12 h-full flex flex-col items-center justify-center text-center gap-6">
+                            <div class="w-20 h-20 bg-customOrange/10 border-2 border-customOrange rounded-2xl flex items-center justify-center text-4xl shadow-[0_0_30px_rgba(255,140,0,0.2)]">
+                                ⚡
+                            </div>
+                            <div>
+                                <p class="text-xs font-black uppercase tracking-[0.3em] text-customOrange mb-2">Déjà identifié</p>
+                                <h2 class="text-3xl font-black text-white mb-3">Bienvenue, ${existingSession.name} !</h2>
+                                <p class="text-gray-500 text-sm leading-relaxed">Vous êtes déjà connecté sur notre site. Vous êtes le bienvenu !</p>
+                            </div>
+                            <div class="flex flex-col w-full gap-3 mt-4">
+                                <a href="../index.html" class="w-full bg-customOrange text-black font-black py-4 rounded-2xl hover:bg-white transition-all shadow-xl shadow-customOrange/10 uppercase tracking-widest text-xs text-center">
+                                    <i class="fas fa-home mr-2"></i> Retour à l'accueil
+                                </a>
+                                <a href="../emploi/emploi.html" class="w-full bg-gray-900 border border-gray-800 text-white font-bold py-3 rounded-2xl hover:bg-gray-800 transition-all text-xs text-center">
+                                    <i class="fas fa-briefcase mr-2 text-customOrange"></i> Hub Emploi
+                                </a>
+                                <button onclick="localStorage.removeItem('electech_session'); window.location.reload();" 
+                                    class="w-full text-gray-600 hover:text-red-400 text-xs font-bold uppercase tracking-widest py-2 transition-colors">
+                                    <i class="fas fa-sign-out-alt mr-1"></i> Me déconnecter
+                                </button>
+                            </div>
+                        </div>`;
+                }
+                // Toast notification
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-6 right-6 bg-customOrange text-black font-bold text-sm px-6 py-3 rounded-full shadow-xl z-50';
+                toast.innerHTML = `<i class="fas fa-check-circle mr-2"></i>Vous êtes déjà identifié, ${existingSession.name} !`;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 4000);
+                return; // stop further init
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('msg')) {
+                const msgEl = document.getElementById('redirect-msg');
+                if (msgEl) msgEl.classList.remove('hidden');
+            }
+            if (params.get('tab') === 'signup') {
+                switchForm('signup');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

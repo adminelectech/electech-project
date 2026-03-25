@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postuler - ELEC TECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { customOrange: '#FF8C00' }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <script src="../javascript/antispam.js"></script>
+    <style>
+        .input-f { width:100%; background:#111; border:1px solid #374151; color:#fff; border-radius:0.75rem; padding:0.75rem 1rem; outline:none; transition:border-color .3s,box-shadow .3s; font-size:.9rem; }
+        .input-f:focus { border-color:#FF8C00; box-shadow:0 0 0 3px rgba(255,140,0,.15); }
+        .input-f::placeholder { color:#4B5563; }
+        .bento-card { background: #0a0a0a; border: 1px solid #1f2937; position: relative; overflow: hidden; }
+        .bento-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, transparent 100%); pointer-events: none; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in { animation: fadeIn .4s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+<header class="p-6 border-b border-gray-800 bg-black/80 sticky top-0 z-50 backdrop-blur-md">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo & Slogan Block -->
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="../index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                    <div class="mt-1.5 py-0.5 px-2 bg-customOrange/10 border border-customOrange/20 rounded-md">
+                        <p class="text-[7px] font-black uppercase tracking-[0.3em] text-customOrange whitespace-nowrap">
+                            La Tech pour tout le monde
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <!-- HLEGA -->
+                    <li class="relative group z-50">
+                        <a href="../Hlega/Hlega.html" class="text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-customOrange pb-1">
+                            🎮 Hlega <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Hlega/Hlega.html#qcm" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-question-circle w-5 text-gray-500"></i> QCMs Éclair</a></li>
+                                <li><a href="../Hlega/Hlega.html#jeux" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-gamepad w-5 text-gray-500"></i> Jeux Interactifs</a></li>
+                                <li><a href="../Hlega/Hlega.html#defis" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-trophy w-5 text-gray-500"></i> Défis & Amis</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- TECHNIQUE -->
+                    <li class="relative group z-40">
+                        <a href="../Technique/Technique.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            ⚙️ Technique <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-64 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li class="px-5 py-2 pt-3 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1">Notions de base</li>
+                                <li><a href="../Tech 1/electrotechnique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-bolt w-5 text-gray-500"></i> Électrotechnique</a></li>
+                                <li><a href="../Tech 1/electronique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microchip w-5 text-gray-500"></i> Électronique</a></li>
+                                <li><a href="../Tech 1/energies.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-leaf w-5 text-gray-500"></i> Énergies</a></li>
+                                <li><a href="../Tech 1/schemas.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-project-diagram w-5 text-gray-500"></i> Schémas</a></li>
+                                
+                                <li class="px-5 py-2 pt-4 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1 mt-2">Spécialisations</li>
+                                <li><a href="../Technique/Technique.html#electricite" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-network-wired w-5 text-gray-500"></i> Électricité</a></li>
+                                <li><a href="../Technique/Technique.html#software" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-code w-5 text-gray-500"></i> Software</a></li>
+                                <li><a href="../Technique/Technique.html#aeronautique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-plane w-5 text-gray-500"></i> Aéronautique</a></li>
+                                <li><a href="../Technique/Technique.html#mecanique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-cogs w-5 text-gray-500"></i> Génie Mécanique</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- DIPLOMES -->
+                    <li class="relative group z-35">
+                        <a href="../Diplomes/diplomes.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            🎓 Diplômes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Diplomes/diplomes.html#bts" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> BTS</a></li>
+                                <li><a href="../Diplomes/diplomes.html#dut" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> DUT</a></li>
+                                <li><a href="../Diplomes/diplomes.html#licence" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-award w-5 text-gray-500"></i> Licence</a></li>
+                                <li><a href="../Diplomes/diplomes.html#master" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-graduate w-5 text-gray-500"></i> Master</a></li>
+                                <li><a href="../Diplomes/diplomes.html#doctorat" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microscope w-5 text-gray-500"></i> Doctorat</a></li>
+                                <li><a href="../Diplomes/diplomes.html#mba" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-certificate w-5 text-gray-500"></i> MBA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <!-- COMMUNITY -->
+                    <li class="relative group z-30">
+                        <a href="../assets/community/clic.electech.html" class="hover:text-yellow-400 text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-yellow-400 pb-1">
+                            👥 Community <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../assets/community/clic.electech.html" class="block px-5 py-2.5 hover:bg-black hover:text-yellow-400 transition-colors"><i class="fas fa-bolt w-5 text-yellow-400"></i> Clic Electech</a></li>
+                                <li><a href="../utilisateur/forum.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-comments w-5 text-gray-500"></i> Forum</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <li><a href="../Tech 1/bibliotheque.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">📚 Livres</a></li>
+                    
+                    <!-- EMPLOI -->
+                    <li class="relative group z-30">
+                        <a href="../emploi/emploi.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            💼 Emploi <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../emploi/offres.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-briefcase w-5 text-gray-500"></i> Offres d'Emploi</a></li>
+                                <li><a href="../emploi/demandes.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-tie w-5 text-gray-500"></i> Demandes d'Emploi</a></li>
+                                <li><a href="../emploi/postale.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-envelope-open-text w-5 text-gray-500"></i> Boîte Postale</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+ 
+                <!-- Dynamic Auth Zone -->
+                <div id="auth-navbar" class="flex items-center gap-3 border-l border-gray-800 pl-8">
+                    <!-- Guest -->
+                    <div id="guest-zone" class="hidden items-center gap-5">
+                        <a href="../utilisateur/login.html?tab=signup" class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors">S'inscrire</a>
+                        <a href="../utilisateur/login.html?tab=login" class="bg-customOrange text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.1em] hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">Connexion</a>
+                    </div>
+                    <!-- Member -->
+                    <div id="member-zone" class="hidden items-center gap-4 bg-gray-950 border border-gray-900 px-4 py-2 rounded-2xl">
+                        <div class="flex items-center gap-3 group cursor-pointer">
+                            <div class="w-8 h-8 bg-customOrange/10 rounded-lg flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-user-circle text-base"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span id="nav-user-name" class="text-[11px] font-black text-white leading-none"></span>
+                                <a href="../utilisateur/profil.html" class="text-[9px] text-gray-600 font-bold uppercase tracking-tighter hover:text-customOrange transition-colors mt-1">Mon Profil</a>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" class="text-gray-700 hover:text-red-500 transition-colors ml-2 pt-1" title="Déconnexion">
+                            <i class="fas fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+    </div>
+</header>
+
+<main class="flex-grow container mx-auto px-4 py-12 max-w-4xl opacity-0 fade-in">
+    <div class="mb-8">
+        <a href="offres.html" class="text-customOrange text-sm hover:underline font-bold tracking-wider uppercase"><i class="fas fa-arrow-left mr-2"></i>Retour aux Offres</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Summary of the Job -->
+        <div class="md:col-span-1 space-y-6">
+            <div id="job-details-loading" class="bento-card p-8 rounded-3xl text-center animate-pulse">
+                <div class="w-16 h-16 bg-gray-800 rounded-2xl mx-auto mb-4"></div>
+                <div class="h-4 bg-gray-800 rounded w-3/4 mx-auto mb-2"></div>
+                <div class="h-3 bg-gray-800 rounded w-1/2 mx-auto"></div>
+            </div>
+
+            <div id="job-details" class="bento-card p-8 rounded-3xl relative overflow-hidden hidden">
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full"></div>
+                <div class="w-16 h-16 bg-blue-600/10 border border-blue-500/30 rounded-2xl flex items-center justify-center text-blue-500 text-2xl mb-6 shadow-xl shadow-blue-500/10">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h1 id="view-poste" class="text-xl font-black text-white mb-2 leading-tight">Poste introuvable</h1>
+                <p id="view-entreprise" class="text-customOrange font-bold text-xs uppercase tracking-widest mb-6"></p>
+                
+                <div class="space-y-4 border-t border-gray-800 pt-6">
+                    <div>
+                        <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Localisation</div>
+                        <div id="view-ville" class="text-white text-sm font-medium"><i class="fas fa-map-marker-alt text-gray-500 mr-2"></i>---</div>
+                    </div>
+                    <div>
+                        <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Type de Contrat</div>
+                        <div id="view-contrat" class="text-white text-sm font-medium"><i class="fas fa-file-signature text-gray-500 mr-2"></i>---</div>
+                    </div>
+                    <div>
+                        <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Employeur</div>
+                        <div id="view-author" class="text-white text-sm font-medium"><i class="fas fa-user-tie text-gray-500 mr-2"></i>---</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bento-card p-6 rounded-3xl border-l-4 border-l-blue-500 bg-blue-900/5">
+                <h3 class="text-white font-bold text-sm mb-2"><i class="fas fa-info-circle text-blue-500 mr-2"></i>Dossier Vérifié</h3>
+                <p class="text-[11px] text-gray-500 leading-relaxed italic">
+                    Votre candidature sera envoyée directement au recruteur ou à la plateforme pour évaluation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Application Form -->
+        <div class="md:col-span-2">
+            <div class="bento-card p-8 md:p-10 rounded-3xl">
+                <h2 class="text-2xl font-black text-white mb-2 flex items-center">
+                    <i class="fas fa-paper-plane text-blue-500 mr-3"></i> Postuler à cette offre
+                </h2>
+                <p class="text-gray-500 text-sm mb-8">Envoyez votre profil en quelques secondes. Assurez-vous que vos informations de contact sont correctes.</p>
+
+                <form id="postulerForm" class="space-y-6">
+                    <input type="hidden" id="offerId">
+                    <input type="hidden" id="offerTitle">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Nom et Prénom</label>
+                            <input type="text" id="cand-nom" placeholder="Ex: Ali Amrani" required class="input-f">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Email de contact</label>
+                            <input type="email" id="cand-email" placeholder="ali.amrani@email.com" required class="input-f">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Téléphone</label>
+                        <input type="tel" id="cand-tel" placeholder="06 12 34 56 78" required class="input-f" pattern="[0-9\s\-\+\.()]+">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Message pour le recruteur</label>
+                        <textarea id="cand-message" rows="4" class="input-f resize-none" placeholder="Décrivez rapidement pourquoi vous êtes le candidat idéal..."></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="relative group">
+                            <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Curriculum Vitae (PDF)</label>
+                            <div class="border-2 border-dashed border-gray-800 rounded-xl p-6 text-center group-hover:border-blue-500/50 transition-colors cursor-pointer bg-black/50">
+                                <input type="file" id="cand-cv" accept=".pdf" class="hidden" onchange="document.getElementById('label-cand-cv').innerHTML = '<i class=\\\'fas fa-check-circle text-blue-500 mb-2 text-2xl block\\\'></i> <span class=\\\'text-white font-bold\\\'>CV Prêt</span><br><span class=\\\'text-[9px]\\\'>' + this.files[0].name + '</span>'" required>
+                                <label for="cand-cv" id="label-cand-cv" class="cursor-pointer text-xs text-gray-500 group-hover:text-blue-400 block h-full flex flex-col items-center justify-center">
+                                    <i class="fas fa-file-pdf mb-2 text-2xl block"></i> Télécharger CV
+                                </label>
+                            </div>
+                        </div>
+                        <div class="relative group">
+                            <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Lettre de Motivation</label>
+                            <div class="border-2 border-dashed border-gray-800 rounded-xl p-6 text-center group-hover:border-blue-500/50 transition-colors cursor-pointer bg-black/50">
+                                <input type="file" id="cand-lm" accept=".pdf,.doc,.docx" class="hidden" onchange="document.getElementById('label-cand-lm').innerHTML = '<i class=\\\'fas fa-check-circle text-blue-500 mb-2 text-2xl block\\\'></i> <span class=\\\'text-white font-bold\\\'>Lettre Prête</span><br><span class=\\\'text-[9px]\\\'>' + this.files[0].name + '</span>'">
+                                <label for="cand-lm" id="label-cand-lm" class="cursor-pointer text-xs text-gray-500 group-hover:text-blue-400 block h-full flex flex-col items-center justify-center">
+                                    <i class="fas fa-file-alt mb-2 text-2xl block"></i> Optionnelle
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Puzzle Anti-Spam -->
+                    <div id="postuler-captcha-container" class="mt-2"></div>
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-4 rounded-xl transition-all uppercase tracking-widest text-xs shadow-xl shadow-blue-900/40 group mt-8">
+                        Envoyer ma candidature <i class="fas fa-paper-plane ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </button>
+
+                    <div id="success-banner" class="hidden mt-6 p-6 bg-blue-500/10 border border-blue-500/30 rounded-2xl text-center fade-in">
+                        <i class="fas fa-check-circle text-blue-500 text-4xl mb-3"></i>
+                        <h4 class="text-blue-400 font-black text-lg">Candidature envoyée !</h4>
+                        <p class="text-xs text-gray-400 mt-2 font-medium">Votre dossier a été transmis avec succès. Le recruteur vous contactera si votre profil correspond au poste.</p>
+                        <a href="offres.html" class="inline-block mt-4 text-[10px] uppercase font-bold text-gray-500 hover:text-white border-b border-gray-700 pb-1 transition-colors">Retour aux offres</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    let postulerCaptcha;
+
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            if (!file) { resolve(null); return; }
+            if (file.size > 2 * 1024 * 1024) { alert("Fichier trop lourd (Max 2Mo)"); resolve(null); return; }
+            const reader = new FileReader();
+            reader.onload = () => resolve({ name: file.name, data: reader.result, type: file.type });
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        postulerCaptcha = new PuzzleCaptcha('postuler-captcha-container');
+
+        // Préremplissage si l'utilisateur est connecté
+        const session = JSON.parse(localStorage.getItem('electech_session'));
+        if(session && session.name) {
+            document.getElementById('cand-nom').value = session.name;
+            document.getElementById('cand-email').value = session.email || '';
+        }
+
+        // Récupérer l'offre via l'URL
+        const params = new URLSearchParams(window.location.search);
+        const offerId = params.get('id');
+        
+        const annonces = JSON.parse(localStorage.getItem('electech_annonces') || '[]');
+        const offer = annonces.find(a => a.id === offerId);
+
+        document.getElementById('job-details-loading').classList.add('hidden');
+        
+        if (offer) {
+            document.getElementById('job-details').classList.remove('hidden');
+            document.getElementById('offerId').value = offer.id;
+            document.getElementById('offerTitle').value = offer.poste;
+            
+            document.getElementById('view-poste').textContent = offer.poste;
+            document.getElementById('view-entreprise').textContent = offer.entreprise || 'Entreprise Confidentielle';
+            document.getElementById('view-ville').innerHTML = `<i class="fas fa-map-marker-alt text-gray-500 mr-2"></i> ${offer.ville || 'Non spécifié'}`;
+            document.getElementById('view-contrat').innerHTML = `<i class="fas fa-file-signature text-gray-500 mr-2"></i> ${offer.contrat || 'Non spécifié'}`;
+            document.getElementById('view-author').innerHTML = `<i class="fas fa-user-tie text-gray-500 mr-2"></i> ${offer.author || 'Inconnu'}`;
+        } else {
+            // Affichage fallback si l'offre n'existe pas (ex: accès direct à postuler.html)
+            document.getElementById('job-details').classList.remove('hidden');
+            document.getElementById('view-poste').textContent = "Candidature Spontanée";
+            document.getElementById('view-entreprise').textContent = "Electech Hub";
+            document.getElementById('view-ville').innerHTML = `<i class="fas fa-info-circle text-gray-500 mr-2"></i> Toutes villes`;
+            document.getElementById('view-contrat').innerHTML = `<i class="fas fa-info-circle text-gray-500 mr-2"></i> Non défini`;
+        }
+
+        document.getElementById('postulerForm').onsubmit = async (e) => {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            if (!checkPuzzle(postulerCaptcha, btn)) return;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin text-xl"></i>';
+            btn.disabled = true;
+
+            const cvFile = document.getElementById('cand-cv').files[0];
+            const lmFile = document.getElementById('cand-lm').files[0];
+
+            const cvData = await readFileAsBase64(cvFile);
+            const lmData = await readFileAsBase64(lmFile);
+
+            const candidature = {
+                id: 'CAND-' + Date.now(),
+                date: new Date().toISOString(),
+                offreId: document.getElementById('offerId').value || 'SPONTANEE',
+                poste: document.getElementById('offerTitle').value || 'Spontanée',
+                candidat: {
+                    nom: document.getElementById('cand-nom').value,
+                    email: document.getElementById('cand-email').value,
+                    tel: document.getElementById('cand-tel').value,
+                    message: document.getElementById('cand-message').value
+                },
+                cv: cvData,
+                lm: lmData,
+                status: 'En cours',   // Apparaîtra "En cours" dans la console Admin
+                recruteurNotifie: false
+            };
+
+            const candidatures = JSON.parse(localStorage.getItem('electech_candidatures') || '[]');
+            candidatures.unshift(candidature);
+            localStorage.setItem('electech_candidatures', JSON.stringify(candidatures));
+
+            // Afficher succès
+            btn.classList.add('hidden');
+            document.getElementById('success-banner').classList.remove('hidden');
+        };
+    });
+</script>
+
+
+    <script src="../js/search_index.js"></script>
+    <script src="../js/search_logic.js"></script>
+    <script src="../js/scroll_to_search.js"></script>
+</body>
+</html>

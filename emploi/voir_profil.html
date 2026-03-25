@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Candidat - ELEC TECH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { customOrange: '#FF8C00' }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <script src="../javascript/antispam.js"></script>
+    <style>
+        .bento-card { background: #0a0a0a; border: 1px solid #1f2937; position: relative; overflow: hidden; }
+        .bento-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, transparent 100%); pointer-events: none; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in { animation: fadeIn .4s ease-out forwards; }
+        .msg-body { white-space: pre-wrap; word-break: break-all; overflow-wrap: break-word; }
+        .modal-overlay { background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }
+    </style>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+<header class="p-6 border-b border-gray-800 bg-black/80 sticky top-0 z-50 backdrop-blur-md">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="../index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <li><a href="../index.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors">Accueil</a></li>
+                    <li><a href="offres.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors">Offres</a></li>
+                    <li><a href="demandes.html" class="text-customOrange font-bold transition-colors">Candidats</a></li>
+                </ul>
+            </nav>
+    </div>
+</header>
+
+<main class="flex-grow container mx-auto px-4 py-12 max-w-4xl opacity-0 fade-in">
+    <div class="mb-8">
+        <a href="demandes.html" class="text-customOrange text-sm hover:underline font-bold tracking-wider uppercase"><i class="fas fa-arrow-left mr-2"></i>Retour aux Demandes</a>
+    </div>
+
+    <div id="loading" class="text-center py-20">
+        <i class="fas fa-circle-notch fa-spin text-4xl text-customOrange"></i>
+    </div>
+
+    <div id="content" class="hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Sidebar Stats -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bento-card p-8 rounded-3xl relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 blur-3xl rounded-full"></div>
+                    <div class="w-16 h-16 bg-green-600/10 border border-green-500/30 rounded-2xl flex items-center justify-center text-green-500 text-2xl mb-6">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h1 id="view-name" class="text-2xl font-black text-white mb-2 leading-tight">Candidat</h1>
+                    <p id="view-poste" class="text-green-500 font-bold text-xs uppercase tracking-widest mb-6"></p>
+                    
+                    <div class="space-y-4 border-t border-gray-800 pt-6">
+                        <div>
+                            <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Disponibilité</div>
+                            <div id="view-dispo" class="text-white text-sm font-medium">---</div>
+                        </div>
+                        <div>
+                            <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Localisation</div>
+                            <div id="view-ville" class="text-white text-sm font-medium">---</div>
+                        </div>
+                        <div>
+                            <div class="text-[9px] text-gray-600 font-bold uppercase tracking-widest mb-1">Date d'annonce</div>
+                            <div id="view-date" class="text-white text-sm font-medium">---</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="openContactModal()" class="block w-full bg-green-600 hover:bg-green-500 text-white text-center font-black py-4 rounded-2xl transition-all uppercase tracking-widest text-xs shadow-xl shadow-green-600/20">
+                    Contacter le candidat <i class="fas fa-envelope ml-2"></i>
+                </button>
+
+                <div id="docs-zone" class="space-y-3 hidden">
+                    <p class="text-[10px] text-gray-600 font-black uppercase tracking-widest px-2">Documents</p>
+                    <div id="cv-btn-container"></div>
+                    <div id="lm-btn-container"></div>
+                </div>
+            </div>
+
+            <!-- Main Description -->
+            <div class="md:col-span-2 space-y-8">
+                <div class="bento-card p-8 md:p-10 rounded-3xl">
+                    <h2 class="text-xl font-black text-white mb-6 flex items-center">
+                        <i class="fas fa-info-circle text-green-500 mr-3"></i> Présentation & Motivation
+                    </h2>
+                    <div id="view-desc" class="text-gray-400 leading-relaxed msg-body text-sm">
+                        <!-- Content here -->
+                    </div>
+                </div>
+
+                <div class="bento-card p-8 rounded-3xl bg-green-900/5">
+                    <h3 class="text-white font-bold text-sm mb-4">Informations supplémentaires</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed italic">
+                        Ce candidat a été vérifié par le système. Vous pouvez le contacter directement via le formulaire pour discuter d'une opportunité.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="modal-overlay absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeContactModal()"></div>
+    <div class="bg-gray-900 border border-gray-800 rounded-3xl p-8 max-w-lg w-full relative z-10 shadow-2xl fade-in">
+        <button onclick="closeContactModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+        <h3 class="text-2xl font-black text-white mb-2 flex items-center gap-3">
+            <i class="fas fa-paper-plane text-customOrange"></i> Contacter <span id="modal-name" class="text-xs uppercase bg-customOrange/10 text-customOrange px-3 py-1 rounded-full border border-customOrange/20 font-black">Candidat</span>
+        </h3>
+        <p id="modalRecipient" class="text-gray-500 text-xs mb-8 font-mono border-b border-gray-800 pb-4">Destinataire: ...</p>
+        
+        <form id="contactForm" onsubmit="sendContactMessage(event)" class="space-y-4">
+            <input type="hidden" id="contactTargetEmail">
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5"><i class="fas fa-envelope text-customOrange mr-1"></i>Votre Email</label>
+                        <input type="email" id="contactSenderEmail" placeholder="vous@email.com" required
+                            class="w-full bg-black border border-gray-800 rounded-lg px-3 py-2 text-xs text-white focus:border-customOrange transition-all outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5"><i class="fas fa-phone text-customOrange mr-1"></i>Téléphone</label>
+                        <input type="tel" id="contactSenderTel" placeholder="06 XX XX XX XX"
+                            class="w-full bg-black border border-gray-800 rounded-lg px-3 py-2 text-xs text-white focus:border-customOrange transition-all outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Votre Message</label>
+                    <textarea id="contactMessage" rows="4" class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-sm text-white focus:border-customOrange transition-all outline-none resize-none" required></textarea>
+                </div>
+                <div id="captcha-container"></div>
+                <div id="contactSuccess" class="hidden text-center py-3 bg-green-900/30 border border-green-700 rounded-xl">
+                    <i class="fas fa-check-circle text-green-400 text-xl mb-1"></i>
+                    <p class="text-green-400 text-xs font-bold">Message envoyé avec succès !</p>
+                </div>
+                <button type="submit" id="contactSubmit" class="w-full bg-customOrange hover:bg-orange-600 text-black font-extrabold py-3 rounded-lg transition-all shadow-lg hover:shadow-customOrange/20">
+                    <i class="fas fa-paper-plane mr-2"></i> Envoyer le message
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let captcha;
+    let currentAnnonce = null;
+
+    function downloadFile(base64Data, fileName) {
+        const link = document.createElement('a');
+        link.href = base64Data;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function openContactModal() {
+        if(!currentAnnonce) return;
+        document.getElementById('modalRecipient').textContent = `Destinataire : ${currentAnnonce.author}`;
+        document.getElementById('contactTargetEmail').value = currentAnnonce.email;
+        document.getElementById('contactModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        if(!captcha) captcha = new PuzzleCaptcha('captcha-container');
+    }
+
+    function closeContactModal() {
+        document.getElementById('contactModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    function sendContactMessage(e) {
+        e.preventDefault();
+        const btn = document.getElementById('contactSubmit');
+        if (!checkPuzzle(captcha, btn)) return;
+
+        const message = {
+            from: document.getElementById('contactSenderEmail').value.trim(),
+            tel: document.getElementById('contactSenderTel').value.trim() || 'Non renseigné',
+            to: document.getElementById('contactTargetEmail').value,
+            content: document.getElementById('contactMessage').value,
+            date: new Date().toLocaleDateString('fr-FR'),
+            time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+        };
+
+        const messages = JSON.parse(localStorage.getItem('electech_messages') || '[]');
+        messages.push(message);
+        localStorage.setItem('electech_messages', JSON.stringify(messages));
+
+        document.getElementById('contactSubmit').classList.add('hidden');
+        document.getElementById('contactSuccess').classList.remove('hidden');
+        setTimeout(closeContactModal, 2200);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const profileId = params.get('id');
+        
+        const annonces = JSON.parse(localStorage.getItem('electech_annonces') || '[]');
+        currentAnnonce = annonces.find(a => a.id === profileId);
+
+        document.getElementById('loading').classList.add('hidden');
+        
+        if (currentAnnonce) {
+            document.getElementById('content').classList.remove('hidden');
+            document.getElementById('view-name').textContent = currentAnnonce.author || 'Anonyme';
+            document.getElementById('view-poste').textContent = currentAnnonce.poste || 'Candidature';
+            document.getElementById('view-dispo').textContent = currentAnnonce.dispo || 'Immédiate';
+            document.getElementById('view-ville').textContent = currentAnnonce.ville || 'Non spécifiée';
+            document.getElementById('view-date').textContent = currentAnnonce.date || 'Récemment';
+            document.getElementById('view-desc').textContent = currentAnnonce.desc || 'Ce candidat n\'a pas ajouté de description supplémentaire.';
+            
+            if(currentAnnonce.cv || currentAnnonce.lm) {
+                document.getElementById('docs-zone').classList.remove('hidden');
+                if(currentAnnonce.cv) {
+                    document.getElementById('cv-btn-container').innerHTML = `
+                        <button onclick="downloadFile('${currentAnnonce.cv.data}', '${currentAnnonce.cv.name}')" class="w-full flex items-center justify-between bg-black border border-gray-800 p-3 rounded-xl hover:border-green-500 transition-all group">
+                            <span class="text-[10px] font-bold text-gray-400 group-hover:text-green-500 flex items-center"><i class="fas fa-file-pdf mr-2"></i> Curriculum Vitae</span>
+                            <i class="fas fa-download text-xs text-gray-700"></i>
+                        </button>`;
+                }
+                if(currentAnnonce.lm) {
+                    document.getElementById('lm-btn-container').innerHTML = `
+                        <button onclick="downloadFile('${currentAnnonce.lm.data}', '${currentAnnonce.lm.name}')" class="w-full flex items-center justify-between bg-black border border-gray-800 p-3 rounded-xl hover:border-green-500 transition-all group">
+                            <span class="text-[10px] font-bold text-gray-400 group-hover:text-green-500 flex items-center"><i class="fas fa-file-alt mr-2"></i> Lettre de Motivation</span>
+                            <i class="fas fa-download text-xs text-gray-700"></i>
+                        </button>`;
+                }
+            }
+        } else {
+            alert("Profil introuvable.");
+            window.location.href = "demandes.html";
+        }
+    });
+</script>
+</body>
+</html>

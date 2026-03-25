@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Communautaire - ELECTECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customOrange: '#FF8C00',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <!-- Header -->
+    <header class="p-6 border-b border-gray-800">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo & Slogan Block -->
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="../index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                    <div class="mt-1.5 py-0.5 px-2 bg-customOrange/10 border border-customOrange/20 rounded-md">
+                        <p class="text-[7px] font-black uppercase tracking-[0.3em] text-customOrange whitespace-nowrap">
+                            La Tech pour tout le monde
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <!-- HLEGA -->
+                    <li class="relative group z-50">
+                        <a href="../Hlega/Hlega.html" class="text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-customOrange pb-1">
+                            🎮 Hlega <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Hlega/Hlega.html#qcm" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-question-circle w-5 text-gray-500"></i> QCMs Éclair</a></li>
+                                <li><a href="../Hlega/Hlega.html#jeux" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-gamepad w-5 text-gray-500"></i> Jeux Interactifs</a></li>
+                                <li><a href="../Hlega/Hlega.html#defis" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-trophy w-5 text-gray-500"></i> Défis & Amis</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- TECHNIQUE -->
+                    <li class="relative group z-40">
+                        <a href="../Technique/Technique.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            ⚙️ Technique <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-64 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li class="px-5 py-2 pt-3 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1">Notions de base</li>
+                                <li><a href="../Tech 1/electrotechnique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-bolt w-5 text-gray-500"></i> Électrotechnique</a></li>
+                                <li><a href="../Tech 1/electronique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microchip w-5 text-gray-500"></i> Électronique</a></li>
+                                <li><a href="../Tech 1/energies.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-leaf w-5 text-gray-500"></i> Énergies</a></li>
+                                <li><a href="../Tech 1/schemas.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-project-diagram w-5 text-gray-500"></i> Schémas</a></li>
+                                
+                                <li class="px-5 py-2 pt-4 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1 mt-2">Spécialisations</li>
+                                <li><a href="../Technique/Technique.html#electricite" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-network-wired w-5 text-gray-500"></i> Électricité</a></li>
+                                <li><a href="../Technique/Technique.html#software" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-code w-5 text-gray-500"></i> Software</a></li>
+                                <li><a href="../Technique/Technique.html#aeronautique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-plane w-5 text-gray-500"></i> Aéronautique</a></li>
+                                <li><a href="../Technique/Technique.html#mecanique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-cogs w-5 text-gray-500"></i> Génie Mécanique</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- DIPLOMES -->
+                    <li class="relative group z-35">
+                        <a href="../Diplomes/diplomes.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            🎓 Diplômes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Diplomes/diplomes.html#bts" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> BTS</a></li>
+                                <li><a href="../Diplomes/diplomes.html#dut" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> DUT</a></li>
+                                <li><a href="../Diplomes/diplomes.html#licence" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-award w-5 text-gray-500"></i> Licence</a></li>
+                                <li><a href="../Diplomes/diplomes.html#master" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-graduate w-5 text-gray-500"></i> Master</a></li>
+                                <li><a href="../Diplomes/diplomes.html#doctorat" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microscope w-5 text-gray-500"></i> Doctorat</a></li>
+                                <li><a href="../Diplomes/diplomes.html#mba" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-certificate w-5 text-gray-500"></i> MBA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <!-- COMMUNITY -->
+                    <li class="relative group z-30">
+                        <a href="../assets/community/clic.electech.html" class="hover:text-yellow-400 text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-yellow-400 pb-1">
+                            👥 Community <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../assets/community/clic.electech.html" class="block px-5 py-2.5 hover:bg-black hover:text-yellow-400 transition-colors"><i class="fas fa-bolt w-5 text-yellow-400"></i> Clic Electech</a></li>
+                                <li><a href="../utilisateur/forum.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-comments w-5 text-gray-500"></i> Forum</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <li><a href="../Tech 1/bibliotheque.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">📚 Livres</a></li>
+                    
+                    <!-- EMPLOI -->
+                    <li class="relative group z-30">
+                        <a href="../emploi/emploi.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            💼 Emploi <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../emploi/offres.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-briefcase w-5 text-gray-500"></i> Offres d'Emploi</a></li>
+                                <li><a href="../emploi/demandes.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-tie w-5 text-gray-500"></i> Demandes d'Emploi</a></li>
+                                <li><a href="../emploi/postale.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-envelope-open-text w-5 text-gray-500"></i> Boîte Postale</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+ 
+                <!-- Dynamic Auth Zone -->
+                <div id="auth-navbar" class="flex items-center gap-3 border-l border-gray-800 pl-8">
+                    <!-- Guest -->
+                    <div id="guest-zone" class="hidden items-center gap-5">
+                        <a href="../utilisateur/login.html?tab=signup" class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors">S'inscrire</a>
+                        <a href="../utilisateur/login.html?tab=login" class="bg-customOrange text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.1em] hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">Connexion</a>
+                    </div>
+                    <!-- Member -->
+                    <div id="member-zone" class="hidden items-center gap-4 bg-gray-950 border border-gray-900 px-4 py-2 rounded-2xl">
+                        <div class="flex items-center gap-3 group cursor-pointer">
+                            <div class="w-8 h-8 bg-customOrange/10 rounded-lg flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-user-circle text-base"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span id="nav-user-name" class="text-[11px] font-black text-white leading-none"></span>
+                                <a href="../utilisateur/profil.html" class="text-[9px] text-gray-600 font-bold uppercase tracking-tighter hover:text-customOrange transition-colors mt-1">Mon Profil</a>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" class="text-gray-700 hover:text-red-500 transition-colors ml-2 pt-1" title="Déconnexion">
+                            <i class="fas fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-20 max-w-6xl">
+        <div id="forum-list-view">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white uppercase tracking-tight mb-4">
+                    C'est le moment pour <span class="text-customOrange">poser des questions</span>
+                </h1>
+                <p class="text-gray-500 text-lg">Rejoignez-nous dès maintenant et échangez avec des experts du monde entier.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 bg-gray-950/30 p-8 rounded-3xl border border-gray-900 border-dashed">
+                <div>
+                    <h2 class="text-white text-2xl font-bold flex items-center gap-3 tracking-tighter">
+                        <i class="fas fa-list-ul text-customOrange text-sm"></i> Questions Récentes
+                    </h2>
+                    <p class="text-gray-500 text-xs mt-1">Dernières discussions de la communauté ELECTECH.</p>
+                </div>
+                <button onclick="openModal()" class="bg-customOrange text-black font-extrabold py-4 px-8 rounded-2xl hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/20 flex items-center gap-3">
+                    Poser une Question ✍️
+                </button>
+            </div>
+
+            <!-- Login Banner (Visible only if not logged in) -->
+            <div id="login-banner" class="mb-8 bg-customOrange/10 border border-customOrange/20 p-6 rounded-2xl flex items-center justify-between group hover:border-customOrange/40 transition-all">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-customOrange/20 rounded-xl flex items-center justify-center text-customOrange shadow-lg shadow-customOrange/5">
+                        <i class="fas fa-lock text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-sm tracking-tight">Connectez-vous pour participer à la discussion</h4>
+                        <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest mt-0.5">Accès restreint aux experts authentifiés</p>
+                    </div>
+                </div>
+                <a href="login.html?redirect=forum.html&msg=restricted" class="bg-customOrange text-black px-6 py-2.5 rounded-xl font-black text-xs hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">S'identifier</a>
+            </div>
+
+            <!-- Forum List -->
+            <div id="questions-container" class="space-y-6">
+                <!-- Dynamic Content -->
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination-container" class="mt-12 flex justify-center gap-3">
+                 <!-- Dynamic Pagination -->
+            </div>
+        </div>
+
+        <!-- Detailed Question View (Hidden by default) -->
+        <div id="question-detail-view" class="hidden">
+            <button onclick="hideQuestionDetail()" class="mb-8 text-customOrange hover:text-white transition-colors flex items-center gap-2 font-bold uppercase tracking-widest text-xs">
+                <i class="fas fa-arrow-left"></i> Retour à la liste
+            </button>
+            
+            <div id="detail-content">
+                <!-- Dynamic Content -->
+            </div>
+
+            <!-- Responses Section -->
+            <div class="mt-16">
+                <h3 class="text-white text-2xl font-bold mb-8 flex items-center gap-3">
+                    <i class="fas fa-comments text-customOrange"></i> Réponses de la communauté
+                </h3>
+                <div id="responses-container" class="space-y-6 mb-12">
+                    <!-- Dynamic Responses -->
+                </div>
+
+                <!-- Add Response Form -->
+                <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-3xl">
+                    <h4 class="text-white font-bold mb-4">Ajouter votre réponse d'expert</h4>
+                    <textarea id="new-response-content" placeholder="Partagez votre expertise ici..." class="w-full bg-black border border-gray-800 text-white p-6 rounded-2xl focus:outline-none focus:border-customOrange transition-all mb-4 min-h-[150px]"></textarea>
+                    <button onclick="submitResponse()" class="bg-customOrange text-black font-extrabold py-3 px-8 rounded-xl hover:bg-white transition-all shadow-lg shadow-customOrange/10">
+                        Répondre
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for New Question -->
+    <div id="question-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="bg-gray-950 border border-gray-800 p-8 rounded-3xl w-full max-w-2xl relative z-10 shadow-2xl m-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-white text-2xl font-bold">Poser une Question</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-white transition-colors"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Titre de votre problème technique</label>
+                    <input type="text" id="modal-title" placeholder="Ex: Problème de couplage moteur..." class="w-full bg-black border border-gray-800 text-white px-5 py-4 rounded-xl focus:outline-none focus:border-customOrange transition-all">
+                </div>
+                <div>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Catégorie</label>
+                    <select id="modal-category" onchange="toggleCustomCategory(this.value)" class="w-full bg-black border border-gray-800 text-white px-5 py-4 rounded-xl focus:outline-none focus:border-customOrange transition-all">
+                        <option value="Électricité BTP">Électricité BTP</option>
+                        <option value="CAO / DAO">CAO / DAO</option>
+                        <option value="Dessin Technique">Dessin Technique</option>
+                        <option value="Automatisme">Automatisme</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Orientation & Études">Orientation & Études</option>
+                        <option value="Recherche d'Emploi">Recherche d'Emploi</option>
+                        <option value="Recrutement Maroc">Recrutement Maroc</option>
+                        <option value="Stages & PFE">Stages & PFE</option>
+                        <option value="Autre">Autre (Saisir un choix personnalisé)</option>
+                    </select>
+                </div>
+                <!-- Custom Category Input (Hidden by default) -->
+                <div id="custom-category-container" class="hidden animate-fade-in">
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Saisir votre catégorie personnalisée</label>
+                    <input type="text" id="modal-custom-category" placeholder="Ex: Domotique, HVAC..." class="w-full bg-black border border-gray-800 text-white px-5 py-4 rounded-xl focus:outline-none focus:border-customOrange transition-all">
+                </div>
+                <div>
+                    <label class="block text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">Description détaillée</label>
+                    <textarea id="modal-description" placeholder="Expliquez votre problème ici..." class="w-full bg-black border border-gray-800 text-white p-5 rounded-xl focus:outline-none focus:border-customOrange transition-all min-h-[150px]"></textarea>
+                </div>
+
+                <!-- Login Alert -->
+                <div id="modal-login-alert" class="bg-customOrange/5 border border-customOrange/20 p-4 rounded-xl flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-customOrange text-sm"></i>
+                    <p class="text-customOrange text-[11px] font-bold">⚠️ Veuillez <a href="login.html?redirect=forum.html&msg=restricted" class="underline hover:text-white transition-colors">vous connecter</a> pour poser votre question.</p>
+                </div>
+
+                <button id="publish-btn" onclick="publishQuestion()" class="w-full bg-customOrange text-black font-extrabold py-4 rounded-xl hover:bg-white transition-all shadow-xl shadow-customOrange/20 disabled:opacity-30 disabled:grayscale disabled:cursor-not-allowed disabled:hover:bg-customOrange">
+                    Publier
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Officiel Full-Width (4 Colonnes) -->
+    <footer class="w-full mt-auto py-20 bg-black border-t border-gray-900">
+        <div class="w-full px-[5%] lg:px-[10%]">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+                
+                <!-- Colonne 1 : Newsletter -->
+                <div class="bg-gray-950/50 border border-gray-800 p-8 rounded-3xl shadow-xl flex flex-col">
+                    <h3 class="text-white font-extrabold text-lg mb-2">Newsletter 📩</h3>
+                    <p class="text-gray-500 text-xs mb-8">Restez informé des derniers cours et schémas techniques.</p>
+                    <form onsubmit="handleNewsletter(event)" class="flex flex-col gap-4">
+                        <input type="email" placeholder="Votre email pro..." required 
+                            class="bg-black border border-gray-800 text-white px-5 py-3 rounded-xl focus:outline-none focus:border-customOrange transition-all text-xs">
+                        <button type="submit" class="bg-customOrange text-black font-extrabold py-3 rounded-xl hover:bg-white hover:text-customOrange transition-all text-xs shadow-lg shadow-customOrange/10">
+                            S'abonner
+                        </button>
+                    </form>
+                    <div id="newsletter-success" class="hidden mt-4 text-customOrange text-[10px] font-bold animate-bounce text-center">
+                        ✅ Inscription validée !
+                    </div>
+                </div>
+
+                <!-- Colonne 2 : Navigation -->
+                <div class="lg:pl-10">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">Navigation</h4>
+                    <ul class="space-y-5 text-sm">
+                        <li><a href="../Tech 1/electrotechnique.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-bolt w-4 opacity-50 text-xs"></i> Électrotechnique</a></li>
+                        <li><a href="../Tech 1/electronique.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-microchip w-4 opacity-50 text-xs"></i> Électronique</a></li>
+                        <li><a href="../Tech 1/schemas.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-project-diagram w-4 opacity-50 text-xs"></i> Schémas & Plans</a></li>
+                        <li><a href="../Tech 1/energies.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-solar-panel w-4 opacity-50 text-xs"></i> Énergies Renouv.</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 3 : Communauté -->
+                <div class="lg:pl-10">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">Communauté</h4>
+                    <ul class="space-y-5 text-sm">
+                        <li><a href="forum.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-comments w-4 opacity-50 text-xs"></i> Forum Public</a></li>
+                        <li><a href="../emploi/emploi.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-briefcase w-4 opacity-50 text-xs"></i> Hub Emploi</a></li>
+                        <li><a href="contact.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-envelope w-4 opacity-50 text-xs"></i> Contact Expert</a></li>
+                        <li><a href="../Tech 1/ressources.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-folder-open w-4 opacity-50 text-xs"></i> Logithèque</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 4 : Réseaux Sociaux -->
+                <div class="lg:pl-10 text-left">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">Suivez-nous</h4>
+                    <p class="text-gray-500 text-xs mb-6">Rejoignez notre laboratoire technologique sur les réseaux.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i class="fab fa-linkedin-in text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i class="fab fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i class="fab fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i class="fab fa-twitter text-sm"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright Line -->
+            <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-customOrange to-transparent opacity-20 mb-8"></div>
+            <p class="text-center text-[10px] text-gray-600 font-medium tracking-widest uppercase">
+                Designed by <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="text-gray-500 hover:text-customOrange transition-all font-bold">ELECTECH Team 2026</a> - © Tous les droits sont reservés
+            </p>
+        </div>
+    </footer>
+
+    <script src="../javascript/api.js"></script>
+    <script src="../javascript/data_forum.js"></script>
+    <script>
+        // Global persistence key
+        const FORUM_STORAGE_KEY = 'electech_forum_questions';
+
+        // Load questions from storage or fallback to data_forum.js
+        let localData = localStorage.getItem(FORUM_STORAGE_KEY);
+        let forumQuestionsData = localData ? JSON.parse(localData) : [...forumQuestions]; // forumQuestions is from data_forum.js
+
+        let isLoggedIn = localStorage.getItem(SESSION_KEY) !== null;
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let currentQuestionId = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLoginUI();
+            
+            // Deep Linking Support
+            const params = new URLSearchParams(window.location.search);
+            const qId = params.get('id');
+            if(qId) {
+                showQuestionDetail(parseInt(qId));
+            } else {
+                renderQuestions(1);
+            }
+        });
+
+        function saveForumData() {
+            localStorage.setItem(FORUM_STORAGE_KEY, JSON.stringify(forumQuestionsData));
+        }
+
+        function updateLoginUI() {
+            const session = JSON.parse(localStorage.getItem(SESSION_KEY));
+            const isLoggedIn = session !== null;
+            
+            const banner = document.getElementById('login-banner');
+            const modalAlert = document.getElementById('modal-login-alert');
+            const publishBtn = document.getElementById('publish-btn');
+            
+            const guestZone = document.getElementById('guest-zone');
+            const memberZone = document.getElementById('member-zone');
+            const navUserName = document.getElementById('nav-user-name');
+
+            if (isLoggedIn) {
+                banner.classList.add('hidden');
+                modalAlert.classList.add('hidden');
+                publishBtn.disabled = false;
+                
+                guestZone.classList.add('hidden');
+                guestZone.classList.remove('flex');
+                memberZone.classList.remove('hidden');
+                memberZone.classList.add('flex');
+                navUserName.textContent = session.name;
+            } else {
+                banner.classList.remove('hidden');
+                modalAlert.classList.remove('hidden');
+                publishBtn.disabled = true;
+
+                guestZone.classList.remove('hidden');
+                guestZone.classList.add('flex');
+                memberZone.classList.add('hidden');
+                memberZone.classList.remove('flex');
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem(SESSION_KEY);
+            window.location.reload();
+        }
+
+        function renderQuestions(page) {
+            currentPage = page;
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+            
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedQuestions = forumQuestionsData.slice(start, end);
+
+            paginatedQuestions.forEach(q => {
+                const card = document.createElement('div');
+                card.className = 'bg-gray-900/50 border border-gray-800 p-8 rounded-3xl hover:border-customOrange/50 transition-all group cursor-pointer relative overflow-hidden';
+                card.onclick = () => showQuestionDetail(q.id);
+                card.innerHTML = `
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-customOrange/5 blur-[80px] group-hover:bg-customOrange/20 transition-all"></div>
+                    <div class="flex flex-col md:flex-row justify-between gap-6 relative z-10">
+                        <div class="flex-grow">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                ${q.tags.map(tag => `<span class="bg-black/50 border border-gray-800 text-customOrange px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest">${tag}</span>`).join('')}
+                            </div>
+                            <h3 class="text-white text-xl font-bold mb-3 group-hover:text-customOrange transition-colors leading-tight">${q.title}</h3>
+                            <div class="flex items-center gap-4 text-xs text-gray-500">
+                                <span class="flex items-center gap-2"><i class="fas fa-user-circle text-gray-700"></i> Par <span class="text-gray-300 font-bold">${q.author}</span></span>
+                                <span class="flex items-center gap-2 font-mono"><i class="fas fa-calendar-alt text-gray-700"></i> ${q.date}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-black/50 border border-gray-800 px-6 py-4 rounded-2xl text-center group-hover:border-customOrange transition-all">
+                                <i class="fas fa-comments text-customOrange mb-1 text-lg"></i>
+                                <div class="text-white font-black text-xl leading-none">${q.responses.length}</div>
+                                <div class="text-gray-500 text-[10px] uppercase font-bold tracking-widest">réponses</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const container = document.getElementById('pagination-container');
+            container.innerHTML = '';
+            const totalPages = Math.ceil(forumQuestionsData.length / itemsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = `w-10 h-10 rounded-xl font-bold transition-all ${i === currentPage ? 'bg-customOrange text-black' : 'bg-gray-900 border border-gray-800 text-gray-500 hover:border-customOrange'}`;
+                btn.innerText = i;
+                btn.onclick = () => renderQuestions(i);
+                container.appendChild(btn);
+            }
+        }
+
+        function showQuestionDetail(id) {
+            const question = forumQuestionsData.find(q => q.id === id);
+            if (!question) return;
+
+            currentQuestionId = id;
+            document.getElementById('forum-list-view').classList.add('hidden');
+            document.getElementById('question-detail-view').classList.remove('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+
+            const detailHeader = document.getElementById('detail-content');
+            detailHeader.innerHTML = `
+                <div class="bg-gray-900/50 border border-gray-800 p-10 rounded-3xl relative overflow-hidden mb-12">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-customOrange/5 blur-[120px]"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-black/50 border border-gray-800 text-customOrange px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest">#${question.category.toUpperCase()}</span>
+                        </div>
+                        <h1 class="text-white text-3xl md:text-5xl font-black mb-6 leading-tight">${question.title}</h1>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-8 border-l-4 border-customOrange pl-6">${question.description}</p>
+                        <div class="flex items-center gap-6 text-sm text-gray-500 border-t border-gray-800 pt-8">
+                            <div class="flex items-center gap-3"><i class="fas fa-user-circle text-2xl text-customOrange"></i> Publié par <span class="text-white font-bold">${question.author}</span></div>
+                            <div class="flex items-center gap-3"><i class="fas fa-calendar-alt"></i> ${question.date}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            renderResponses(question.responses);
+        }
+
+        function renderResponses(responses) {
+            const container = document.getElementById('responses-container');
+            container.innerHTML = '';
+
+            if (responses.length === 0) {
+                container.innerHTML = '<p class="text-gray-600 italic">Aucune réponse pour le moment. Soyez le premier à répondre !</p>';
+                return;
+            }
+
+            responses.forEach(r => {
+                const respDiv = document.createElement('div');
+                respDiv.className = 'bg-gray-950 border border-gray-900 p-8 rounded-3xl hover:border-gray-700 transition-all';
+                respDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-white font-bold flex items-center gap-2"><i class="fas fa-user-shield text-customOrange"></i> ${r.author}</span>
+                        <span class="text-gray-600 text-xs font-mono">${r.date}</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">${r.content}</p>
+                `;
+                container.appendChild(respDiv);
+            });
+        }
+
+        function hideQuestionDetail() {
+            document.getElementById('forum-list-view').classList.remove('hidden');
+            document.getElementById('question-detail-view').classList.add('hidden');
+            currentQuestionId = null;
+        }
+
+        function openModal() {
+            if (!isLoggedIn) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const banner = document.getElementById('login-banner');
+                banner.classList.add('ring-2', 'ring-customOrange', 'animate-pulse');
+                setTimeout(() => banner.classList.remove('ring-2', 'ring-customOrange', 'animate-pulse'), 2000);
+                return;
+            }
+            document.getElementById('question-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('question-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleCustomCategory(value) {
+            const container = document.getElementById('custom-category-container');
+            if (value === 'Autre') {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        function publishQuestion() {
+            const title = document.getElementById('modal-title').value;
+            let category = document.getElementById('modal-category').value;
+            const customCategory = document.getElementById('modal-custom-category').value;
+            const description = document.getElementById('modal-description').value;
+
+            if (!title || !description) {
+                alert('Veuillez remplir tous les champs !');
+                return;
+            }
+
+            if (category === 'Autre') {
+                if (!customCategory) {
+                    alert('Veuillez saisir votre catégorie personnalisée !');
+                    return;
+                }
+                category = customCategory;
+            }
+
+            const session = JSON.parse(localStorage.getItem(SESSION_KEY)) || { name: "Utilisateur" };
+            
+            const newQ = {
+                id: forumQuestions.length + 1,
+                category: category,
+                tags: [`#${category.replace(/\s+/g, '')}`],
+                title: title,
+                description: description,
+                author: session.name,
+                date: "À l'instant",
+                responses: []
+            };
+
+            forumQuestionsData.unshift(newQ);
+            saveForumData();
+            renderQuestions(1);
+            closeModal();
+            
+            // Success feedback
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-10 right-10 bg-customOrange text-black px-8 py-4 rounded-2xl font-bold shadow-2xl z-[100] animate-bounce';
+            toast.innerText = '✅ Question publiée avec succès !';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function submitResponse() {
+            const content = document.getElementById('new-response-content').value;
+            if (!content) return;
+
+            const question = forumQuestionsData.find(q => q.id === currentQuestionId);
+            if (!question) return;
+
+            const session = JSON.parse(localStorage.getItem(SESSION_KEY)) || { name: "Utilisateur" };
+
+            const newResponse = {
+                author: session.name,
+                date: "À l'instant",
+                content: content
+            };
+            question.responses.push(newResponse);
+            saveForumData();
+
+            document.getElementById('new-response-content').value = '';
+            renderResponses(question.responses);
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value.trim();
+            const success = document.getElementById('newsletter-success');
+            if (email) {
+                const subs = JSON.parse(localStorage.getItem('electech_newsletter') || '[]');
+                if (!subs.find(s => s.email === email)) {
+                    subs.unshift({ email, date: new Date().toLocaleDateString('fr-FR'), page: document.title || 'forum.html' });
+                    localStorage.setItem('electech_newsletter', JSON.stringify(subs));
+                }
+            }
+            success.classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => success.classList.add('hidden'), 5000);
+        }
+    </script>
+
+    <script src="../js/search_index.js"></script>
+    <script src="../js/search_logic.js"></script>
+    <script src="../js/scroll_to_search.js"></script>
+</body>
+
+</html>

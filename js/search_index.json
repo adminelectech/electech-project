@@ -1,0 +1,78 @@
+[
+    {
+        "url": "index.html",
+        "title": "Ingénierie Électrique"
+    },
+    {
+        "url": "Tech 1/Article.html",
+        "title": "Article Technique - ELEC TECH"
+    },
+    {
+        "url": "Tech 1/bibliotheque.html",
+        "title": "Électrotechnique - Ingénierie Électrique"
+    },
+    {
+        "url": "Tech 1/electronique.html",
+        "title": "Électrotechnique - Ingénierie Électrique"
+    },
+    {
+        "url": "Tech 1/electrotechnique.html",
+        "title": "Électrotechnique - Ingénierie Électrique"
+    },
+    {
+        "url": "Tech 1/energies.html",
+        "title": "Électrotechnique - Ingénierie Électrique"
+    },
+    {
+        "url": "Tech 1/materiel.html",
+        "title": "Électrotechnique - Ingénierie Électrique"
+    },
+    {
+        "url": "Tech 1/ressources.html",
+        "title": "Électrotechnique - Ingénierie Électrique"
+    },
+    {
+        "url": "Tech 1/schemas.html",
+        "title": "Électrotechnique - Ingénierie Électrique"
+    },
+    {
+        "url": "diplomes/diplomes.html",
+        "title": "Vos Formations et Diplômes - ELEC TECH"
+    },
+    {
+        "url": "emploi/demandes.html",
+        "title": "Demandes d'Emploi - ELEC TECH"
+    },
+    {
+        "url": "emploi/emploi.html",
+        "title": "Hub Emploi Électrique - ELEC TECH"
+    },
+    {
+        "url": "emploi/offres.html",
+        "title": "Offres d'Emploi - ELEC TECH"
+    },
+    {
+        "url": "emploi/postale.html",
+        "title": "Boîte Postale - ELEC TECH"
+    },
+    {
+        "url": "emploi/postuler.html",
+        "title": "Postuler - ELEC TECH"
+    },
+    {
+        "url": "utilisateur/contact.html",
+        "title": "Contact - ELEC TECH"
+    },
+    {
+        "url": "utilisateur/forum.html",
+        "title": "Forum Communautaire - ELECTECH"
+    },
+    {
+        "url": "utilisateur/login.html",
+        "title": "Authentification - ELECTECH"
+    },
+    {
+        "url": "utilisateur/profil.html",
+        "title": "Mon Profil Expert - ELECTECH"
+    }
+]

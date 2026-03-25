@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Électrotechnique - Ingénierie Électrique</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        customOrange: '#FF8C00',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+</head>
+
+<body
+    class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <!-- Header -->
+    <header class="p-6 border-b border-gray-800 backdrop-blur-sm bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo & Slogan Block -->
+            <div class="flex flex-col group mb-6 md:mb-0">
+                <a href="../index.html" class="flex flex-col transition-all duration-300">
+                    <div class="text-2xl font-black text-white tracking-widest leading-none flex items-center">
+                        <i class="fas fa-bolt text-customOrange mr-2 group-hover:rotate-12 transition-transform"></i>
+                        ELEC<span class="text-customOrange">TECH</span>
+                    </div>
+                    <div class="mt-1.5 py-0.5 px-2 bg-customOrange/10 border border-customOrange/20 rounded-md">
+                        <p class="text-[7px] font-black uppercase tracking-[0.3em] text-customOrange whitespace-nowrap">
+                            La Tech pour tout le monde
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="flex items-center gap-8">
+                <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm md:text-base font-medium">
+                    <!-- HLEGA -->
+                    <li class="relative group z-50">
+                        <a href="../Hlega/Hlega.html" class="text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-customOrange pb-1">
+                            🎮 Hlega <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Hlega/Hlega.html#qcm" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-question-circle w-5 text-gray-500"></i> QCMs Éclair</a></li>
+                                <li><a href="../Hlega/Hlega.html#jeux" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-gamepad w-5 text-gray-500"></i> Jeux Interactifs</a></li>
+                                <li><a href="../Hlega/Hlega.html#defis" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-trophy w-5 text-gray-500"></i> Défis & Amis</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- TECHNIQUE -->
+                    <li class="relative group z-40">
+                        <a href="../Technique/Technique.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            ⚙️ Technique <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-64 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li class="px-5 py-2 pt-3 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1">Notions de base</li>
+                                <li><a href="../Tech 1/electrotechnique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-bolt w-5 text-gray-500"></i> Électrotechnique</a></li>
+                                <li><a href="../Tech 1/electronique.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microchip w-5 text-gray-500"></i> Électronique</a></li>
+                                <li><a href="../Tech 1/energies.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-leaf w-5 text-gray-500"></i> Énergies</a></li>
+                                <li><a href="../Tech 1/schemas.html" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-project-diagram w-5 text-gray-500"></i> Schémas</a></li>
+                                
+                                <li class="px-5 py-2 pt-4 text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 mb-1 mt-2">Spécialisations</li>
+                                <li><a href="../Technique/Technique.html#electricite" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-network-wired w-5 text-gray-500"></i> Électricité</a></li>
+                                <li><a href="../Technique/Technique.html#software" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-code w-5 text-gray-500"></i> Software</a></li>
+                                <li><a href="../Technique/Technique.html#aeronautique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-plane w-5 text-gray-500"></i> Aéronautique</a></li>
+                                <li><a href="../Technique/Technique.html#mecanique" class="block px-5 py-2 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-cogs w-5 text-gray-500"></i> Génie Mécanique</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- DIPLOMES -->
+                    <li class="relative group z-35">
+                        <a href="../Diplomes/diplomes.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            🎓 Diplômes <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../Diplomes/diplomes.html#bts" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> BTS</a></li>
+                                <li><a href="../Diplomes/diplomes.html#dut" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-graduation-cap w-5 text-gray-500"></i> DUT</a></li>
+                                <li><a href="../Diplomes/diplomes.html#licence" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-award w-5 text-gray-500"></i> Licence</a></li>
+                                <li><a href="../Diplomes/diplomes.html#master" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-graduate w-5 text-gray-500"></i> Master</a></li>
+                                <li><a href="../Diplomes/diplomes.html#doctorat" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-microscope w-5 text-gray-500"></i> Doctorat</a></li>
+                                <li><a href="../Diplomes/diplomes.html#mba" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-certificate w-5 text-gray-500"></i> MBA</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <!-- COMMUNITY -->
+                    <li class="relative group z-30">
+                        <a href="../assets/community/clic.electech.html" class="hover:text-yellow-400 text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-yellow-400 pb-1">
+                            👥 Community <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-3 w-48 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../assets/community/clic.electech.html" class="block px-5 py-2.5 hover:bg-black hover:text-yellow-400 transition-colors"><i class="fas fa-bolt w-5 text-yellow-400"></i> Clic Electech</a></li>
+                                <li><a href="../utilisateur/forum.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-comments w-5 text-gray-500"></i> Forum</a></li>
+                            </ul>
+                        </div>
+                    </li>
+ 
+                    <li><a href="../Tech 1/bibliotheque.html" class="text-gray-300 hover:text-customOrange font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">📚 Livres</a></li>
+                    
+                    <!-- EMPLOI -->
+                    <li class="relative group z-30">
+                        <a href="../emploi/emploi.html" class="hover:text-customOrange text-gray-300 font-bold transition-colors duration-300 flex items-center gap-1 border-b-2 border-transparent hover:border-customOrange pb-1">
+                            💼 Emploi <i class="fas fa-chevron-down text-[10px]"></i>
+                        </a>
+                        <div class="absolute right-0 mt-3 w-56 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform origin-top group-hover:scale-100 scale-95 text-left">
+                            <ul class="py-2 text-sm font-medium">
+                                <li><a href="../emploi/offres.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-briefcase w-5 text-gray-500"></i> Offres d'Emploi</a></li>
+                                <li><a href="../emploi/demandes.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-user-tie w-5 text-gray-500"></i> Demandes d'Emploi</a></li>
+                                <li><a href="../emploi/postale.html" class="block px-5 py-2.5 hover:bg-black hover:text-customOrange transition-colors"><i class="fas fa-envelope-open-text w-5 text-gray-500"></i> Boîte Postale</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+ 
+                <!-- Dynamic Auth Zone -->
+                <div id="auth-navbar" class="flex items-center gap-3 border-l border-gray-800 pl-8">
+                    <!-- Guest -->
+                    <div id="guest-zone" class="hidden items-center gap-5">
+                        <a href="../utilisateur/login.html?tab=signup" class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors">S'inscrire</a>
+                        <a href="../utilisateur/login.html?tab=login" class="bg-customOrange text-black px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.1em] hover:bg-white hover:scale-105 transition-all shadow-xl shadow-customOrange/10">Connexion</a>
+                    </div>
+                    <!-- Member -->
+                    <div id="member-zone" class="hidden items-center gap-4 bg-gray-950 border border-gray-900 px-4 py-2 rounded-2xl">
+                        <div class="flex items-center gap-3 group cursor-pointer">
+                            <div class="w-8 h-8 bg-customOrange/10 rounded-lg flex items-center justify-center text-customOrange group-hover:bg-customOrange group-hover:text-black transition-all">
+                                <i class="fas fa-user-circle text-base"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span id="nav-user-name" class="text-[11px] font-black text-white leading-none"></span>
+                                <a href="../utilisateur/profil.html" class="text-[9px] text-gray-600 font-bold uppercase tracking-tighter hover:text-customOrange transition-colors mt-1">Mon Profil</a>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" class="text-gray-700 hover:text-red-500 transition-colors ml-2 pt-1" title="Déconnexion">
+                            <i class="fas fa-power-off text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-start p-8 py-20">
+        <!-- Titre de la page -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold uppercase tracking-widest text-white border-b-4 border-customOrange pb-4 inline-block">
+                Électrotechnique
+            </h1>
+            <p class="mt-6 text-gray-400 text-lg max-w-2xl mx-auto">
+                Ajoutez ici votre description ou sous-titre.
+            </p>
+        </div>
+
+        <!-- Contenu de la page -->
+        <div class="container mx-auto max-w-5xl space-y-12">
+            
+            <!-- Sommaire / Navigation interne -->
+            <div class="w-full bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-lg mb-8">
+                <h3 class="text-xl font-bold text-white mb-4"><i class="fas fa-list text-customOrange mr-2"></i> Sommaire Rapide</h3>
+                <ul class="flex flex-wrap gap-4 text-sm font-medium">
+                    <li><a href="#transformateurs" class="text-customOrange hover:text-white transition-colors py-2 px-4 border border-customOrange rounded-full hover:bg-customOrange inline-block">1. Transformateurs</a></li>
+                    <li><a href="#machines" class="text-customOrange hover:text-white transition-colors py-2 px-4 border border-customOrange rounded-full hover:bg-customOrange inline-block">2. Moteurs</a></li>
+                    <li><a href="#slt" class="text-customOrange hover:text-white transition-colors py-2 px-4 border border-customOrange rounded-full hover:bg-customOrange inline-block">3. Régimes de Neutre</a></li>
+                    <li><a href="#compensation" class="text-customOrange hover:text-white transition-colors py-2 px-4 border border-customOrange rounded-full hover:bg-customOrange inline-block">4. Énergie Réactive</a></li>
+                    <li><a href="#habilitation" class="text-customOrange hover:text-white transition-colors py-2 px-4 border border-customOrange rounded-full hover:bg-customOrange inline-block">5. Sécurité NF C 18-510</a></li>
+                </ul>
+            </div>
+
+            <!-- Section 1 : Transformateurs Expert -->
+            <div id="transformateurs" class="bg-gray-900 border border-gray-800 rounded-2xl p-8 md:p-12 shadow-lg hover:border-customOrange transition-all duration-300 group">
+                <h2 class="text-3xl font-extrabold text-customOrange mb-8 flex items-center border-b border-gray-800 pb-4">
+                    <i class="fas fa-network-wired mr-4"></i> 1. Transformateurs de Puissance (Expert)
+                </h2>
+                <p class="text-gray-300 leading-relaxed mb-10 text-lg">
+                    Le transformateur de puissance est le cœur des réseaux HTB/HTA. Il adapte la tension avec un rendement exceptionnel (>99%). Son étude repose sur l'analyse de ses couplages, de son bilan de puissance et de ses systèmes de protection critiques, essentiels à la continuité de service.
+                </p>
+
+                <!-- Sous-sections en Accordéon -->
+                <div class="space-y-4 mb-6">
+                    <!-- Sous-section A : Couplages -->
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('contentA', 'iconA')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-link mr-3"></i> A. Couplages & Indices Horaires</h3>
+                            <i id="iconA" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="contentA" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left border-collapse text-sm md:text-base border border-gray-800 rounded-xl overflow-hidden">
+                                        <thead>
+                                            <tr class="bg-black text-white border-b-2 border-customOrange">
+                                                <th class="p-4 w-1/4">Couplage</th>
+                                                <th class="p-4 w-1/4 text-center">Symbole (HT/bt)</th>
+                                                <th class="p-4 w-1/2">Propriétés & Indices Horaires</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-gray-300 bg-gray-900 border-t border-gray-800">
+                                            <tr class="border-b border-gray-800 hover:bg-black transition-colors">
+                                                <td class="p-4 font-bold text-customOrange">Étoile</td>
+                                                <td class="p-4 font-mono text-lg text-white text-center">Y / y</td>
+                                                <td class="p-4 text-sm leading-relaxed">Le point neutre est accessible. Chaque enroulement ne supporte que la tension simple V (U/√3). Idéal pour la Très Haute Tension (HTB).<br><span class="text-gray-500 font-mono italic text-xs mt-1 block">Ex: Yy0, YNyn6</span></td>
+                                            </tr>
+                                            <tr class="border-b border-gray-800 hover:bg-black transition-colors">
+                                                <td class="p-4 font-bold text-customOrange">Triangle</td>
+                                                <td class="p-4 font-mono text-lg text-white text-center">D / d (ou Δ)</td>
+                                                <td class="p-4 text-sm leading-relaxed">Pas de neutre. Atténue l'harmonique de rang 3 (courant de boucle). Utilisé pour les forts courants de ligne et la HTA.<br><span class="text-gray-500 font-mono italic text-xs mt-1 block">Ex: Dyn11, Yd11</span></td>
+                                            </tr>
+                                            <tr class="hover:bg-black transition-colors">
+                                                <td class="p-4 font-bold text-customOrange">Zigzag</td>
+                                                <td class="p-4 font-mono text-lg text-white text-center">Z / z</td>
+                                                <td class="p-4 text-sm leading-relaxed">Utilisé au secondaire pour les réseaux BT déséquilibrés. Excellente répartition des courants homopolaires en cas de défaut monophasé.<br><span class="text-gray-500 font-mono italic text-xs mt-1 block">Ex: Yzn11, Dzn0</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sous-section B : Bilan de Puissance -->
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('contentB', 'iconB')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-chart-pie mr-3"></i> B. Bilan de Puissance & Pertes</h3>
+                            <i id="iconB" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="contentB" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-black p-6 rounded-xl border border-gray-800 border-t-4 border-t-blue-500 hover:border-customOrange transition-all">
+                                    <h4 class="text-white font-bold mb-3 flex items-center"><i class="fas fa-magnet text-blue-500 mr-2"></i> Pertes Fer (Magnétiques)</h4>
+                                    <p class="text-gray-400 text-sm mb-3">Elles sont <strong class="text-white">constantes indépendamment de la charge</strong>. Elles apparaissent dès la mise sous tension du primaire à cause du circuit magnétique de la machine. Elles regroupent :</p>
+                                    <ul class="list-disc list-inside text-gray-400 text-sm space-y-2">
+                                        <li><strong>Hystérésis :</strong> Énergie dissipée par le renversement cyclique de l'aimantation.</li>
+                                        <li><strong>Courants de Foucault :</strong> Courants parasites induits dans la tôle du fer.</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-black p-6 rounded-xl border border-gray-800 border-t-4 border-t-red-500 hover:border-customOrange transition-all">
+                                    <h4 class="text-white font-bold mb-3 flex items-center"><i class="fas fa-fire text-red-500 mr-2"></i> Pertes Cuivre (Joule)</h4>
+                                    <p class="text-gray-400 text-sm mb-3">Elles sont les pertes thermiques causées par la résistance intrinsèque (R) des bobinages du transformateur. Elles sont proportionnelles au <strong>carré du courant</strong> appelé par la charge.</p>
+                                    <div class="bg-gray-900 border border-gray-800 p-4 rounded-lg font-mono text-customOrange text-sm text-center">
+                                        P_joule = R1·I1² + r2·I2²
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sous-section C : Essais -->
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('contentC', 'iconC')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-vial mr-3"></i> C. Procédure de Détermination (Essais)</h3>
+                            <i id="iconC" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="contentC" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <p class="text-gray-400 text-sm mb-6">Pour valider le rendement exact de la machine sans gaspiller d'énergie, on réalise deux essais à puissance très réduite :</p>
+                                <div class="space-y-4">
+                                    <div class="bg-black p-6 rounded-lg border-l-4 border-customOrange border border-gray-800">
+                                        <strong class="text-white block mb-2 text-lg">1. L'essai à vide (Secondaire Ouvert)</strong>
+                                        <p class="text-gray-400 text-sm leading-relaxed">On applique la tension nominale stricte (U1n) au primaire en laissant le secondaire "en l'air" (I2 = 0). La puissance lue correspond intégralement aux <strong class="text-customOrange">Pertes Fer</strong>.</p>
+                                    </div>
+                                    <div class="bg-black p-6 rounded-lg border-l-4 border-customOrange border border-gray-800">
+                                        <strong class="text-white block mb-2 text-lg">2. L'essai en court-circuit (Secondaire Relié)</strong>
+                                        <p class="text-gray-400 text-sm leading-relaxed">On relie les bornes du secondaire entre elles par un gros fil (I2_côté = I2n, tension nulle U2=0). On alimente alors le primaire avec une source de tension réglable. La puissance lue correspond exclusivement aux <strong class="text-customOrange">Pertes Cuivre nominales</strong>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sous-section D : Protection -->
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('contentD', 'iconD')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-shield-virus mr-3"></i> D. Dispositifs de Protection Critiques</h3>
+                            <i id="iconD" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="contentD" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="bg-black p-6 rounded-lg border border-gray-800">
+                                    <h4 class="text-white font-extrabold text-xl mb-4"><i class="fas fa-gas-pump text-customOrange mr-2"></i> Relais Buchholz (80T)</h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Dispositif électromécanique intercalé dans la tuyauterie entre la cuve d'huile principale et le réservoir conservateur :</p>
+                                    <span class="block bg-gray-900 border border-yellow-600 border-l-4 p-3 rounded mb-2 text-sm"><strong class="text-yellow-500">Alarme :</strong> Dégagement lent de gaz (défaut mineur).</span>
+                                    <span class="block bg-gray-900 border border-red-600 border-l-4 p-3 rounded text-sm"><strong class="text-red-500">Déclenchement :</strong> Geyser d'huile suite à un gros arc. Ouvre les disjoncteurs.</span>
+                                </div>
+                                <div class="bg-black p-6 rounded-lg border border-gray-800">
+                                    <h4 class="text-white font-extrabold text-xl mb-4"><i class="fas fa-balance-scale text-customOrange mr-2"></i> Protection Différentielle (87T)</h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                        Protection instantanée absolue. Surveille la règle : <em>"I_entrant - I_sortant = 0"</em>.<br><br>
+                                        S'il relève un <strong class="text-white">courant différentiel non nul</strong>, cela signifie qu'un court-circuit interne consomme l'énergie. Il ordonne le déclenchement triphasé immédiat.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleAccordion(contentId, iconId) {
+                        const content = document.getElementById(contentId);
+                        const icon = document.getElementById(iconId);
+                        
+                        // Parse height checking if it's implicitly 0 via CSS or explicitly set
+                        if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                            content.style.maxHeight = '0px';
+                            icon.style.transform = 'rotate(0deg)';
+                        } else {
+                            content.style.maxHeight = content.scrollHeight + 'px';
+                            icon.style.transform = 'rotate(180deg)';
+                        }
+                    }
+                </script>
+
+            </div>
+
+            <!-- Section 2 : Moteurs Expert -->
+            <div id="machines" class="bg-gray-900 border border-gray-800 rounded-2xl p-8 md:p-12 shadow-lg hover:border-customOrange transition-all duration-300 group mb-12">
+                <h2 class="text-3xl font-extrabold text-customOrange mb-8 flex items-center border-b border-gray-800 pb-4">
+                    <i class="fas fa-cogs mr-4"></i> 2. Moteurs Asynchrones Triphasés
+                </h2>
+                <p class="text-gray-300 leading-relaxed mb-10 text-lg">
+                    Le moteur asynchrone est le standard absolu de l'industrie grâce à sa robustesse et son faible coût. Son étude implique la gestion rigoureuse de ses courants forts au démarrage.
+                </p>
+                
+                <div class="space-y-4 mb-6">
+                    <!-- Sous-section A : Couplages -->
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('content2A', 'icon2A')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-bezier-curve mr-3"></i> A. Couplages Y/Δ et Courants</h3>
+                            <i id="icon2A" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="content2A" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <p class="text-gray-400 text-sm mb-4">Le couplage des enroulements dépend de la concordance entre la tension du réseau et la tension assignée au moteur.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="bg-black p-5 rounded-lg border-l-4 border-l-blue-500 border border-gray-800">
+                                        <strong class="text-white block mb-2">Couplage Étoile (Y)</strong>
+                                        <p class="text-gray-400 text-sm">Utilisé quand la <span class="text-white">tension la plus élevée</span> plaque correspond au réseau. I_ligne = I_phase.</p>
+                                    </div>
+                                    <div class="bg-black p-5 rounded-lg border-l-4 border-l-red-500 border border-gray-800">
+                                        <strong class="text-white block mb-2">Couplage Triangle (Δ)</strong>
+                                        <p class="text-gray-400 text-sm">Utilisé quand la <span class="text-white">tension la plus basse</span> plaque correspond au réseau. I_ligne = √3 × I_phase.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sous-section B : Caractéristiques -->
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('content2B', 'icon2B')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-tachometer-alt mr-3"></i> B. Caractéristiques Mécaniques</h3>
+                            <i id="icon2B" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="content2B" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <ul class="list-disc list-inside text-gray-400 text-sm space-y-3">
+                                    <li><strong class="text-white">Glissement (g) :</strong> Écart en % entre Ns (champ tournant statorique) et N (vitesse rotor).</li>
+                                    <li><strong class="text-white">Couple de démarrage :</strong> Vainc l'inertie, 1.5 à 2.5 fois le couple nominal.</li>
+                                    <li><strong class="text-white">Zone stable :</strong> Fonctionnement optimal sur la partie quasi-linéaire de la courbe de couple (faibles glissements).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sous-section C : Démarrage -->
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('content2C', 'icon2C')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-power-off mr-3"></i> C. Méthodes de Démarrage</h3>
+                            <i id="icon2C" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="content2C" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <p class="text-gray-400 text-sm mb-4">Le défi majeur est de limiter le pic de courant au démarrage (Id) qui atteint 6 à 8 fois nominal (In).</p>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left border-collapse text-sm border border-gray-800 rounded-xl overflow-hidden">
+                                        <thead>
+                                            <tr class="bg-black text-white border-b-2 border-customOrange">
+                                                <th class="p-3">Méthode</th>
+                                                <th class="p-3">Courant</th>
+                                                <th class="p-3 w-1/2">Propriétés principales</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-gray-300 bg-gray-900">
+                                            <tr class="border-b border-gray-800 hover:bg-black">
+                                                <td class="p-3 text-customOrange font-bold">Direct</td>
+                                                <td class="p-3">~ 6-8 In</td>
+                                                <td class="p-3">Simple, couple maximal. <strong class="text-red-500">Choc mécanique violent.</strong></td>
+                                            </tr>
+                                            <tr class="border-b border-gray-800 hover:bg-black">
+                                                <td class="p-3 text-customOrange font-bold">Étoile-Triangle</td>
+                                                <td class="p-3">~ 2-3 In</td>
+                                                <td class="p-3">Divise courant/couple par 3. Nécessite moteur couplable en Δ complet.</td>
+                                            </tr>
+                                            <tr class="bg-gray-900 hover:bg-black">
+                                                <td class="p-3 text-customOrange font-bold">Variateur</td>
+                                                <td class="p-3">< 1.5 In</td>
+                                                <td class="p-3">Contrôle de rampe. Ratio U/f constant. Coûteux mais ultra-efficace.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3 : SLT -->
+            <div id="slt" class="bg-gray-900 border border-gray-800 rounded-2xl p-8 md:p-12 shadow-lg hover:border-customOrange transition-all duration-300 group mb-12">
+                <h2 class="text-3xl font-extrabold text-customOrange mb-8 flex items-center border-b border-gray-800 pb-4">
+                    <i class="fas fa-shield-alt mr-4"></i> 3. Régimes de Neutre (SLT)
+                </h2>
+                <div class="space-y-4 mb-6">
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('content3A', 'icon3A')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-bolt mr-3"></i> A. Vue d'overview TT, TN, IT</h3>
+                            <i id="icon3A" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="content3A" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="bg-black p-6 rounded-lg border-t-4 border-t-green-500 border border-gray-800">
+                                    <h4 class="text-white font-bold mb-2">Régime TT</h4>
+                                    <p class="text-gray-400 text-sm">Neutre à la terre, Masses à la terre. Utilisé dans le résidentiel. Nécessite des DDR (Dispositifs Différentiels) obligatoires.</p>
+                                </div>
+                                <div class="bg-black p-6 rounded-lg border-t-4 border-t-blue-500 border border-gray-800">
+                                    <h4 class="text-white font-bold mb-2">Régime TN</h4>
+                                    <p class="text-gray-400 text-sm">Neutre à la terre, Masses au neutre (PEN/PE). Transforme le défaut d'isolement en court-circuit. Disjoncteur magnéto-thermique.</p>
+                                </div>
+                                <div class="bg-black p-6 rounded-lg border-t-4 border-t-red-500 border border-gray-800">
+                                    <h4 class="text-white font-bold mb-2">Régime IT</h4>
+                                    <p class="text-gray-400 text-sm">Neutre isolé, Masses à la terre. Continuité de service : ne coupe pas au 1er défaut. Exige un CPI (Contrôleur).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4 : Compensation -->
+            <div id="compensation" class="bg-gray-900 border border-gray-800 rounded-2xl p-8 md:p-12 shadow-lg hover:border-customOrange transition-all duration-300 group mb-12">
+                <h2 class="text-3xl font-extrabold text-customOrange mb-8 flex items-center border-b border-gray-800 pb-4">
+                    <i class="fas fa-battery-half mr-4"></i> 4. Énergie Réactive
+                </h2>
+                <div class="space-y-4 mb-6">
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('content4A', 'icon4A')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-question-circle mr-3"></i> A. Pourquoi Compenser ?</h3>
+                            <i id="icon4A" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="content4A" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <p class="text-gray-400 text-sm leading-relaxed mb-4">L'énergie réactive (kVAR) pénalise l'installation :</p>
+                                <ul class="list-disc list-inside text-gray-300 text-sm space-y-2">
+                                    <li><strong class="text-white">Pertes Joules accrues :</strong> Câbles surchargés.</li>
+                                    <li><strong class="text-white">Chute de tension :</strong> Baisse de la qualité énergétique.</li>
+                                    <li><strong class="text-white">Pénalités réseau :</strong> Facturation lourde si `cos(φ) < 0.93`.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('content4B', 'icon4B')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-calculator mr-3"></i> B. Calcul des Condensateurs</h3>
+                            <i id="icon4B" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="content4B" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <p class="text-gray-400 text-sm mb-4">Formule essentielle de dimensionnement capacitif (Qc en kVAR) pour passer du déphasage actuel (φ) à cible (φ') :</p>
+                                <div class="bg-gray-900 border border-gray-800 p-6 rounded-lg font-mono text-customOrange text-lg text-center font-bold">
+                                    Q_c = P · ( tan(φ) - tan(φ') )
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5 : Habilitation -->
+            <div id="habilitation" class="bg-gray-900 border border-gray-800 rounded-2xl p-8 md:p-12 shadow-lg hover:border-customOrange transition-all duration-300 group">
+                <h2 class="text-3xl font-extrabold text-customOrange mb-8 flex items-center border-b border-gray-800 pb-4">
+                    <i class="fas fa-hard-hat mr-4"></i> 5. Sécurité (NF C 18-510)
+                </h2>
+                <div class="space-y-4 mb-6">
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('content5A', 'icon5A')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-lock mr-3"></i> A. Consignation (5 Étapes)</h3>
+                            <i id="icon5A" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="content5A" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <ol class="list-decimal list-inside text-gray-300 text-sm space-y-4">
+                                    <li><strong class="text-customOrange">Séparation :</strong> Isoler complètement des sources d'énergie.</li>
+                                    <li><strong class="text-customOrange">Condamnation :</strong> Verrouillage mécanique + signalisation.</li>
+                                    <li><strong class="text-customOrange">Identification :</strong> Certitude absolue sur l'ouvrage concerné.</li>
+                                    <li><strong class="text-customOrange">VAT (Vérification) :</strong> Tester l'absence de tension au plus près.</li>
+                                    <li><strong class="text-customOrange">Mise à la Terre (MALT/CC) :</strong> Rempart final vital en HT/BT.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-customOrange rounded-xl overflow-hidden bg-black">
+                        <button onclick="toggleAccordion('content5B', 'icon5B')" class="w-full flex justify-between items-center p-5 focus:outline-none hover:bg-gray-900 transition-colors">
+                            <h3 class="text-xl font-bold text-customOrange m-0 flex items-center"><i class="fas fa-id-badge mr-3"></i> B. Qualifications Habilitation</h3>
+                            <i id="icon5B" class="fas fa-chevron-down text-customOrange transition-transform duration-300"></i>
+                        </button>
+                        <div id="content5B" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-900" style="max-height: 0px;">
+                            <div class="p-6">
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-left border-collapse text-sm border border-gray-800 rounded-xl overflow-hidden">
+                                        <thead>
+                                            <tr class="bg-black text-white border-b-2 border-customOrange">
+                                                <th class="p-4 w-1/4">Symbole</th>
+                                                <th class="p-4 w-3/4">Rôle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-gray-300 bg-gray-900">
+                                            <tr class="border-b border-gray-800 hover:bg-black">
+                                                <td class="p-4 font-bold text-customOrange">B1V / H1V</td>
+                                                <td class="p-4"><strong class="text-white">Exécutant</strong> électricien travaillant au Voisinage de pièces nues.</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-800 hover:bg-black">
+                                                <td class="p-4 font-bold text-customOrange">B2V / H2V</td>
+                                                <td class="p-4"><strong class="text-white">Chargé de travaux</strong> électricien. Titulaire de l'opération.</td>
+                                            </tr>
+                                            <tr class="border-b border-gray-800 hover:bg-black">
+                                                <td class="p-4 font-bold text-customOrange">BC / HC</td>
+                                                <td class="p-4"><strong class="text-white">Chargé de consignation.</strong> Opère seul les séparations et VAT.</td>
+                                            </tr>
+                                            <tr class="bg-gray-900 hover:bg-black">
+                                                <td class="p-4 font-bold text-customOrange">BR</td>
+                                                <td class="p-4"><strong class="text-white">Interventions générales</strong> / Dépannage. Autonome sur lui-même.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bouton Voir Plus -->
+            <div class="mt-16 mb-8 text-center">
+                <a href="ressources.html" class="inline-flex items-center justify-center bg-transparent border-2 border-customOrange text-customOrange hover:bg-customOrange hover:text-black font-extrabold text-xl py-4 px-10 rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(255,140,0,0.5)] hover:shadow-[0_0_30px_rgba(255,140,0,0.8)] animate-pulse">
+                    <i class="fas fa-folder-open mr-3"></i> Voir plus de cours (Logithèque)
+                </a>
+            </div>
+        <div id="dynamic-articles" class="w-full max-w-5xl mx-auto space-y-8 mt-12 mb-12"></div>
+    </main>
+
+    <!-- Footer Officiel Full-Width (4 Colonnes) -->
+    <footer class="w-full mt-auto py-20 bg-black border-t border-gray-900">
+        <div class="w-full px-[5%] lg:px-[10%]">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+                
+                <!-- Colonne 1 : Newsletter -->
+                <div class="bg-gray-950/50 border border-gray-800 p-8 rounded-3xl shadow-xl flex flex-col">
+                    <h3 class="text-white font-extrabold text-lg mb-2">Newsletter 📩</h3>
+                    <p class="text-gray-500 text-xs mb-8">Restez informé des derniers cours et schémas techniques.</p>
+                    <form onsubmit="handleNewsletter(event)" class="flex flex-col gap-4">
+                        <input type="email" placeholder="Votre email pro..." required 
+                            class="bg-black border border-gray-800 text-white px-5 py-3 rounded-xl focus:outline-none focus:border-customOrange transition-all text-xs">
+                        <button type="submit" class="bg-customOrange text-black font-extrabold py-3 rounded-xl hover:bg-white hover:text-customOrange transition-all text-xs shadow-lg shadow-customOrange/10">
+                            S'abonner
+                        </button>
+                    </form>
+                    <div id="newsletter-success" class="hidden mt-4 text-customOrange text-[10px] font-bold animate-bounce text-center">
+                        ✅ Inscription validée !
+                    </div>
+                </div>
+
+                <!-- Colonne 2 : Navigation -->
+                <div class="lg:pl-10">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">Navigation</h4>
+                    <ul class="space-y-5 text-sm">
+                        <li><a href="electrotechnique.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-bolt w-4 opacity-50 text-xs text-customOrange"></i> Électrotechnique</a></li>
+                        <li><a href="electronique.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-microchip w-4 opacity-50 text-xs text-customOrange"></i> Électronique</a></li>
+                        <li><a href="schemas.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-project-diagram w-4 opacity-50 text-xs text-customOrange"></i> Schémas & Plans</a></li>
+                        <li><a href="energies.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-solar-panel w-4 opacity-50 text-xs text-customOrange"></i> Énergies Renouv.</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 3 : Communauté -->
+                <div class="lg:pl-10">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">Communauté</h4>
+                    <ul class="space-y-5 text-sm">
+                        <li><a href="../utilisateur/forum.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-comments w-4 opacity-50 text-xs text-customOrange"></i> Forum Public</a></li>
+                        <li><a href="../emploi/emploi.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-briefcase w-4 opacity-50 text-xs text-customOrange"></i> Hub Emploi</a></li>
+                        <li><a href="../utilisateur/contact.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-envelope w-4 opacity-50 text-xs text-customOrange"></i> Contact Expert</a></li>
+                        <li><a href="ressources.html" class="text-gray-500 hover:text-white transition-colors flex items-center gap-3"><i class="fas fa-folder-open w-4 opacity-50 text-xs text-customOrange"></i> Logithèque</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne 4 : Réseaux Sociaux -->
+                <div class="lg:pl-10 text-left">
+                    <h4 class="text-white font-bold text-xs mb-10 uppercase tracking-[0.2em] text-customOrange">Suivez-nous</h4>
+                    <p class="text-gray-500 text-xs mb-6">Rejoignez notre laboratoire technologique sur les réseaux.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i class="fab fa-linkedin-in text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i class="fab fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i class="fab fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 hover:bg-customOrange hover:text-black transition-all shadow-lg hover:-translate-y-1"><i class="fab fa-twitter text-sm"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright Line -->
+            <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-customOrange to-transparent opacity-20 mb-8"></div>
+            <p class="text-center text-[10px] text-gray-600 font-medium tracking-widest uppercase">
+                Designed by <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="text-gray-500 hover:text-customOrange transition-all font-bold">ELECTECH Team 2026</a> - © Tous les droits sont reservés
+            </p>
+        </div>
+    </footer>
+    <script>
+        function updateHeaderUI() {
+            // SESSION_KEY is already defined in api.js
+            const session = JSON.parse(localStorage.getItem(SESSION_KEY));
+            
+            const guestZone = document.getElementById('guest-zone');
+            const memberZone = document.getElementById('member-zone');
+            const navUserName = document.getElementById('nav-user-name');
+
+            if (session) {
+                guestZone.classList.add('hidden');
+                guestZone.classList.remove('flex');
+                memberZone.classList.remove('hidden');
+                memberZone.classList.add('flex');
+                navUserName.textContent = session.name;
+            } else {
+                guestZone.classList.remove('hidden');
+                guestZone.classList.add('flex');
+                memberZone.classList.add('hidden');
+                memberZone.classList.remove('flex');
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('electech_session');
+            window.location.reload();
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const success = document.getElementById('newsletter-success');
+            success.classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => success.classList.add('hidden'), 5000);
+        }
+
+        window.addEventListener('DOMContentLoaded', updateHeaderUI);
+    </script>
+    
+    <script src="../javascript/data_elec.js"></script>
+
+    <script src="../js/search_index.js"></script>
+    <script src="../js/search_logic.js"></script>
+    <script src="../js/scroll_to_search.js"></script>
+</body>
+</html>

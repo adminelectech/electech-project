@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publier un Article - Console Admin - ELEC TECH</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { customOrange: '#FF8C00' }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="../javascript/api.js"></script>
+    <style>
+        .input-field {
+            width: 100%;
+            background: #111;
+            border: 1px solid #374151;
+            color: #fff;
+            border-radius: 0.5rem;
+            padding: 0.8rem 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 0.9rem;
+        }
+        .input-field:focus {
+            border-color: #FF8C00;
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+        }
+    </style>
+    <script>
+        // Simple Auth Check
+        if (sessionStorage.getItem('admin_unlocked') !== 'true') {
+            window.location.href = 'admin_publish.html';
+        }
+    </script>
+</head>
+<body class="bg-black text-gray-300 font-sans min-h-screen flex flex-col selection:bg-customOrange selection:text-black">
+
+    <header class="p-6 border-b border-gray-800 backdrop-blur-sm bg-black/80 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <a href="admin_publish.html" class="text-gray-400 hover:text-customOrange transition-colors text-sm font-bold flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Tableau de bord
+                </a>
+                <a href="../index.html" class="text-2xl font-bold text-white tracking-widest hover:scale-105 transition-transform inline-block">
+                    <i class="fas fa-bolt text-customOrange mr-2"></i>ELEC<span class="text-customOrange">TECH</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-customOrange font-black tracking-widest uppercase border border-customOrange/30 bg-customOrange/10 px-4 py-1.5 rounded-full text-xs">
+                    <i class="fas fa-shield-alt mr-1"></i> Mode Admin
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-start p-6 py-12">
+        <div class="w-full max-w-4xl bg-gray-900 border border-gray-800 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
+            <!-- Decorative Glow -->
+            <div class="absolute top-[-50px] right-[-50px] w-40 h-40 bg-customOrange/20 blur-[60px] rounded-full pointer-events-none"></div>
+
+            <h1 class="text-3xl font-black text-white mb-2 flex items-center">
+                Publier un Article Dynamique
+            </h1>
+            <p class="text-gray-500 mb-8 border-b border-gray-800 pb-8 text-sm">
+                Remplissez les informations ci-dessous. Le champ "Page de destination" est automatiquement synchronisé avec le menu du site.
+            </p>
+
+            <form id="publishForm" class="space-y-6 relative z-10">
+                <input type="hidden" id="editingId" value="">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Auteur -->
+                    <div>
+                        <label class="block text-xs font-black text-gray-400 mb-2 uppercase tracking-widest">Nom de l'auteur <span class="text-red-500">*</span></label>
+                        <input type="text" id="auteur" required class="input-field shadow-inner" placeholder="Ex: Ahmed" value="Administratif">
+                    </div>
+                    <!-- Titre -->
+                    <div>
+                        <label class="block text-xs font-black text-gray-400 mb-2 uppercase tracking-widest">Titre de l'article <span class="text-red-500">*</span></label>
+                        <input type="text" id="titre" required class="input-field shadow-inner" placeholder="Ex: Les Fondamentaux du Solaire Photovoltaïque">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Target Page -->
+                    <div>
+                        <label class="block text-xs font-black text-gray-400 mb-2 uppercase tracking-widest">Page de Destination <span class="text-red-500">*</span></label>
+                        <select id="targetPage" required class="input-field cursor-pointer">
+                            <option value="">(Analyse du site web en cours...)</option>
+                        </select>
+                        <p class="text-[10px] text-customOrange mt-2 font-bold uppercase tracking-wider"><i class="fas fa-sync-alt animate-spin mr-1"></i> Menu auto-synchronisé</p>
+                    </div>
+
+                    <!-- Category -->
+                    <div>
+                        <label class="block text-xs font-black text-gray-400 mb-2 uppercase tracking-widest">Catégorie <span class="text-red-500">*</span></label>
+                        <select id="categorie" required class="input-field cursor-pointer">
+                            <option value="Basse Tension (BT)">Basse Tension (BT)</option>
+                            <option value="Haute Tension (HT)">Haute Tension (HT)</option>
+                            <option value="Renouvelable">Solaire / Renouvelable</option>
+                            <option value="Automatisme">Automatisme</option>
+                            <option value="Informatique">Informatique Industrielle</option>
+                            <option value="Conception">Conception / CAO</option>
+                            <option value="Général">Général</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Cover Image -->
+                <div>
+                    <label class="block text-xs font-black text-gray-400 mb-2 uppercase tracking-widest">URL de l'Image de Couverture</label>
+                    <input type="url" id="image" class="input-field" placeholder="https://exemple.com/image.jpg (Optionnel: par défaut image technique)">
+                </div>
+
+                <!-- Content -->
+                <div>
+                    <label class="block text-xs font-black text-gray-400 mb-2 uppercase tracking-widest">Contenu (HTML supporté) <span class="text-red-500">*</span></label>
+                    <textarea id="contenu" required rows="8" class="input-field font-mono text-sm leading-relaxed" placeholder="<p>Écrivez votre contenu ici. Vous pouvez utiliser des balises HTML comme <strong> ou <br>.</p>"></textarea>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="w-full bg-customOrange hover:bg-white text-black font-black text-sm uppercase tracking-[0.2em] py-4 rounded-xl transition-all shadow-xl hover:shadow-customOrange/30 hover:-translate-y-1">
+                    <i class="fas fa-satellite-dish mr-2"></i> Publier l'article sur le réseau
+                </button>
+            </form>
+            
+            <div id="publishSuccess" class="hidden mt-8 bg-green-900/30 border border-green-500/50 p-6 rounded-2xl text-green-400 text-center font-bold flex flex-col items-center shadow-lg">
+                <i class="fas fa-check-circle text-4xl mb-3"></i>
+                <span class="text-lg">Transmission réussie !</span>
+                <span class="text-sm font-normal text-green-500/80 mt-1">L'opération s'est déroulée avec succès.</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTargetPages();
+            document.getElementById('publishForm').addEventListener('submit', handlePublish);
+            
+            // Check if we are editing
+            const urlParams = new URLSearchParams(window.location.search);
+            const editId = urlParams.get('edit');
+            if (editId) {
+                setTimeout(() => editArticle(editId), 500); // Give time for populateTargetPages
+            }
+        });
+
+        async function populateTargetPages() {
+            const select = document.getElementById('targetPage');
+            try {
+                const response = await fetch('../index.html');
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const links = doc.querySelectorAll('nav ul li a');
+                select.innerHTML = '';
+                let pagesFound = 0;
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    let text = link.textContent.trim().replace(/📚|💼/g, '').trim(); 
+                    if(href && href.endsWith('.html') && !['contact.html', 'emploi/emploi.html', 'index.html', 'login.html'].includes(href)) {
+                        const option = document.createElement('option');
+                        option.value = href;
+                        option.textContent = text + ' (' + href + ')';
+                        select.appendChild(option);
+                        pagesFound++;
+                    }
+                });
+                if(pagesFound === 0) throw new Error("Aucune page de contenu trouvée.");
+            } catch(e) {
+                select.innerHTML = `
+                    <option value="Tech 1/schemas.html">Schémas</option>
+                    <option value="Tech 1/electrotechnique.html">Électrotechnique</option>
+                    <option value="Tech 1/electronique.html">Électronique</option>
+                    <option value="Tech 1/energies.html">Énergies</option>
+                    <option value="Tech 1/forum.html">Forum</option>
+                    <option value="Tech 1/bibliotheque.html">Livres</option>
+                `;
+            }
+        }
+
+        function handlePublish(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Téléversement...';
+            btn.disabled = true;
+
+            const fallbackImage = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000';
+            const editingId = document.getElementById('editingId').value;
+            
+            const articleData = {
+                title: document.getElementById('titre').value,
+                target_page: document.getElementById('targetPage').value,
+                category: document.getElementById('categorie').value,
+                image: document.getElementById('image').value || fallbackImage,
+                content: document.getElementById('contenu').value,
+                author: document.getElementById('auteur').value || 'Administratif'
+            };
+
+            let articles = JSON.parse(localStorage.getItem('electech_articles') || '[]');
+            if (editingId) {
+                const index = articles.findIndex(a => a.id === editingId);
+                if (index > -1) {
+                    articles[index] = { ...articles[index], ...articleData };
+                }
+            } else {
+                articles.push({
+                    id: 'art_' + Date.now(),
+                    date: new Date().toISOString(),
+                    ...articleData
+                });
+            }
+
+            localStorage.setItem('electech_articles', JSON.stringify(articles));
+
+            setTimeout(() => {
+                e.target.reset();
+                document.getElementById('editingId').value = '';
+                document.getElementById('publishSuccess').classList.remove('hidden');
+                btn.innerHTML = '<i class="fas fa-satellite-dish mr-2"></i> Publier un nouveau article';
+                btn.disabled = false;
+                setTimeout(() => {
+                    document.getElementById('publishSuccess').classList.add('hidden');
+                    window.location.href = 'admin_control_tower.html'; // Redirect to activity log
+                }, 2000);
+            }, 800);
+        }
+
+        function editArticle(id) {
+            const articles = JSON.parse(localStorage.getItem('electech_articles') || '[]');
+            const art = articles.find(a => a.id === id);
+            if (!art) return;
+
+            document.getElementById('editingId').value = art.id;
+            document.getElementById('titre').value = art.title;
+            document.getElementById('targetPage').value = art.targetPage || art.target_page || '';
+            document.getElementById('categorie').value = art.category || '';
+            document.getElementById('image').value = art.image || '';
+            document.getElementById('contenu').value = art.content || '';
+            document.getElementById('auteur').value = art.author || 'Administratif';
+
+            const btn = document.querySelector('#publishForm button[type="submit"]');
+            btn.innerHTML = '<i class="fas fa-save mr-2"></i> Sauvegarder les modifications';
+        }
+    </script>
+</body>
+</html>
