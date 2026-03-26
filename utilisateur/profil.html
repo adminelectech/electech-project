@@ -619,6 +619,9 @@
                 if(msg) msg.style.opacity = '1';
                 if(msgDocs) msgDocs.style.opacity = '1';
 
+                // AUTO-SYNC TO HUB ANNONCES
+                await syncProfileToPublicAnnonces(profileData, session, newName);
+
                 setTimeout(() => {
                     if(msg) msg.style.opacity = '0';
                     if(msgDocs) msgDocs.style.opacity = '0';
@@ -630,6 +633,43 @@
             } catch (err) {
                 alert('Erreur: ' + err.message);
             }
+        }
+
+        async function syncProfileToPublicAnnonces(profileData, session, newName) {
+            const ANNONCES_KEY = 'electech_annonces';
+            const annonces = JSON.parse(localStorage.getItem(ANNONCES_KEY) || '[]');
+            
+            // Generate a unique ID for this user's profile announcement
+            const profileAnnonceId = 'PROF-' + btoa(session.email).substring(0, 12);
+            
+            // Check if already exists
+            const existingIdx = annonces.findIndex(a => a.id === profileAnnonceId);
+            
+            const newAnnonce = {
+                id: profileAnnonceId,
+                type: session.role === 'Recruteur' ? 'recruteur_profil' : 'candidat',
+                author: newName,
+                email: session.email,
+                date: new Date().toLocaleDateString('fr-FR'),
+                ville: profileData.city || 'Maroc',
+                poste: profileData.specialty || (session.role === 'Recruteur' ? 'Recruteur' : 'Technicien'),
+                desc: profileData.motivationLetter || '',
+                experience: profileData.experience || '0',
+                status: 'pending' // Always reset to pending for admin validation when updated
+            };
+
+            // Add specialized fields for candidate if needed
+            if (session.role !== 'Recruteur') {
+                newAnnonce.dispo = 'À préciser';
+            }
+
+            if (existingIdx > -1) {
+                annonces[existingIdx] = newAnnonce;
+            } else {
+                annonces.unshift(newAnnonce);
+            }
+
+            localStorage.setItem(ANNONCES_KEY, JSON.stringify(annonces));
         }
 
         function handleLogout() {

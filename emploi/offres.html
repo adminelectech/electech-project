@@ -280,26 +280,28 @@
         }
 
         board.innerHTML = list.map((a, idx) => {
-            const excerpt = truncateWords(a.desc, 40); // Environ 200 mots c'est bcp, 40 mots c'est bien pour une carte
+            const excerpt = truncateWords(a.desc, 40);
+            const isProfile = a.type === 'recruteur_profil';
+            
             return `
-            <div class="group bg-gray-900 border border-gray-800 hover:border-blue-500 rounded-2xl p-8 transition-all hover:scale-[1.01] fade-in relative overflow-hidden ${a.status === 'pending' ? 'opacity-50 grayscale' : ''}">
+            <div class="group bg-gray-900 border border-gray-800 ${isProfile ? 'hover:border-blue-400 border-l-4 border-l-blue-500' : 'hover:border-blue-500'} rounded-2xl p-8 transition-all hover:scale-[1.01] fade-in relative overflow-hidden ${a.status === 'pending' ? 'opacity-50 grayscale' : ''}">
                 ${a.status === 'pending' ? '<div class="absolute inset-0 flex items-center justify-center z-10"><span class="bg-black/80 text-[10px] font-black text-customOrange px-4 py-2 border border-customOrange/50 rounded-full tracking-widest uppercase">En attente de validation</span></div>' : ''}
                 
                 <div class="flex justify-between items-center mb-6">
-                    <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
-                        🏢 Offre d'Emploi
+                    <span class="px-3 py-1 rounded-full ${isProfile ? 'bg-blue-600/20 text-blue-300' : 'bg-blue-500/10 text-blue-400'} text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
+                        <i class="${isProfile ? 'fas fa-id-badge' : 'fas fa-building'} mr-1.5"></i> ${isProfile ? 'Profil Entreprise / Recruteur' : 'Offre d\'Emploi'}
                     </span>
                     <span class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">${a.date}</span>
                 </div>
 
-                <h3 class="text-2xl font-black text-white mb-2 group-hover:text-blue-400 transition-colors">${a.poste}</h3>
+                <h3 class="text-2xl font-black text-white mb-2 group-hover:text-blue-400 transition-colors">${isProfile ? a.author : a.poste}</h3>
                 <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-6 font-medium">
                     <span><i class="fas fa-map-marker-alt text-blue-500 mr-1.5"></i> ${a.ville || 'Maroc'}</span>
-                    <span><i class="fas fa-building text-blue-500 mr-1.5"></i> ${a.entreprise || 'Anonyme'}</span>
-                    <span><i class="fas fa-file-contract text-blue-500 mr-1.5"></i> ${a.contrat}</span>
+                    ${isProfile ? `<span><i class="fas fa-award text-blue-500 mr-1.5"></i> ${a.poste}</span>` : `<span><i class="fas fa-building text-blue-500 mr-1.5"></i> ${a.entreprise || 'Anonyme'}</span>`}
+                    <span><i class="fas fa-file-contract text-blue-500 mr-1.5"></i> ${isProfile ? a.experience + ' ans exp.' : a.contrat}</span>
                 </div>
 
-                <p class="text-gray-400 text-sm leading-relaxed mb-8 msg-body">${excerpt}</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8 msg-body">${excerpt || 'Présentation en attente...'}</p>
 
                 <div class="flex justify-between items-center pt-6 border-t border-gray-800/50">
                     <div class="flex items-center gap-3">
