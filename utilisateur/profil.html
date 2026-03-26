@@ -350,7 +350,8 @@
                                     <textarea id="motivation-letter" rows="8" class="w-full bg-black/40 border border-gray-800 rounded-2xl p-5 text-sm text-gray-300 focus:border-customOrange outline-none resize-none transition-all placeholder:text-gray-700" placeholder="Décrivez votre parcours et vos ambitions..."></textarea>
                                 </div>
                             </div>
-                            <div class="mt-8 flex justify-end">
+                            <div class="mt-8 flex justify-end items-center gap-4">
+                                <p id="save-msg-docs" class="text-xs font-bold text-green-500 opacity-0 transition-opacity whitespace-nowrap">Sauvegarde effectué</p>
                                 <button onclick="saveProfile(event)" class="bg-customOrange text-black px-8 py-3.5 rounded-2xl font-black uppercase tracking-widest hover:bg-white transition-all text-xs">
                                     Enregistrer les documents
                                 </button>
@@ -613,9 +614,14 @@
                 document.getElementById('view-name').textContent = newName;
                 
                 const msg = document.getElementById('save-msg');
-                msg.style.opacity = '1';
+                const msgDocs = document.getElementById('save-msg-docs');
+                
+                if(msg) msg.style.opacity = '1';
+                if(msgDocs) msgDocs.style.opacity = '1';
+
                 setTimeout(() => {
-                    msg.style.opacity = '0';
+                    if(msg) msg.style.opacity = '0';
+                    if(msgDocs) msgDocs.style.opacity = '0';
                     // If it was the first login and now complete, redirect back to index or hub
                     if (response.profileComplete && document.getElementById('redirect-alert').classList.contains('hidden') === false) {
                         window.location.href = '../index.html';
