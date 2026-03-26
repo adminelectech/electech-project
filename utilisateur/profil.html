@@ -312,6 +312,30 @@
                     <!-- TAB 1: MON COMPTE -->
                     <div id="tab-compte" class="tab-content active space-y-6">
                         <form id="profileForm" class="space-y-6" onsubmit="saveProfile(event)">
+                            
+                            <!-- BENTO CARD: Account Information -->
+                            <div class="bento-card p-8 rounded-3xl">
+                                <h2 class="text-xl font-black text-white mb-6 flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-lg bg-customOrange/10 flex items-center justify-center text-customOrange text-xs"><i class="fas fa-cog"></i></span>
+                                    Informations de compte
+                                </h2>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div class="space-y-2">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Email d'inscription (Identifiant)</label>
+                                        <input type="email" id="account-email" class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 text-gray-500 cursor-not-allowed border-gray-800" disabled>
+                                    </div>
+                                    <div class="space-y-2 relative">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Mot de passe</label>
+                                        <div class="flex items-center gap-2">
+                                            <input type="password" id="account-password" class="w-full px-4 py-3 rounded-xl text-sm bg-black/50 text-gray-500 cursor-not-allowed border-gray-800" value="********" disabled>
+                                            <a href="login.html?tab=login" class="w-12 h-12 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 hover:text-customOrange hover:border-customOrange transition-all flex items-center justify-center shrink-0" title="Modifier le mot de passe">
+                                                <i class="fas fa-pen text-xs"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="bento-card p-8 rounded-3xl">
                                 <h2 class="text-xl font-black text-white mb-6 flex items-center gap-3">
                                     <span class="w-8 h-8 rounded-lg bg-customOrange/10 flex items-center justify-center text-customOrange text-xs"><i class="fas fa-user-circle"></i></span>
@@ -568,6 +592,10 @@
             document.getElementById('name').value = session.name;
             document.getElementById('view-name').textContent = session.name;
             document.getElementById('view-role').textContent = session.role || 'Expert';
+
+            // Populate account email
+            const accEmail = document.getElementById('account-email');
+            if (accEmail) accEmail.value = session.email;
 
             // Configure Quick Action Button based on Role
             const btnEmploi = document.getElementById('btn-action-emploi');
