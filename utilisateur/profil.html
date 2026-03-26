@@ -494,6 +494,7 @@
             try {
                 const profile = await API.call(`/profile?email=${session.email}`);
                 if (profile) {
+                    document.getElementById('city').value = profile.city || '';
                     document.getElementById('experience').value = profile.experience || '';
                     document.getElementById('motivation-letter').value = profile.motivationLetter || '';
                     
