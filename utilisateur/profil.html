@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
     <script src="../javascript/api.js"></script>
+    <!-- Cropper.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -223,10 +226,22 @@
                     <!-- Profile Card -->
                     <div class="bento-card p-8 rounded-3xl text-center relative overflow-hidden">
                         <div class="absolute -top-10 -right-10 w-32 h-32 bg-customOrange/10 blur-3xl rounded-full"></div>
-                        <div class="w-24 h-24 bg-gradient-to-br from-customOrange to-orange-600 rounded-2xl mx-auto flex items-center justify-center text-black text-4xl font-black mb-4 shadow-xl shadow-customOrange/20">
-                            <i class="fas fa-user-tie"></i>
+                        <!-- Avatar Upload -->
+                        <div class="relative w-24 h-24 mx-auto mb-4">
+                            <div id="avatar-display" onclick="document.getElementById('avatar-upload').click()" class="w-24 h-24 bg-gradient-to-br from-customOrange to-orange-600 rounded-2xl flex items-center justify-center text-black text-4xl font-black shadow-xl shadow-customOrange/20 cursor-pointer overflow-hidden relative group">
+                                <i id="avatar-icon" class="fas fa-user-tie"></i>
+                                <img id="avatar-img" class="hidden w-full h-full object-cover absolute inset-0" src="" alt="Avatar">
+                                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
+                                    <i class="fas fa-camera text-white text-xl"></i>
+                                </div>
+                            </div>
+                            <input type="file" id="avatar-upload" accept="image/*" class="hidden" onchange="openPhotoEditor(event)">
                         </div>
                         <h1 id="view-name" class="text-2xl font-black text-white mb-1">Expert</h1>
+                        <div id="verified-badge" class="hidden mb-1 justify-center items-center gap-1">
+                            <i class="fas fa-circle-check text-sky-400 text-sm"></i>
+                            <span class="text-[10px] text-sky-400 font-bold uppercase tracking-widest">Compte vérifié</span>
+                        </div>
                         <p id="view-role" class="text-customOrange font-bold text-xs uppercase tracking-widest mb-6 opacity-80"></p>
                         
                         <div class="flex justify-center gap-4 border-t border-gray-800 pt-6">
@@ -240,6 +255,10 @@
                                 <div class="text-[10px] text-gray-600 font-bold uppercase">Spécialité</div>
                             </div>
                         </div>
+                        <!-- Déconnexion -->
+                        <button onclick="logoutUser()" class="mt-5 w-full bg-pink-600/10 border border-pink-600/30 text-pink-400 font-bold text-xs py-2.5 rounded-xl hover:bg-pink-600/20 transition-all uppercase tracking-widest">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Se déconnecter
+                        </button>
                     </div>
 
                     <!-- SIDE MENU -->
@@ -334,6 +353,16 @@
                                     <div class="space-y-2">
                                         <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Expérience (Années)</label>
                                         <input type="number" id="experience" min="0" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="0">
+                                    </div>
+
+                                    <!-- Champ Genre -->
+                                    <div class="space-y-2" id="div-genre">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Genre / Type</label>
+                                        <select id="genre" class="w-full px-4 py-3 rounded-xl text-sm appearance-none bg-gray-900 text-white border-gray-800">
+                                            <option value="" class="bg-gray-900 text-gray-400">Sélectionner...</option>
+                                            <option value="Homme" class="bg-gray-900 text-white">Homme</option>
+                                            <option value="Femme" class="bg-gray-900 text-white">Femme</option>
+                                        </select>
                                     </div>
 
                                     <!-- Champs Candidat (Cachés par défaut) -->
@@ -464,6 +493,66 @@
             return session;
         }
 
+        // ===== PHOTO EDITOR FUNCTIONS (Global Scope) =====
+        function openPhotoEditor(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.getElementById('cropper-src-img');
+                img.src = e.target.result;
+                img.style.filter = 'brightness(100%)';
+                document.getElementById('brightness-slider').value = 100;
+                document.getElementById('brightness-val').textContent = '100%';
+                if (window._cropper) { window._cropper.destroy(); }
+                const modal = document.getElementById('photo-editor-modal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                window._cropper = new Cropper(img, {
+                    aspectRatio: 1,
+                    viewMode: 2,
+                    autoCropArea: 0.85,
+                    background: false,
+                    movable: true,
+                    zoomable: true,
+                    rotatable: false
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function closePhotoEditor() {
+            const modal = document.getElementById('photo-editor-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            if (window._cropper) { window._cropper.destroy(); window._cropper = null; }
+            const upload = document.getElementById('avatar-upload');
+            if (upload) upload.value = '';
+        }
+
+        function saveCroppedPhoto() {
+            if (!window._cropper) return;
+            const brightness = parseInt(document.getElementById('brightness-slider').value, 10);
+            const canvas = window._cropper.getCroppedCanvas({ width: 300, height: 300 });
+            const ctx = canvas.getContext('2d');
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const factor = brightness / 100;
+            for (let i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i]     = Math.min(255, imgData.data[i]     * factor);
+                imgData.data[i + 1] = Math.min(255, imgData.data[i + 1] * factor);
+                imgData.data[i + 2] = Math.min(255, imgData.data[i + 2] * factor);
+            }
+            ctx.putImageData(imgData, 0, 0);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.88);
+            document.getElementById('avatar-icon').classList.add('hidden');
+            const avatarImg = document.getElementById('avatar-img');
+            avatarImg.src = dataUrl;
+            avatarImg.classList.remove('hidden');
+            window._tempAvatarData = dataUrl;
+            closePhotoEditor();
+        }
+        // ===== END PHOTO EDITOR =====
+
         // Initialize
         window.addEventListener('DOMContentLoaded', async () => {
             const session = checkAuth();
@@ -492,6 +581,16 @@
                 }
             }
 
+            // Configure Genre field based on Role
+            const genreSelect = document.getElementById('genre');
+            if (session.role === 'Recruteur' && genreSelect) {
+                const entOption = document.createElement('option');
+                entOption.value = 'Entreprise';
+                entOption.textContent = 'Entreprise (Personne Morale)';
+                entOption.className = 'bg-gray-900 text-white';
+                genreSelect.appendChild(entOption);
+            }
+
             // Configure Form Fields based on Role
             if (session.role === 'Recruteur') {
                 const divComp = document.getElementById('div-company');
@@ -511,16 +610,34 @@
                 document.getElementById('experience').value = cachedProfile.experience || '';
                 document.getElementById('motivation-letter').value = cachedProfile.motivationLetter || '';
                 
-                if (document.getElementById('contact-phone')) document.getElementById('contact-phone').value = cachedProfile.phone || '';
+            // Load saved avatar from cache
+            if (cachedProfile.avatar) {
+                window._tempAvatarData = cachedProfile.avatar;
+                document.getElementById('avatar-icon').classList.add('hidden');
+                const avatarImg = document.getElementById('avatar-img');
+                avatarImg.src = cachedProfile.avatar;
+                avatarImg.classList.remove('hidden');
+            }
+            
+            if (document.getElementById('contact-phone')) document.getElementById('contact-phone').value = cachedProfile.phone || '';
                 if (document.getElementById('contact-email')) document.getElementById('contact-email').value = cachedProfile.contactEmail || session.email;
+                if (document.getElementById('genre')) document.getElementById('genre').value = cachedProfile.genre || '';
                 if (document.getElementById('education-level')) document.getElementById('education-level').value = cachedProfile.educationLevel || '';
                 if (document.getElementById('last-diploma')) document.getElementById('last-diploma').value = cachedProfile.lastDiploma || '';
                 if (document.getElementById('company')) document.getElementById('company').value = cachedProfile.company || '';
 
                 updateVisuals(cachedProfile);
+
+                // Show verified badge
+                const badge = document.getElementById('verified-badge');
+                if (badge && cachedProfile.verified) {
+                    badge.classList.remove('hidden');
+                    badge.classList.add('flex');
+                }
             } else {
                 if (document.getElementById('contact-email')) document.getElementById('contact-email').value = session.email;
             }
+
 
             // Load tabs logic
             window.switchTab = (tabId) => {
@@ -628,9 +745,16 @@
                 if (e.target.files.length) showFileStatus(e.target.files[0].name);
             };
 
-            // Initialize City Autocomplete
+            // Initialize City Autocomplete & Brightness Slider
             if (typeof API.initCityAutocomplete === 'function') {
                 API.initCityAutocomplete('city');
+            }
+            // Brightness slider live feedback
+            const bslider = document.getElementById('brightness-slider');
+            if (bslider) {
+                bslider.addEventListener('input', (ev) => {
+                    document.getElementById('brightness-val').textContent = ev.target.value + '%';
+                });
             }
         });
 
@@ -680,8 +804,10 @@
                 city: document.getElementById('city').value,
                 specialty: specialtyValue,
                 experience: document.getElementById('experience').value,
+                avatar: window._tempAvatarData || '',
                 phone: document.getElementById('contact-phone') ? document.getElementById('contact-phone').value : '',
                 contactEmail: document.getElementById('contact-email') ? document.getElementById('contact-email').value : '',
+                genre: document.getElementById('genre') ? document.getElementById('genre').value : '',
                 educationLevel: document.getElementById('education-level') ? document.getElementById('education-level').value : '',
                 lastDiploma: document.getElementById('last-diploma') ? document.getElementById('last-diploma').value : '',
                 company: document.getElementById('company') ? document.getElementById('company').value : '',
@@ -769,11 +895,38 @@
             localStorage.setItem(ANNONCES_KEY, JSON.stringify(annonces));
         }
 
-        function handleLogout() {
+        function logoutUser() {
             localStorage.removeItem(SESSION_KEY);
-            window.location.href = '../index.html';
+            window.location.href = '../utilisateur/login.html';
+        }
+
+        function handleLogout() {
+            logoutUser();
         }
     </script>
+
+    <!-- Photo Editor Modal -->
+    <div id="photo-editor-modal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[300] hidden flex-col items-center justify-center p-4">
+        <div class="bg-gray-950 border border-gray-800 rounded-[2rem] p-6 w-full max-w-lg shadow-2xl">
+            <h3 class="text-lg font-black text-white mb-4 text-center">Modifier votre photo <i class="fas fa-crop-simple ml-2 text-customOrange"></i></h3>
+            <!-- Cropper wrapper -->
+            <div class="relative bg-black rounded-2xl overflow-hidden" style="height:280px;">
+                <img id="cropper-src-img" class="block max-w-full" src="" alt=""/>
+            </div>
+            <!-- Brightness control -->
+            <div class="mt-5 flex items-center gap-4">
+                <i class="fas fa-sun text-gray-500 text-sm"></i>
+                <input type="range" id="brightness-slider" min="0" max="200" value="100" class="flex-1 accent-customOrange cursor-pointer h-2 rounded-full">
+                <span id="brightness-val" class="text-xs text-gray-400 w-10 text-center">100%</span>
+            </div>
+            <p class="text-[10px] text-gray-600 text-center mt-2">Glissez pour recadrer &bull; Tournette zoom avec la molette</p>
+            <!-- Actions -->
+            <div class="flex gap-3 mt-5">
+                <button onclick="closePhotoEditor()" class="flex-1 bg-gray-900 border border-gray-800 text-gray-400 font-bold py-3 rounded-2xl hover:bg-gray-800 transition-all text-xs">Annuler</button>
+                <button onclick="saveCroppedPhoto()" class="flex-1 bg-customOrange text-black font-black py-3 rounded-2xl hover:bg-white transition-all text-xs"><i class="fas fa-check mr-2"></i>Appliquer</button>
+            </div>
+        </div>
+    </div>
     <footer class="p-8 text-center border-t border-gray-900 mt-10">
         <p class="text-[10px] text-gray-700 font-bold uppercase tracking-[0.4em]">Designed by ELECTECH Team 2026 - © Tous les droits sont reservés</p>
     </footer>

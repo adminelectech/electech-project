@@ -266,6 +266,22 @@
             </div>
         </div>
     </div>
+    <!-- Email Confirmation Modal -->
+    <div id="email-confirm-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] hidden items-center justify-center p-4">
+        <div class="bg-gray-950 border border-green-800/50 rounded-[2rem] p-10 w-full max-w-sm shadow-2xl text-center">
+            <div class="w-16 h-16 bg-green-500/10 rounded-2xl flex items-center justify-center mx-auto mb-5">
+                <i class="fas fa-envelope-circle-check text-green-400 text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-black text-white mb-2">Inscription réussie !</h3>
+            <p class="text-sm text-gray-400 mb-1">Un email de confirmation a été envoyé à :</p>
+            <p id="confirm-email-addr" class="text-green-400 font-bold text-sm mb-6">votre@email.com</p>
+            <p class="text-[10px] text-gray-600 mb-6">Vérifiez votre boîte de réception et cliquez sur le lien pour activer votre compte.</p>
+            <button id="confirm-modal-btn" class="w-full bg-customOrange text-black font-black py-3.5 rounded-2xl hover:bg-white transition-all uppercase tracking-widest text-xs">
+                Accéder à mon profil
+            </button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="p-8 text-center relative z-10">
         <p class="text-[10px] text-gray-700 font-bold uppercase tracking-[0.4em]">Designed by ELECTECH Team 2026 - © Tous les droits sont reservés</p>
@@ -326,13 +342,17 @@
                 const endpoint = type === 'login' ? '/login' : '/register';
                 const response = await API.call(endpoint, 'POST', data);
 
+                response.user.verified = false;
                 localStorage.setItem(SESSION_KEY, JSON.stringify(response.user));
 
-                if (response.user.profileComplete) {
-                    const params = new URLSearchParams(window.location.search);
-                    window.location.href = params.get('redirect') || '../index.html';
+                const redirectTarget = response.user.profileComplete
+                    ? (new URLSearchParams(window.location.search).get('redirect') || '../index.html')
+                    : 'profil.html?reason=first_login';
+
+                if (type === 'signup') {
+                    showEmailConfirmModal(email, redirectTarget);
                 } else {
-                    window.location.href = 'profil.html?reason=first_login';
+                    window.location.href = redirectTarget;
                 }
             } catch (error) {
                 console.error('Auth error:', error);
@@ -402,6 +422,16 @@
             document.getElementById('social-step-1').classList.remove('hidden');
         }
 
+        function showEmailConfirmModal(email, redirectUrl) {
+            document.getElementById('confirm-email-addr').textContent = email;
+            const modal = document.getElementById('email-confirm-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('confirm-modal-btn').onclick = () => {
+                window.location.href = redirectUrl;
+            };
+        }
+
         function finalizeSocialLogin(name, email) {
             document.getElementById('social-step-2').classList.add('hidden');
             document.getElementById('social-step-3').classList.remove('hidden');
@@ -411,10 +441,12 @@
                     name: name,
                     email: email,
                     role: currentSocialRole,
-                    profileComplete: false
+                    profileComplete: false,
+                    verified: false
                 };
                 localStorage.setItem(SESSION_KEY, JSON.stringify(mockUser));
-                window.location.href = 'profil.html?reason=first_login';
+                closeSocialModal();
+                showEmailConfirmModal(email, 'profil.html?reason=first_login');
             }, 1500);
         }
 
