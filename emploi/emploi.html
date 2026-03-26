@@ -484,7 +484,7 @@ function switchDash(panel) {
 function publishAnnonce(e, type) {
     e.preventDefault();
     const user = getSession();
-    let annonce = { type, author: user.name, date: new Date().toLocaleDateString('fr-FR') };
+    let annonce = { id: Date.now(), type, author: user.name, date: new Date().toLocaleDateString('fr-FR') };
     if (type === 'candidat') {
         annonce = { ...annonce,
             dispo:   document.getElementById('c_dispo').value,
@@ -578,8 +578,6 @@ function renderAnnonces() {
             }, 500);
         }
     }
-}
-    }).join('');
 }
 
 function deleteAnnonce(idx) {
