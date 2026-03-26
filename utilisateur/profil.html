@@ -304,6 +304,14 @@
                                         <input type="text" id="name" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="Votre nom" required>
                                     </div>
                                     <div class="space-y-2">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Adresse mail de contact</label>
+                                        <input type="email" id="contact-email" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="Ex: contact@email.com">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Numéro de téléphone de contact</label>
+                                        <input type="tel" id="contact-phone" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="Ex: +212 600000000">
+                                    </div>
+                                    <div class="space-y-2">
                                         <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Ville</label>
                                         <input type="text" id="city" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="Ex: Casablanca">
                                     </div>
@@ -326,6 +334,30 @@
                                     <div class="space-y-2">
                                         <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Expérience (Années)</label>
                                         <input type="number" id="experience" min="0" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="0">
+                                    </div>
+
+                                    <!-- Champs Candidat (Cachés par défaut) -->
+                                    <div class="space-y-2 hidden" id="div-education-level">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Niveau des études</label>
+                                        <select id="education-level" class="w-full px-4 py-3 rounded-xl text-sm appearance-none bg-gray-900 text-white border-gray-800">
+                                            <option value="" class="bg-gray-900 text-gray-400">Sélectionner...</option>
+                                            <option value="Bac" class="bg-gray-900 text-white">Bac</option>
+                                            <option value="Bac+2 (BTS/DUT/ISTA)" class="bg-gray-900 text-white">Bac+2 (BTS/DUT/ISTA)</option>
+                                            <option value="Bac+3 (Licence)" class="bg-gray-900 text-white">Bac+3 (Licence)</option>
+                                            <option value="Bac+5 (Ingénieur/Master)" class="bg-gray-900 text-white">Bac+5 (Ingénieur/Master)</option>
+                                            <option value="Doctorat" class="bg-gray-900 text-white">Doctorat</option>
+                                            <option value="Autre" class="bg-gray-900 text-white">Autre</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-2 hidden" id="div-last-diploma">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Dernier diplôme achevé</label>
+                                        <input type="text" id="last-diploma" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="Ex: BTS Électrotechnique">
+                                    </div>
+
+                                    <!-- Champs Recruteur (Cachés par défaut) -->
+                                    <div class="space-y-2 hidden" id="div-company">
+                                        <label class="text-[10px] text-gray-500 font-black uppercase tracking-widest ml-1">Nom de l'entreprise</label>
+                                        <input type="text" id="company" class="w-full px-4 py-3 rounded-xl text-sm" placeholder="Ex: OCP, ONEE...">
                                     </div>
                                 </div>
                             </div>
@@ -460,6 +492,17 @@
                 }
             }
 
+            // Configure Form Fields based on Role
+            if (session.role === 'Recruteur') {
+                const divComp = document.getElementById('div-company');
+                if(divComp) divComp.classList.remove('hidden');
+            } else {
+                const divEdu = document.getElementById('div-education-level');
+                const divDip = document.getElementById('div-last-diploma');
+                if(divEdu) divEdu.classList.remove('hidden');
+                if(divDip) divDip.classList.remove('hidden');
+            }
+
             // ZERO-LAG PRE-LOAD: Load from localStorage immediately before API call
             const cachedProfiles = JSON.parse(localStorage.getItem('electech_user_profiles') || '{}');
             const cachedProfile = cachedProfiles[session.email];
@@ -467,7 +510,16 @@
                 document.getElementById('city').value = cachedProfile.city || '';
                 document.getElementById('experience').value = cachedProfile.experience || '';
                 document.getElementById('motivation-letter').value = cachedProfile.motivationLetter || '';
+                
+                if (document.getElementById('contact-phone')) document.getElementById('contact-phone').value = cachedProfile.phone || '';
+                if (document.getElementById('contact-email')) document.getElementById('contact-email').value = cachedProfile.contactEmail || session.email;
+                if (document.getElementById('education-level')) document.getElementById('education-level').value = cachedProfile.educationLevel || '';
+                if (document.getElementById('last-diploma')) document.getElementById('last-diploma').value = cachedProfile.lastDiploma || '';
+                if (document.getElementById('company')) document.getElementById('company').value = cachedProfile.company || '';
+
                 updateVisuals(cachedProfile);
+            } else {
+                if (document.getElementById('contact-email')) document.getElementById('contact-email').value = session.email;
             }
 
             // Load tabs logic
@@ -539,6 +591,12 @@
                     document.getElementById('experience').value = profile.experience || '';
                     document.getElementById('motivation-letter').value = profile.motivationLetter || '';
                     
+                    if (document.getElementById('contact-phone')) document.getElementById('contact-phone').value = profile.phone || '';
+                    if (document.getElementById('contact-email')) document.getElementById('contact-email').value = profile.contactEmail || session.email;
+                    if (document.getElementById('education-level')) document.getElementById('education-level').value = profile.educationLevel || '';
+                    if (document.getElementById('last-diploma')) document.getElementById('last-diploma').value = profile.lastDiploma || '';
+                    if (document.getElementById('company')) document.getElementById('company').value = profile.company || '';
+
                     // Handle specialty loading
                     const select = document.getElementById('specialty');
                     const options = Array.from(select.options).map(o => o.value);
@@ -622,6 +680,11 @@
                 city: document.getElementById('city').value,
                 specialty: specialtyValue,
                 experience: document.getElementById('experience').value,
+                phone: document.getElementById('contact-phone') ? document.getElementById('contact-phone').value : '',
+                contactEmail: document.getElementById('contact-email') ? document.getElementById('contact-email').value : '',
+                educationLevel: document.getElementById('education-level') ? document.getElementById('education-level').value : '',
+                lastDiploma: document.getElementById('last-diploma') ? document.getElementById('last-diploma').value : '',
+                company: document.getElementById('company') ? document.getElementById('company').value : '',
                 cvName: document.getElementById('cv-name').textContent,
                 motivationLetter: document.getElementById('motivation-letter').value
             };
@@ -679,12 +742,16 @@
                 id: profileAnnonceId,
                 type: session.role === 'Recruteur' ? 'recruteur_profil' : 'candidat',
                 author: newName,
-                email: session.email,
+                email: profileData.contactEmail || session.email,
+                tel: profileData.phone || '',
                 date: new Date().toLocaleDateString('fr-FR'),
                 ville: profileData.city || 'Maroc',
                 poste: profileData.specialty || (session.role === 'Recruteur' ? 'Recruteur' : 'Technicien'),
                 desc: profileData.motivationLetter || '',
                 experience: profileData.experience || '0',
+                educationLevel: profileData.educationLevel || '',
+                lastDiploma: profileData.lastDiploma || '',
+                entreprise: profileData.company || '',
                 status: 'pending' // Always reset to pending for admin validation when updated
             };
 
