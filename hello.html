@@ -196,89 +196,81 @@
                 </div>
             </div>
         </div>
-        </div>
-    </main>
-
-    <!-- Social Auth Modal -->
-    <div id="social-auth-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-gray-950 border border-gray-800 rounded-[2rem] p-8 w-full max-w-md shadow-2xl relative overflow-hidden transform scale-95 transition-transform duration-300" id="social-modal-content">
-            <!-- Close btn -->
-            <button onclick="closeSocialModal()" class="absolute top-5 right-5 text-gray-500 hover:text-white transition-colors">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-
-            <!-- Step 1: Role Selection -->
-            <div id="social-step-1" class="space-y-6">
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-black text-white mb-2">Votre Profil</h3>
-                    <p class="text-xs text-gray-400">Pour finaliser votre inscription, veuillez nous indiquer votre type de profil.</p>
+         <!-- Social Auth Modal (Modernized OAuth Popup Style) -->
+    <div id="social-auth-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] hidden items-center justify-center p-4 opacity-0 transition-all duration-300">
+        <!-- The "Popup" Window -->
+        <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl w-full max-w-[440px] shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden transform scale-95 transition-all duration-300" id="social-modal-content">
+            
+            <!-- Browser Header Simulation -->
+            <div class="bg-[#222] px-4 py-3 flex items-center justify-between border-b border-white/5">
+                <div class="flex gap-1.5">
+                    <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
                 </div>
-                <div class="grid grid-cols-1 gap-4">
-                    <button onclick="selectSocialRole('Technicien')" class="group relative overflow-hidden bg-gray-900 border border-gray-800 p-6 rounded-3xl text-left hover:border-customOrange transition-all flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-2xl bg-customOrange/10 flex items-center justify-center text-customOrange group-hover:scale-110 transition-transform">
-                            <i class="fas fa-user-graduate text-xl"></i>
+                <div class="bg-black/40 px-3 py-1 rounded-md flex items-center gap-2 border border-white/5 w-64">
+                    <i class="fas fa-lock text-[10px] text-green-500"></i>
+                    <span id="fake-url" class="text-[10px] text-gray-400 font-mono truncate">accounts.google.com</span>
+                </div>
+                <button onclick="closeSocialModal()" class="text-gray-500 hover:text-white transition-colors">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <div class="p-8">
+                <!-- Step 1: Account Selection -->
+                <div id="social-step-1" class="space-y-8">
+                    <div class="text-center">
+                        <div id="social-provider-logo" class="mb-6 h-12 flex justify-center items-center">
+                            <!-- Injected Logo -->
                         </div>
-                        <div>
-                            <h4 class="text-white font-bold text-sm">Candidat / Technicien</h4>
-                            <p class="text-[10px] text-gray-500 mt-1">Je cherche des opportunités</p>
-                        </div>
-                        <div class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity text-customOrange">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </button>
-                    <button onclick="selectSocialRole('Recruteur')" class="group relative overflow-hidden bg-gray-900 border border-gray-800 p-6 rounded-3xl text-left hover:border-blue-500 transition-all flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
-                            <i class="fas fa-briefcase text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-bold text-sm">Entreprise / Recruteur</h4>
-                            <p class="text-[10px] text-gray-500 mt-1">Je cherche des talents</p>
-                        </div>
-                        <div class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </button>
+                        <h3 class="text-xl font-bold text-white mb-2">Continuer avec <span id="social-provider-name">Google</span></h3>
+                        <p class="text-xs text-gray-400">Pour continuer vers ELECTECH</p>
+                    </div>
+
+                    <div class="bg-white/5 rounded-2xl p-1 space-y-1 border border-white/5">
+                        <button onclick="finalizeSocialLogin('Ahmed Chikh', 'ahmed@example.com')" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-all text-left group">
+                            <div class="w-10 h-10 rounded-full bg-customOrange/20 border border-customOrange/40 flex items-center justify-center text-customOrange font-black text-lg group-hover:scale-110 transition-transform">A</div>
+                            <div class="flex-grow">
+                                <p class="text-white font-bold text-sm">Ahmed Chikh</p>
+                                <p class="text-[10px] text-gray-500 group-hover:text-gray-400 transition-colors">ahmed@example.com</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-[10px] text-gray-700 opacity-0 group-hover:opacity-100 transition-all"></i>
+                        </button>
+                        <div class="h-px w-full bg-white/5 mx-auto w-[90%]"></div>
+                        <button onclick="finalizeSocialLogin('Compte Pro', 'pro@electech.ma')" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-all text-left group">
+                            <div class="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-black text-lg group-hover:scale-110 transition-transform">P</div>
+                            <div class="flex-grow">
+                                <p class="text-white font-bold text-sm">Compte Professionnel</p>
+                                <p class="text-[10px] text-gray-500 group-hover:text-gray-400 transition-colors">pro@electech.ma</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-[10px] text-gray-700 opacity-0 group-hover:opacity-100 transition-all"></i>
+                        </button>
+                    </div>
+
+                    <p class="text-[9px] text-center text-gray-600 px-6 leading-relaxed">
+                        Pour continuer, Google partagera votre nom, votre adresse e-mail, votre langue préférée et votre photo de profil avec ELECTECH.
+                    </p>
+                </div>
+
+                <!-- Step 2: Loading / Finalizing -->
+                <div id="social-step-2" class="hidden py-12 flex flex-col items-center justify-center text-center">
+                    <div class="relative w-16 h-16 mb-6">
+                        <div class="absolute inset-0 border-4 border-customOrange/10 rounded-full"></div>
+                        <div class="absolute inset-0 border-4 border-t-customOrange rounded-full animate-spin"></div>
+                    </div>
+                    <h3 class="text-lg font-bold text-white" id="social-loading-title">Authentification...</h3>
+                    <p class="text-xs text-gray-400 mt-2">Nous vérifions vos informations avec <span class="capitalize" id="social-loading-provider">Google</span>.</p>
                 </div>
             </div>
 
-            <!-- Step 2: Account Selection -->
-            <div id="social-step-2" class="hidden space-y-6">
-                <div class="text-center mb-8">
-                    <div id="social-provider-icon" class="text-4xl mb-4"></div>
-                    <h3 class="text-xl font-black text-white mb-2">Sélectionnez un compte</h3>
-                    <p class="text-xs text-gray-400">Continuer vers Electech</p>
-                </div>
-                <div class="bg-gray-900 rounded-2xl p-2 space-y-1">
-                    <button onclick="finalizeSocialLogin('Ahmed Chikh', 'ahmed@example.com')" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-gray-800 transition-colors text-left border border-transparent hover:border-gray-700">
-                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg">A</div>
-                        <div>
-                            <p class="text-white font-bold text-sm">Ahmed Chikh</p>
-                            <p class="text-[10px] text-gray-400">ahmed@example.com</p>
-                        </div>
-                    </button>
-                    <div class="h-px w-full bg-gray-800 my-1"></div>
-                    <button onclick="finalizeSocialLogin('Compte Professionnel', 'contact@entreprise.com')" class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-gray-800 transition-colors text-left border border-transparent hover:border-gray-700">
-                        <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-lg">C</div>
-                        <div>
-                            <p class="text-white font-bold text-sm">Compte Professionnel</p>
-                            <p class="text-[10px] text-gray-400">contact@entreprise.com</p>
-                        </div>
-                    </button>
-                </div>
-                <div class="text-center mt-6">
-                    <button onclick="goBackSocialRole()" class="text-[10px] text-gray-500 font-bold uppercase tracking-widest hover:text-white transition-colors">
-                        <i class="fas fa-arrow-left mr-1"></i> Retour
-                    </button>
-                </div>
-            </div>
-
-            <!-- Step 3: Loading -->
-            <div id="social-step-3" class="hidden py-8 flex flex-col items-center justify-center text-center">
-                <i class="fas fa-circle-notch fa-spin text-4xl text-customOrange mb-4"></i>
-                <h3 class="text-lg font-black text-white">Connexion en cours...</h3>
-                <p class="text-xs text-gray-400 mt-2">Veuillez patienter quelques instants.</p>
+            <!-- Footer for additional trust -->
+            <div id="social-footer" class="bg-black/20 p-4 border-t border-white/5 text-center">
+                <p class="text-[9px] uppercase tracking-widest text-gray-700 font-bold">Sécurisé par ELECTECH Auth Service</p>
             </div>
         </div>
+    </div>
+       </div>
     </div>
 
     <!-- Email Confirmation Modal -->
@@ -375,23 +367,31 @@
             }
         }
 
-        // --- Social Auth Logic ---
+        // --- Social Auth Logic (Modernized) ---
         let currentSocialProvider = '';
-        let currentSocialRole = '';
 
         function startSocialLogin(provider) {
             currentSocialProvider = provider;
-            currentSocialRole = '';
             
+            // UI state reset
             document.getElementById('social-step-1').classList.remove('hidden');
             document.getElementById('social-step-2').classList.add('hidden');
-            document.getElementById('social-step-3').classList.add('hidden');
             
-            const providerIconContainer = document.getElementById('social-provider-icon');
+            const providerLogo = document.getElementById('social-provider-logo');
+            const providerName = document.getElementById('social-provider-name');
+            const fakeUrl = document.getElementById('fake-url');
+            const loadingProvider = document.getElementById('social-loading-provider');
+
             if (provider === 'google') {
-                providerIconContainer.innerHTML = '<img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" class="w-12 h-12 mx-auto" alt="Google">';
+                providerLogo.innerHTML = '<img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" class="w-10 h-10" alt="Google">';
+                providerName.textContent = 'Google';
+                fakeUrl.textContent = 'accounts.google.com';
+                loadingProvider.textContent = 'Google';
             } else {
-                providerIconContainer.innerHTML = '<i class="fab fa-facebook text-[#1877F2] text-5xl"></i>';
+                providerLogo.innerHTML = '<i class="fab fa-facebook text-[#1877F2] text-5xl"></i>';
+                providerName.textContent = 'Facebook';
+                fakeUrl.textContent = 'facebook.com';
+                loadingProvider.textContent = 'Facebook';
             }
 
             const modal = document.getElementById('social-auth-modal');
@@ -420,43 +420,46 @@
             }, 300);
         }
 
-        function selectSocialRole(role) {
-            currentSocialRole = role;
-            document.getElementById('social-step-1').classList.add('hidden');
-            document.getElementById('social-step-2').classList.remove('hidden');
-        }
-
-        function goBackSocialRole() {
-            currentSocialRole = '';
-            document.getElementById('social-step-2').classList.add('hidden');
-            document.getElementById('social-step-1').classList.remove('hidden');
-        }
-
         function showEmailConfirmModal(email, redirectUrl) {
-            document.getElementById('confirm-email-addr').textContent = email;
+            const emailEl = document.getElementById('confirm-email-addr');
+            if (emailEl) emailEl.textContent = email;
             const modal = document.getElementById('email-confirm-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.getElementById('confirm-modal-btn').onclick = () => {
-                window.location.href = redirectUrl;
-            };
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+            const btn = document.getElementById('confirm-modal-btn');
+            if (btn) {
+                btn.onclick = () => {
+                    window.location.href = redirectUrl;
+                };
+            }
         }
 
         function finalizeSocialLogin(name, email) {
-            document.getElementById('social-step-2').classList.add('hidden');
-            document.getElementById('social-step-3').classList.remove('hidden');
-
+            // Animating transition in popup
+            document.getElementById('social-step-1').classList.add('hidden');
+            document.getElementById('social-step-2').classList.remove('hidden');
+            document.getElementById('social-loading-title').textContent = 'Connexion à ELECTECH...';
+            
+            // Mocking network delay
             setTimeout(() => {
-                const mockUser = {
-                    name: name,
-                    email: email,
-                    role: currentSocialRole,
-                    profileComplete: false,
-                    verified: false
-                };
-                localStorage.setItem(SESSION_KEY, JSON.stringify(mockUser));
-                closeSocialModal();
-                showEmailConfirmModal(email, 'utilisateur/profil.html?reason=first_login');
+                document.getElementById('social-loading-title').textContent = 'Succès !';
+                
+                setTimeout(() => {
+                    const mockUser = {
+                        name: name,
+                        email: email,
+                        role: 'Technicien', // Default role to avoid friction
+                        profileComplete: false,
+                        verified: false
+                    };
+                    localStorage.setItem(SESSION_KEY, JSON.stringify(mockUser));
+                    closeSocialModal();
+                    
+                    // Show final confirmation modal or redirect
+                    showEmailConfirmModal(email, 'utilisateur/profil.html?reason=first_login');
+                }, 800);
             }, 1500);
         }
 
