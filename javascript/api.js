@@ -89,10 +89,18 @@ function renderDynamicArticles() {
     
     const pathPrefix = window.location.pathname.includes('/Tech 1/') ? '' : (window.location.pathname.includes('/admin/') || window.location.pathname.includes('/emploi/') ? '../Tech 1/' : 'Tech 1/');
     
+    function truncateWords(str, count) {
+        if (!str) return "";
+        const words = str.split(/\s+/);
+        if (words.length <= count) return str;
+        return words.slice(0, count).join(" ") + "...";
+    }
+
     // Sort chronologically reverse (newest first)
     pageArticles.reverse().forEach(art => {
         const d = new Date(art.date);
         const dateStr = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
+        const excerpt = truncateWords(art.content, 40); // 40 mots pour l'extrait
 
         html += `
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-lg hover:border-customOrange transition-all duration-300 group flex flex-col md:flex-row gap-8 mb-8">
@@ -114,7 +122,7 @@ function renderDynamicArticles() {
                         ${art.title}
                     </h2>
                     <div class="prose prose-invert prose-orange max-w-none text-gray-400 overflow-hidden text-sm md:text-base leading-relaxed mb-6 break-words break-all line-clamp-4">
-                        ${art.content}
+                        ${excerpt}
                     </div>
                     <div class="mt-auto">
                         <a href="${pathPrefix}Article.html?id=${art.id}" class="inline-block bg-customOrange/10 text-customOrange border border-customOrange/30 hover:bg-customOrange hover:text-black font-bold text-xs uppercase tracking-widest py-2 px-6 rounded-lg transition-all shadow-md group-hover:bg-customOrange group-hover:text-black">

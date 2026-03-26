@@ -262,6 +262,13 @@
         if(p && d) d.textContent = p.value;
     }
 
+    function truncateWords(str, count) {
+        if (!str) return "";
+        const words = str.split(/\s+/);
+        if (words.length <= count) return str;
+        return words.slice(0, count).join(" ") + "...";
+    }
+
     function renderAnnonces() {
         const list = getAnnonces().filter(a => a.type !== 'candidat');
         const board = document.getElementById('annonceBoard');
@@ -272,22 +279,43 @@
             return;
         }
 
-        board.innerHTML = list.map((a, idx) => `
-            <div class="bg-gray-900 border border-gray-800 hover:border-blue-700 rounded-2xl p-8 transition-all hover:scale-[1.01] fade-in relative overflow-hidden ${a.status === 'pending' ? 'opacity-50 grayscale' : ''}">
+        board.innerHTML = list.map((a, idx) => {
+            const excerpt = truncateWords(a.desc, 40); // Environ 200 mots c'est bcp, 40 mots c'est bien pour une carte
+            return `
+            <div class="group bg-gray-900 border border-gray-800 hover:border-blue-500 rounded-2xl p-8 transition-all hover:scale-[1.01] fade-in relative overflow-hidden ${a.status === 'pending' ? 'opacity-50 grayscale' : ''}">
                 ${a.status === 'pending' ? '<div class="absolute inset-0 flex items-center justify-center z-10"><span class="bg-black/80 text-[10px] font-black text-customOrange px-4 py-2 border border-customOrange/50 rounded-full tracking-widest uppercase">En attente de validation</span></div>' : ''}
-                <div class="flex justify-between items-start mb-4">
-                    <span class="badge badge-recruiter uppercase tracking-tighter">${a.contrat}</span>
-                    <span class="text-[10px] text-gray-700 font-mono">${a.date}</span>
+                
+                <div class="flex justify-between items-center mb-6">
+                    <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
+                        🏢 Offre d'Emploi
+                    </span>
+                    <span class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">${a.date}</span>
                 </div>
-                <h3 class="text-white text-xl font-black mb-1">${a.poste}</h3>
-                <p class="text-customOrange text-sm font-bold mb-4">${a.entreprise || '---'} — ${a.ville || '---'}</p>
-                <div class="bg-black/50 p-4 rounded-xl mb-6 text-sm text-gray-400 leading-relaxed msg-body border border-gray-800/30 italic">${a.desc || ''}</div>
-                <div class="flex items-center justify-between">
-                    <a href="voir_annonce.html?id=${a.id}" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-full text-xs font-bold transition-all shadow-lg shadow-blue-600/20">Voir l'annonce</a>
-                    <span class="text-[10px] text-gray-800">Par ${a.author}</span>
+
+                <h3 class="text-2xl font-black text-white mb-2 group-hover:text-blue-400 transition-colors">${a.poste}</h3>
+                <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-6 font-medium">
+                    <span><i class="fas fa-map-marker-alt text-blue-500 mr-1.5"></i> ${a.ville || 'Maroc'}</span>
+                    <span><i class="fas fa-building text-blue-500 mr-1.5"></i> ${a.entreprise || 'Anonyme'}</span>
+                    <span><i class="fas fa-file-contract text-blue-500 mr-1.5"></i> ${a.contrat}</span>
+                </div>
+
+                <p class="text-gray-400 text-sm leading-relaxed mb-8 msg-body">${excerpt}</p>
+
+                <div class="flex justify-between items-center pt-6 border-t border-gray-800/50">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-blue-500/10 flex items-center justify-center text-xs text-blue-500 font-black border border-blue-500/20">
+                            ${a.author ? a.author.substring(0,2).toUpperCase() : 'AD'}
+                        </div>
+                        <span class="text-[10px] text-gray-500 font-bold">Par ${a.author}</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <a href="voir_annonce.html?id=${a.id}" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20">
+                            Voir l'offre <i class="fas fa-arrow-right ml-2 text-[8px]"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     document.addEventListener('DOMContentLoaded', () => {

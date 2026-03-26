@@ -265,7 +265,7 @@
                     : '<span class="text-green-500 text-[10px] font-bold border border-green-500/30 bg-green-500/10 px-2 py-0.5 rounded uppercase tracking-wider">Public</span>';
                 journal.push({
                     _rawDate: new Date(j.date || Date.now()),
-                    id: j.id || (idx + '_' + j.poste),
+                    id: j.id || idx,
                     dbType: 'job',
                     displayType: '<span class="text-green-400 flex items-center gap-2"><div class="w-6 h-6 flex items-center justify-center bg-green-500/10 rounded"><i class="fas fa-briefcase"></i></div> Emploi</span>',
                     titleExcerpt: `[${j.type === 'recrutement' || j.type === 'recruteur' ? 'OFFRE' : 'CV'}] ${j.poste || j.author}`,

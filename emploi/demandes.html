@@ -296,6 +296,11 @@
                     </div>
                 </div>
 
+                <div>
+                    <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Ma Bio / Description (200 mots recommandés)</label>
+                    <textarea id="c_desc" rows="5" placeholder="Décrivez votre parcours, vos compétences clés et ce que vous recherchez..." required class="input-f resize-none"></textarea>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="relative group">
                         <label
@@ -502,6 +507,13 @@
         }
 
         // Helper: Trigger Download
+        function truncateWords(str, count) {
+            if (!str) return "";
+            const words = str.split(/\s+/);
+            if (words.length <= count) return str;
+            return words.slice(0, count).join(" ") + "...";
+        }
+
         function downloadFile(base64Data, fileName) {
             const link = document.createElement('a');
             link.href = base64Data;
@@ -523,35 +535,46 @@
                 return;
             }
 
-            board.innerHTML = list.map((a, idx) => `
-            <div class="bg-gray-950 border border-gray-900 hover:border-green-800 rounded-3xl p-8 transition-all hover:translate-y-[-4px] fade-in relative overflow-hidden group ${a.status === 'pending' ? 'opacity-50 grayscale' : ''}">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-green-600/5 rounded-full blur-2xl translate-x-12 -translate-y-12"></div>
-                ${a.status === 'pending' ? '<div class="absolute inset-0 flex items-center justify-center z-10"><span class="bg-black/80 text-[10px] font-black text-customOrange px-4 py-2 border border-customOrange/50 rounded-full tracking-widest uppercase">En attente de validation</span></div>' : ''}
-                <div class="flex justify-between items-start mb-6">
-                    <div class="w-12 h-12 bg-green-600/10 rounded-2xl flex items-center justify-center text-green-500">
-                        <i class="fas fa-user-tie text-xl"></i>
+            board.innerHTML = list.map((a, idx) => {
+                const excerpt = truncateWords(a.desc, 40);
+                return `
+                <div class="group bg-gray-900 border border-gray-800 hover:border-green-500 rounded-2xl p-8 transition-all hover:scale-[1.01] fade-in relative overflow-hidden ${a.status === 'pending' ? 'opacity-50 grayscale' : ''}">
+                    ${a.status === 'pending' ? '<div class="absolute inset-0 flex items-center justify-center z-10"><span class="bg-black/80 text-[10px] font-black text-customOrange px-4 py-2 border border-customOrange/50 rounded-full tracking-widest uppercase">En attente de validation</span></div>' : ''}
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-[10px] font-black uppercase tracking-widest border border-green-500/20">
+                            👤 Profil Candidat
+                        </span>
+                        <span class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">${a.date}</span>
                     </div>
-                    <span class="text-[10px] bg-green-900/40 text-green-400 border border-green-800/50 px-3 py-1 rounded-full font-black uppercase tracking-wider">${a.dispo || '---'}</span>
+
+                    <h3 class="text-2xl font-black text-white mb-2 group-hover:text-green-400 transition-colors">${a.author || 'Anonyme'}</h3>
+                    <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-6 font-medium">
+                        <span class="text-green-500 font-black uppercase tracking-wider"><i class="fas fa-briefcase mr-1.5"></i> ${a.poste || 'Candidat'}</span>
+                        <span><i class="fas fa-clock text-green-500 mr-1.5"></i> Dispo: ${a.dispo || 'Immédiate'}</span>
+                    </div>
+
+                    <p class="text-gray-400 text-sm leading-relaxed mb-8 line-clamp-3">${excerpt || 'Aucune description fournie.'}</p>
+
+                    <div class="flex justify-between items-center pt-6 border-t border-gray-800/50">
+                        <div class="flex items-center gap-3">
+                            ${a.cv ? `
+                                <button onclick="downloadFile('${a.cv.data}', '${a.cv.name}')" class="w-8 h-8 bg-green-500/10 border border-green-500/20 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition-all flex items-center justify-center shadow-lg" title="Télécharger CV">
+                                    <i class="fas fa-file-pdf text-[10px]"></i>
+                                </button>
+                            ` : ''}
+                            ${a.lm ? `
+                                <button onclick="downloadFile('${a.lm.data}', '${a.lm.name}')" class="w-8 h-8 bg-blue-500/10 border border-blue-500/20 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition-all flex items-center justify-center shadow-lg" title="Télécharger Lettre">
+                                    <i class="fas fa-file-alt text-[10px]"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+                        <a href="voir_profil.html?id=${a.id}" class="bg-white hover:bg-green-500 text-black px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-xl group-hover:shadow-green-500/10">
+                            Voir le profil <i class="fas fa-arrow-right ml-2 text-[8px]"></i>
+                        </a>
+                    </div>
                 </div>
-                <h3 class="text-white font-black text-lg mb-1">${a.author || 'Anonyme'}</h3>
-                <p class="text-green-500 text-xs font-bold uppercase tracking-wider mb-2">${a.poste || '---'}</p>
-                <div class="flex items-center gap-4 mt-6">
-                    <a href="voir_profil.html?id=${a.id}" class="flex-1 bg-white hover:bg-green-500 text-black text-center font-black py-3 rounded-xl transition-all text-[11px] uppercase tracking-widest shadow-xl group-hover:shadow-green-500/10 flex items-center justify-center">
-                        <i class="far fa-user mr-2"></i> Voir le profil
-                    </a>
-                    ${a.cv ? `
-                        <button onclick="downloadFile('${a.cv.data}', '${a.cv.name}')" class="w-12 h-12 bg-gray-900 border border-gray-800 text-green-500 rounded-xl hover:bg-green-500 hover:text-white transition-all flex items-center justify-center shadow-lg" title="Télécharger CV">
-                            <i class="fas fa-file-pdf"></i>
-                        </button>
-                    ` : ''}
-                    ${a.lm ? `
-                        <button onclick="downloadFile('${a.lm.data}', '${a.lm.name}')" class="w-12 h-12 bg-gray-900 border border-gray-800 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all flex items-center justify-center shadow-lg" title="Télécharger Lettre">
-                            <i class="fas fa-file-alt"></i>
-                        </button>
-                    ` : ''}
-                </div>
-            </div>
-        `).join('');
+            `}).join('');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -577,6 +600,7 @@
                         date: new Date().toLocaleDateString('fr-FR'),
                         poste: document.getElementById('c_poste').value,
                         dispo: document.getElementById('c_dispo').value,
+                        desc:  document.getElementById('c_desc').value,
                         email: document.getElementById('c_email').value,
                         tel: document.getElementById('dialCode').textContent + ' ' + document.getElementById('c_tel').value,
                         cv: cv,
