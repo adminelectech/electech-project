@@ -538,6 +538,11 @@
             fileInput.onchange = (e) => {
                 if (e.target.files.length) showFileStatus(e.target.files[0].name);
             };
+
+            // Initialize City Autocomplete
+            if (typeof API.initCityAutocomplete === 'function') {
+                API.initCityAutocomplete('city');
+            }
         });
 
         function toggleOtherSpecialty() {

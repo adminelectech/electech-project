@@ -272,27 +272,29 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Email
-                            Professionnel</label>
-                        <input type="email" id="c_email" placeholder="votre.nom@email.com" required class="input-f">
+                        <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Ville</label>
+                        <input type="text" id="c_ville" placeholder="Ex: Casablanca, Rabat..." required class="input-f">
                     </div>
                     <div>
-                        <label
-                            class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Téléphone
-                            / WhatsApp</label>
-                        <div class="flex">
-                            <div class="dial-code" id="dialCode">+212</div>
-                            <select id="c_pays" onchange="updateDialCode()"
-                                class="bg-black/80 border border-gray-800 border-l-0 text-white text-[10px] px-2 outline-none focus:border-green-500">
-                                <option value="+212">🇲🇦 MA</option>
-                                <option value="+33">🇫🇷 FR</option>
-                                <option value="+213">🇩🇿 DZ</option>
-                                <option value="+216">🇹🇳 TN</option>
-                                <option value="+221">🇸🇳 SN</option>
-                            </select>
-                            <input type="tel" id="c_tel" placeholder="06 12 34 56 78" required
-                                class="flex-1 input-f rounded-l-none">
-                        </div>
+                        <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Email Professionnel</label>
+                        <input type="email" id="c_email" placeholder="votre.nom@email.com" required class="input-f">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-black text-gray-600 mb-2 uppercase tracking-widest">Téléphone / WhatsApp</label>
+                    <div class="flex">
+                        <div class="dial-code" id="dialCode">+212</div>
+                        <select id="c_pays" onchange="updateDialCode()"
+                            class="bg-black/80 border border-gray-800 border-l-0 text-white text-[10px] px-2 outline-none focus:border-green-500">
+                            <option value="+212">🇲🇦 MA</option>
+                            <option value="+33">🇫🇷 FR</option>
+                            <option value="+213">🇩🇿 DZ</option>
+                            <option value="+216">🇹🇳 TN</option>
+                            <option value="+221">🇸🇳 SN</option>
+                        </select>
+                        <input type="tel" id="c_tel" placeholder="06 12 34 56 78" required
+                            class="flex-1 input-f rounded-l-none">
                     </div>
                 </div>
 
@@ -551,6 +553,7 @@
                     <h3 class="text-2xl font-black text-white mb-2 group-hover:text-green-400 transition-colors">${a.author || 'Anonyme'}</h3>
                     <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-6 font-medium">
                         <span class="text-green-500 font-black uppercase tracking-wider"><i class="fas fa-briefcase mr-1.5"></i> ${a.poste || 'Candidat'}</span>
+                        <span><i class="fas fa-map-marker-alt text-green-500 mr-1.5"></i> ${a.ville || 'Maroc'}</span>
                         <span><i class="fas fa-clock text-green-500 mr-1.5"></i> Dispo: ${a.dispo || 'Immédiate'}</span>
                     </div>
 
@@ -579,6 +582,12 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderAnnonces();
+            
+            // Initialize City Autocomplete
+            if (typeof API.initCityAutocomplete === 'function') {
+                API.initCityAutocomplete('c_ville');
+            }
+
             const form = document.getElementById('formCandidat');
             if (form) {
                 form.onsubmit = async (e) => {
@@ -600,6 +609,7 @@
                         date: new Date().toLocaleDateString('fr-FR'),
                         poste: document.getElementById('c_poste').value,
                         dispo: document.getElementById('c_dispo').value,
+                        ville: document.getElementById('c_ville').value,
                         desc:  document.getElementById('c_desc').value,
                         email: document.getElementById('c_email').value,
                         tel: document.getElementById('dialCode').textContent + ' ' + document.getElementById('c_tel').value,

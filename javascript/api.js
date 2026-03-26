@@ -1,9 +1,52 @@
-const API_URL = 'http://localhost:3000/api';
 const SESSION_KEY = 'electech_session';
+const API_URL = 'http://localhost:3000/api';
+
+const MOROCCAN_CITIES = [
+    "Casablanca", "Rabat", "Fès", "Tanger", "Marrakech", "Salé", "Meknès", "Agadir", "Oujda", "Tétouan", "Kénitra", "Safi", "Mohammédia", "Khouribga", "Béni Mellal", "El Jadida", "Taza", "Nador", "Settat", "Larache", "Ksar El Kébir", "Khémisset", "Guelmim", "Berrechid", "Wad Zem", "Fquih Ben Salah", "Taourirt", "Berkane", "Sidi Slimane", "Sidi Kacem", "Khenifra", "Tifelt", "Essaouira", "Taroudant", "Kelaat Sraghna", "Ouarzazate", "Youssoufia", "Tan-Tan", "Ouazzane", "Guercif", "Tiznit", "Fnideq", "Martil", "Azrou", "Skhirat", "Souk El Arbaa", "Tinghir", "Ait Melloul", "El Kelaa des Sraghna", "Midelt", "Azemmour", "Chefchaouen", "M'diq", "Sidi Bennour", "Benslimane", "Al Hoceima", "Tarfaya", "Boujdour", "Laayoune", "Dakhla", "Arfoud", "Sidi Ifni", "Ifrane"
+];
 
 let isBackendOffline = sessionStorage.getItem('electech_api_offline') === 'true';
 
 const API = {
+    initCityAutocomplete(inputId) {
+        const input = document.getElementById(inputId);
+        if (!input) return;
+
+        // Create results container
+        const container = document.createElement('div');
+        container.id = `${inputId}-autocomplete-list`;
+        container.className = 'absolute z-[100] w-full mt-1 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl overflow-hidden hidden max-h-60 overflow-y-auto';
+        input.parentNode.style.position = 'relative';
+        input.parentNode.appendChild(container);
+
+        input.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase().trim();
+            if (!val || val.length < 1) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            const matches = MOROCCAN_CITIES.filter(c => c.toLowerCase().includes(val)).slice(0, 8);
+            if (matches.length > 0) {
+                container.innerHTML = matches.map(city => `
+                    <div class="px-4 py-3 hover:bg-customOrange/20 hover:text-customOrange cursor-pointer text-sm font-medium border-b border-gray-800 last:border-0 transition-colors" onclick="document.getElementById('${inputId}').value = '${city}'; document.getElementById('${container.id}').classList.add('hidden');">
+                        <i class="fas fa-map-marker-alt mr-2 text-[10px]"></i> ${city}
+                    </div>
+                `).join('');
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+        });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+            if (e.target !== input && e.target !== container) {
+                container.classList.add('hidden');
+            }
+        });
+    },
+
     async call(endpoint, method = 'GET', data = null) {
         if (isBackendOffline) {
             return this.fallback(endpoint, method, data);
@@ -13,7 +56,7 @@ const API = {
             const options = {
                 method,
                 headers: { 'Content-Type': 'application/json' },
-                signal: AbortSignal.timeout(1500) // Timeout de 1.5s max pour ne pas bloquer l'utilisateur
+                signal: AbortSignal.timeout(1500)
             };
             if (data) options.body = JSON.stringify(data);
 
@@ -31,14 +74,11 @@ const API = {
         }
     },
 
-    // Simulation logic to keep the site working without running Node.js
     fallback(endpoint, method, data) {
         if (endpoint === '/login' && method === 'POST') {
-            // Simple mock login
             return { user: { name: 'Expert Simulé', email: data.email, role: 'technicien', profileComplete: false } };
         }
         if (endpoint === '/register' && method === 'POST') {
-            // Persist user to electech_users array
             const users = JSON.parse(localStorage.getItem('electech_users') || '[]');
             if (users.find(u => u.email === data.email)) {
                 throw new Error('Cet email est déjà utilisé.');
@@ -67,8 +107,6 @@ const API = {
                 const { email, profile } = data;
                 profiles[email] = profile;
                 localStorage.setItem('electech_user_profiles', JSON.stringify(profiles));
-                
-                // profileComplete si ville, spécialité et expérience sont renseignées
                 const isComplete = !!(profile.city && profile.specialty && profile.experience);
                 return { message: 'Profil mis à jour', profileComplete: isComplete };
             }
@@ -76,6 +114,7 @@ const API = {
         return { message: 'Action simulée' };
     }
 };
+
 // Dynamic Article Rendering for Admin
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof renderDynamicArticles === 'function') {
@@ -85,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderDynamicArticles() {
     const container = document.getElementById('dynamic-articles');
-    if (!container) return; // Only render if the page has the container
+    if (!container) return;
 
     const currentFile = window.location.pathname.split('/').pop() || 'index.html';
     const articles = JSON.parse(localStorage.getItem('electech_articles') || '[]');
@@ -104,11 +143,10 @@ function renderDynamicArticles() {
         return words.slice(0, count).join(" ") + "...";
     }
 
-    // Sort chronologically reverse (newest first)
     pageArticles.reverse().forEach(art => {
         const d = new Date(art.date);
         const dateStr = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
-        const excerpt = truncateWords(art.content, 40); // 40 mots pour l'extrait
+        const excerpt = truncateWords(art.content, 40);
 
         html += `
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-lg hover:border-customOrange transition-all duration-300 group flex flex-col md:flex-row gap-8 mb-8">

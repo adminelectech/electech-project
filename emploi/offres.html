@@ -321,6 +321,12 @@
     document.addEventListener('DOMContentLoaded', () => {
         offresCaptcha = new PuzzleCaptcha('offres-captcha-container');
         renderAnnonces();
+        
+        // Initialize City Autocomplete
+        if (typeof API.initCityAutocomplete === 'function') {
+            API.initCityAutocomplete('r_ville');
+        }
+
         const form = document.getElementById('formRecruteur');
         if(form) {
             form.onsubmit = (e) => {
