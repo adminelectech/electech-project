@@ -332,7 +332,7 @@
                 else if(item.dbType === 'comment') viewUrl = `../Tech 1/Article.html?id=${item.artId}`;
                 else if(item.dbType === 'book') viewUrl = `../Tech 1/bibliotheque.html`;
                 else if(item.dbType === 'forum') viewUrl = `../utilisateur/forum.html?id=${item.id}`;
-                else if(item.dbType === 'job') viewUrl = `../emploi/emploi.html`;
+                else if(item.dbType === 'job') viewUrl = `../emploi/emploi.html#job-${item.id}`;
                 else if(item.dbType === 'candidature') viewUrl = `../emploi/emploi.html`;
 
                 if(viewUrl) actionBtns += `<a href="${viewUrl}" target="_blank" class="text-gray-400 hover:text-white mx-1 text-xs w-8 h-8 flex items-center justify-center rounded-lg bg-gray-800/40 hover:bg-gray-700 transition-all font-bold" title="Voir l'élément"><i class="fas fa-external-link-alt"></i></a>`;
