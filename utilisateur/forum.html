@@ -437,7 +437,8 @@
                             <div class="flex flex-wrap gap-2 mb-4">
                                 ${q.tags.map(tag => `<span class="bg-black/50 border border-gray-800 text-customOrange px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest">${tag}</span>`).join('')}
                             </div>
-                            <h3 class="text-white text-xl font-bold mb-3 group-hover:text-customOrange transition-colors leading-tight">${q.title}</h3>
+                            <h3 class="text-white text-xl font-bold mb-2 group-hover:text-customOrange transition-colors leading-tight">${q.title}</h3>
+                            <p class="text-gray-500 text-sm line-clamp-2 mb-4 group-hover:text-gray-400 transition-colors">${q.description ? (q.description.substring(0, 200) + (q.description.length > 200 ? '...' : '')) : ''}</p>
                             <div class="flex items-center gap-4 text-xs text-gray-500">
                                 <span class="flex items-center gap-2"><i class="fas fa-user-circle text-gray-700"></i> Par <span class="text-gray-300 font-bold">${q.author}</span></span>
                                 <span class="flex items-center gap-2 font-mono"><i class="fas fa-calendar-alt text-gray-700"></i> ${q.date}</span>
