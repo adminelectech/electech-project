@@ -1,12 +1,19 @@
 const API_URL = 'http://localhost:3000/api';
 const SESSION_KEY = 'electech_session';
 
+let isBackendOffline = sessionStorage.getItem('electech_api_offline') === 'true';
+
 const API = {
     async call(endpoint, method = 'GET', data = null) {
+        if (isBackendOffline) {
+            return this.fallback(endpoint, method, data);
+        }
+
         try {
             const options = {
                 method,
                 headers: { 'Content-Type': 'application/json' },
+                signal: AbortSignal.timeout(1500) // Timeout de 1.5s max pour ne pas bloquer l'utilisateur
             };
             if (data) options.body = JSON.stringify(data);
 
@@ -17,8 +24,9 @@ const API = {
             }
             return await res.json();
         } catch (error) {
-            console.warn('Backend not reachable, falling back to localStorage logic:', error.message);
-            // Fallback to simulated logic if server is down
+            console.warn('Backend not reachable, activating fast-fallback mode:', error.message);
+            isBackendOffline = true;
+            sessionStorage.setItem('electech_api_offline', 'true');
             return this.fallback(endpoint, method, data);
         }
     },

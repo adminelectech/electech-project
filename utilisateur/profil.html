@@ -429,6 +429,16 @@
             document.getElementById('view-name').textContent = session.name;
             document.getElementById('view-role').textContent = session.role || 'Expert';
 
+            // ZERO-LAG PRE-LOAD: Load from localStorage immediately before API call
+            const cachedProfiles = JSON.parse(localStorage.getItem('electech_user_profiles') || '{}');
+            const cachedProfile = cachedProfiles[session.email];
+            if (cachedProfile) {
+                document.getElementById('city').value = cachedProfile.city || '';
+                document.getElementById('experience').value = cachedProfile.experience || '';
+                document.getElementById('motivation-letter').value = cachedProfile.motivationLetter || '';
+                updateVisuals(cachedProfile);
+            }
+
             // Load tabs logic
             window.switchTab = (tabId) => {
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
