@@ -260,6 +260,24 @@
                         </nav>
                     </div>
 
+                    <!-- Actions Rapides -->
+                    <div class="bento-card p-4 rounded-3xl mb-6">
+                        <h3 class="text-white font-bold text-sm mb-4 pl-2"><i class="fas fa-bolt text-customOrange mr-2"></i>Actions Rapides</h3>
+                        <div class="space-y-2">
+                            <a href="#" id="btn-action-emploi" class="flex items-center gap-3 w-full bg-gray-900/50 hover:bg-black border border-gray-800 hover:border-customOrange text-gray-300 hover:text-white transition-all px-4 py-3 rounded-2xl text-xs font-bold text-left group">
+                                <!-- Dynamic icon & text based on role -->
+                            </a>
+                            <a href="forum.html" class="flex items-center gap-3 w-full bg-gray-900/50 hover:bg-black border border-gray-800 hover:border-customOrange text-gray-300 hover:text-white transition-all px-4 py-3 rounded-2xl text-xs font-bold text-left group">
+                                <span class="w-8 h-8 rounded-xl bg-customOrange/10 flex items-center justify-center text-customOrange group-hover:scale-110 transition-transform"><i class="fas fa-comments text-sm"></i></span>
+                                Ajouter une question au forum
+                            </a>
+                            <a href="../assets/community/clic.electech.html" class="flex items-center gap-3 w-full bg-gray-900/50 hover:bg-black border border-gray-800 hover:border-yellow-400 text-gray-300 hover:text-white transition-all px-4 py-3 rounded-2xl text-xs font-bold text-left group">
+                                <span class="w-8 h-8 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-500 group-hover:scale-110 transition-transform"><i class="fas fa-star text-sm"></i></span>
+                                Publier un avis sur Clic.Electech
+                            </a>
+                        </div>
+                    </div>
+
                     <!-- Confidentiality Info -->
                     <div class="bento-card p-6 rounded-3xl border-l-4 border-l-customOrange">
                         <h3 class="text-white font-bold text-sm mb-2"><i class="fas fa-shield-halved text-customOrange mr-2"></i>Sécurité</h3>
@@ -429,6 +447,18 @@
             document.getElementById('name').value = session.name;
             document.getElementById('view-name').textContent = session.name;
             document.getElementById('view-role').textContent = session.role || 'Expert';
+
+            // Configure Quick Action Button based on Role
+            const btnEmploi = document.getElementById('btn-action-emploi');
+            if (btnEmploi) {
+                if (session.role === 'Recruteur') {
+                    btnEmploi.href = '../emploi/offres.html';
+                    btnEmploi.innerHTML = `<span class="w-8 h-8 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform"><i class="fas fa-briefcase text-sm"></i></span> Publier une offre`;
+                } else {
+                    btnEmploi.href = '../emploi/demandes.html';
+                    btnEmploi.innerHTML = `<span class="w-8 h-8 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform"><i class="fas fa-user-graduate text-sm"></i></span> Déposer ma candidature`;
+                }
+            }
 
             // ZERO-LAG PRE-LOAD: Load from localStorage immediately before API call
             const cachedProfiles = JSON.parse(localStorage.getItem('electech_user_profiles') || '{}');
